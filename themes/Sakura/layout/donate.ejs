@@ -15,12 +15,11 @@
     <div id="root">
       <div class="root">
         <a href="https://github.com/Kaiyuan/donate-page" target="_blank" class="pos-f tr3" title="Github"><span id="github"></span></a>
-        <ul id="donateBox" class="list pos-f tr3">
-          <!-- <li id="BTC" data-footnote="Copy addres and show QRCod"><button id="BTCBn"  data-clipboard-target="#btc-key" alt="Copy to clipboard">Bitcoin</button></li> -->
+        <!-- <ul id="donateBox" class="list pos-f tr3">
           <li id="PayPal"><a href="<%- theme.donate.paypal %>" target="_blank">PayPal</a></li>
           <li id="AliPay">AliPay</li>
           <li id="WeChat">WeChat</li>
-        </ul>
+        </ul> -->
         <div id="DonateText" class="tr3">Donate</div>
         <div id="QRBox" class="pos-f left-100">
           <div id="MainBox"></div>
@@ -61,8 +60,8 @@
     var QRBox = $('#QRBox');
     var MainBox = $('#MainBox');
     var BTCQR = '/images/donate/BTCQR.png'; // 二维码路径
-    var AliPayQR  = '<%- (theme.cdn || '') + theme.donate.alipay %>';
-    var WeChanQR  = '<%- (theme.cdn || '') + theme.donate.wechatSQ %>';
+    // var AliPayQR  = '<%- (theme.cdn || '') + theme.donate.alipay %>';
+    // var WeChanQR  = '<%- (theme.cdn || '') + theme.donate.wechatSQ %>';
 
     function showQR(QR) {
       if (QR) {
