@@ -79,9 +79,8 @@ theme: Sakura
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: 
-    # github: git@github.com:honjun/honjun.github.io.git
-    gitee: https://gitee.com/darkstranded/hexo-blog.git
+  repo: git@github.com:DarkStranded/hexo-blog.git
+    # gitee: https://gitee.com/darkstranded/hexo-blog.git
     # coding: https://gitee.com/darkstranded/hexo-blog.git
   branch: master
 
