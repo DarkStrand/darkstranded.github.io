@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2021-08-13T01:25:34.880Z</updated>
+  <updated>2021-08-13T08:08:32.209Z</updated>
   <id>/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>canvas</title>
+    <link href="/2021/08/13/canvas/"/>
+    <id>/2021/08/13/canvas/</id>
+    <published>2021-08-13T08:00:45.558Z</published>
+    <updated>2021-08-13T08:08:32.209Z</updated>
+    
+    <summary type="html">
+    
+      canvas
+    
+    </summary>
+    
+      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="web" scheme="/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>新鲜玩意</title>
