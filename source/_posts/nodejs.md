@@ -12,7 +12,8 @@ tags:
  - 后端
 keywords: node
 description: nodejs教程
-photos: https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/405.jpeg
+photos: https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/5.jpeg
+
 ---
 
 

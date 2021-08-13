@@ -3,7 +3,7 @@ prefixName: FLの
 siteName: Blog
 # favicon and site master avatar
 favicon: /images/favicon.ico
-avatar: /images/avatar.jpg
+avatar: /images/touxiang.JPG
 url: ''
 description: Live your life with passion! With some drive!
 cdn: 'https://cdn.jsdelivr.net/gh/Darkstranded/CDN'
@@ -12,7 +12,7 @@ pjax: 1
 mathjax: 0
 
 notice: 不愧是你，不愧是我
-lazyloadImg: /bg1.jpg
+lazyloadImg: /images/bg1.jpg
 
 menus:
   首页: { path: /, fa: fa-fort-awesome faa-shake }
@@ -56,8 +56,8 @@ bgclass: filter-dot
 # startdash url, title, desc img
 startdash: 
   - {url: /theme-sakura/, title: Sakura, desc: 本站 hexo 主题, img: /images/pexels-pixabay-2150.jpg}
-  - {url: http://space.bilibili.com/271849279, title: Bilibili, desc: 博主的b站视频, img: /images/pexels-junior-teixeira-2047905.jpg}
-  - {url: /, title: hojun的万事屋, desc: 技术服务, img: /images/pexels-markus-spiske-1089438.jpg}
+  - {url: , title: Bilibili, desc: 博主的b站视频, img: /images/pexels-junior-teixeira-2047905.jpg}
+  - {url: /, title: DarkStrand的万事屋, desc: 技术服务, img: /images/pexels-markus-spiske-1089438.jpg}
 
 
 
@@ -85,7 +85,7 @@ msocial:
 
 # 视频地址为https://cdn.jsdelivr.net/gh/honjun/hojun@1.2/Unbroken.mp4，配置如下
 movies:
-  url: https://cdn.jsdelivr.net/gh/honjun/hojun@1.2
+  url: https://cdn.jsdelivr.net/gh/honjun/hojun@1.2/Bazinga.mp4
   # 多个视频用逗号隔开，随机获取。支持的格式目前已知MP4,Flv。其他的可以试下，不保证有用
   name: Unbroken.mp4
 
