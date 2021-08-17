@@ -102,3 +102,16 @@ feed:
   content_limit: 140
   content_limit_delim: ' '
   order_by: -date
+
+# hexo-renderer-marked插件配置
+marked:
+  smartypants: false
+
+
+live2d: ##自定义看板娘动画
+  enable: true
+  pluginRootPath: live2dw/
+  pluginJsPath: lib/
+  pluginModelPath: assets/
+  model:
+    use: live2d-widget-model-haruto

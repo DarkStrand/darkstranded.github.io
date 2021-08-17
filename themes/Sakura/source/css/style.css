@@ -6710,7 +6710,7 @@ progress {
     overflow-y:auto
 }
 .toc>.toc-list {
-    overflow:auto;
+    overflow:auto!important;
     position:relative
 }
 .toc>.toc-list li {
