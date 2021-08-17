@@ -522,7 +522,7 @@ obj: {
 <h4 id="1-11-2-子传父"><a href="#1-11-2-子传父" class="headerlink" title="1.11.2 子传父"></a>1.11.2 子传父</h4><p>在父组件中给子组件绑定一个自定义的事件，子组件通过$emit()触发该事件并传值。</p>
 <blockquote>
 <p>父组件： <code>&lt;child @receive = &#39;receive&#39; /&gt;</code></p>
-<p>子组件: this.$emit(‘receive’,’传递的数据’)</p>
+<p>子组件: this.$emit(&#39;receive&#39;,&#39;传递的数据&#39;)</p>
 </blockquote>
 <h4 id="1-11-3-兄弟组件传值"><a href="#1-11-3-兄弟组件传值" class="headerlink" title="1.11.3 兄弟组件传值"></a>1.11.3 兄弟组件传值</h4><ul>
 <li>通过中央通信 let bus = new Vue()</li>
@@ -656,336 +656,301 @@ const dom = this.$refs.test
 <p>以下为详细扩展</p>
 </blockquote>
 <h4 id="1-21-1-插槽是什么"><a href="#1-21-1-插槽是什么" class="headerlink" title="1.21.1 插槽是什么"></a>1.21.1 插槽是什么</h4><ul>
-<li>写个父组件：test.vue<br><code>`</code>vue<template><br><div><br>  <div>大家好我是父组件</div><br>  <myslot><br>    <p>测试一下吧内容写在这里了能否显示</p><br>  </myslot><br></div><br></template>
-
-</li>
+<li>写个父组件：test.vue</li>
 </ul>
-<script>
-  import myslot from './myslot';
+<pre><code class="vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;div&gt;大家好我是父组件&lt;/div&gt;
+    &lt;myslot&gt;
+      &lt;p&gt;测试一下吧内容写在这里了能否显示&lt;/p&gt;
+    &lt;/myslot&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  import myslot from &#39;./myslot&#39;;
   export default {
     components: {
       myslot
     }
   }
-</script>
+&lt;/script&gt;
 
-<style>
-</style>
-```
+&lt;style&gt;
+&lt;/style&gt;
+</code></pre>
+<ul>
+<li>写个子组件：myslot.vue</li>
+</ul>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;div&gt;我是子组件&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
 
-* 写个子组件：myslot.vue
-```vue
-<template>
-  <div>
-    <div>我是子组件</div>
-  </div>
-</template>
+&lt;script&gt;
+&lt;/script&gt;
 
-<script>
-</script>
+&lt;style&gt;
+&lt;/style&gt;
+</code></pre>
+<p>运行代码，发现，最终渲染的效果是</p>
+<blockquote>
+<p>大家好我是父组件</p>
+<p>我是子组件</p>
+</blockquote>
+<p>那如果我想实现显示父组件中p标签的内容怎么办 修改子组件：myslot.vue</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div&gt;
+      &lt;div&gt;我是子组件&lt;/div&gt;
+      &lt;p&gt;现在测试一下slot&lt;/p&gt;
+      &lt;slot&gt;&lt;/slot&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
 
-<style>
-</style>
-```
+&lt;script&gt;
+&lt;/script&gt;
 
-运行代码，发现，最终渲染的效果是
->大家好我是父组件
->
->我是子组件
-
-那如果我想实现显示父组件中p标签的内容怎么办 修改子组件：myslot.vue
-
-```vue
-<template>
-  <div>
-      <div>我是子组件</div>
-      <p>现在测试一下slot</p>
-      <slot></slot>
-  </div>
-</template>
-
-<script>
-</script>
-
-<style>
-</style>
-```
-
-运行代码，可以看到以下效果
->大家好我是父组件<br>我是子组件<br>现在测试一下slot<br>测试一下吧内容写在这里了能否显示
-
-官方文档对于插槽的应用场景是这样描述的: 我们经常需要向一个组件传递内容 Vue 自定义的 ``<slot>`` 元素让这变得非常简单 只要在需要的地方加入插槽就行了——就这么简单！ 
-结合上面的例子来理解就是这样的： 
-1. 父组件在引用子组件时希望向子组件传递模板内容``<p>``测试一下吧内容写在这里了能否显示``</p>`` 
-2. 子组件让父组件传过来的模板内容在所在的位置显示 
-3. 子组件中的``<slot>``就是一个槽，可以接收父组件传过来的模板内容，``<slot>`` 元素自身将被替换 
-4. ``<myslot></myslot>``组件没有包含一个 ``<slot>`` 元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃
-
-#### 1.21.2 插槽的作用
-让用户可以拓展组件，去更好地复用组件和对其做定制化处理
-
-#### 1.21.3 插槽的分类
-##### 1.21.3.1 默认插槽
-在一个 ``<submit-button>`` 组件中：
-```
-<button type="submit">
-  <slot></slot>
-</button>
-```
-* 我们可能希望这个 ``<button>`` 内绝大多数情况下都渲染文本“Submit”，但是有时候却希望渲染文本为别的东西，那怎么实现呢？ 我们可以将“Submit”作为后备内容，我们可以将它放在 ``<slot>`` 标签内：
-```
-<button type="submit">
-  <slot>Submit</slot>
-</button>
-```
-
-现在当我在一个父级组件中使用 ``<submit-button>`` 并且不提供任何插槽内容时：
-```
-<submit-button></submit-button>
-```
-后备内容“Submit”将会被渲染：
-```
-<button type="submit">
+&lt;style&gt;
+&lt;/style&gt;
+</code></pre>
+<p>运行代码，可以看到以下效果</p>
+<blockquote>
+<p>大家好我是父组件<br>我是子组件<br>现在测试一下slot<br>测试一下吧内容写在这里了能否显示</p>
+</blockquote>
+<p>官方文档对于插槽的应用场景是这样描述的: 我们经常需要向一个组件传递内容 Vue 自定义的 <code>&lt;slot&gt;</code> 元素让这变得非常简单 只要在需要的地方加入插槽就行了——就这么简单！<br>结合上面的例子来理解就是这样的： </p>
+<ol>
+<li>父组件在引用子组件时希望向子组件传递模板内容<code>&lt;p&gt;</code>测试一下吧内容写在这里了能否显示<code>&lt;/p&gt;</code> </li>
+<li>子组件让父组件传过来的模板内容在所在的位置显示 </li>
+<li>子组件中的<code>&lt;slot&gt;</code>就是一个槽，可以接收父组件传过来的模板内容，<code>&lt;slot&gt;</code> 元素自身将被替换 </li>
+<li><code>&lt;myslot&gt;&lt;/myslot&gt;</code>组件没有包含一个 <code>&lt;slot&gt;</code> 元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃</li>
+</ol>
+<h4 id="1-21-2-插槽的作用"><a href="#1-21-2-插槽的作用" class="headerlink" title="1.21.2 插槽的作用"></a>1.21.2 插槽的作用</h4><p>让用户可以拓展组件，去更好地复用组件和对其做定制化处理</p>
+<h4 id="1-21-3-插槽的分类"><a href="#1-21-3-插槽的分类" class="headerlink" title="1.21.3 插槽的分类"></a>1.21.3 插槽的分类</h4><h5 id="1-21-3-1-默认插槽"><a href="#1-21-3-1-默认插槽" class="headerlink" title="1.21.3.1 默认插槽"></a>1.21.3.1 默认插槽</h5><p>在一个 <code>&lt;submit-button&gt;</code> 组件中：</p>
+<pre><code>&lt;button type=&quot;submit&quot;&gt;
+  &lt;slot&gt;&lt;/slot&gt;
+&lt;/button&gt;
+</code></pre><ul>
+<li>我们可能希望这个 <code>&lt;button&gt;</code> 内绝大多数情况下都渲染文本“Submit”，但是有时候却希望渲染文本为别的东西，那怎么实现呢？ 我们可以将“Submit”作为后备内容，我们可以将它放在 <code>&lt;slot&gt;</code> 标签内：<pre><code>&lt;button type=&quot;submit&quot;&gt;
+&lt;slot&gt;Submit&lt;/slot&gt;
+&lt;/button&gt;
+</code></pre></li>
+</ul>
+<p>现在当我在一个父级组件中使用 <code>&lt;submit-button&gt;</code> 并且不提供任何插槽内容时：</p>
+<pre><code>&lt;submit-button&gt;&lt;/submit-button&gt;
+</code></pre><p>后备内容“Submit”将会被渲染：</p>
+<pre><code>&lt;button type=&quot;submit&quot;&gt;
   Submit
-</button>
-```
-
-* 但是如果我们提供内容：
-```
-<submit-button>
+&lt;/button&gt;
+</code></pre><ul>
+<li>但是如果我们提供内容：</li>
+</ul>
+<pre><code>&lt;submit-button&gt;
   Save
-</submit-button>
-```
-
-则这个提供的内容将会被渲染从而取代后备内容：
-```
-<button type="submit">
+&lt;/submit-button&gt;
+</code></pre><p>则这个提供的内容将会被渲染从而取代后备内容：</p>
+<pre><code>&lt;button type=&quot;submit&quot;&gt;
   Save
-</button>
-```
+&lt;/button&gt;
+</code></pre><h5 id="1-21-3-2-具名插槽"><a href="#1-21-3-2-具名插槽" class="headerlink" title="1.21.3.2 具名插槽"></a>1.21.3.2 具名插槽</h5><p>有时我们写了一个子组件，我们希望</p>
+<pre><code>&lt;template&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;header&gt;
+      &lt;!-- 我们希望把页头放这里 --&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+      &lt;!-- 我们希望把主要内容放这里 --&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+      &lt;!-- 我们希望把页脚放这里 --&gt;
+    &lt;/footer&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+</code></pre><p>对于这样的情况，<code>&lt;slot&gt;</code> 元素有一个特殊的 attribute：name。这个 attribute 可以用来定义额外的插槽：</p>
+<pre><code>&lt;template&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;header&gt;
+      &lt;slot name=&quot;header&quot;&gt;&lt;/slot&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+      &lt;slot&gt;&lt;/slot&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+      &lt;slot name=&quot;footer&quot;&gt;&lt;/slot&gt;
+    &lt;/footer&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+</code></pre><p>一个不带 name 的 <code>&lt;slot&gt;</code> 出口会带有隐含的名字“default”。 父组件在向具名插槽提供内容的时候，我们可以在一个 <code>&lt;template&gt;</code> 元素上使用 v-slot 指令，并以 v-slot 的参数的形式提供其名称：</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;myslot&gt;
+    &lt;div&gt;大家好我是父组件&lt;/div&gt;
+    &lt;template v-slot:header&gt;
+      &lt;h1&gt;Here might be a page title&lt;/h1&gt;
+    &lt;/template&gt;
 
-##### 1.21.3.2 具名插槽
-有时我们写了一个子组件，我们希望
-```
-<template>
-  <div class="container">
-    <header>
-      <!-- 我们希望把页头放这里 -->
-    </header>
-    <main>
-      <!-- 我们希望把主要内容放这里 -->
-    </main>
-    <footer>
-      <!-- 我们希望把页脚放这里 -->
-    </footer>
-  </div>
-</template>
-```
+    &lt;p&gt;A paragraph for the main content.&lt;/p&gt;
+    &lt;p&gt;And another one.&lt;/p&gt;
 
-对于这样的情况，``<slot>`` 元素有一个特殊的 attribute：name。这个 attribute 可以用来定义额外的插槽：
-```
-<template>
-  <div class="container">
-    <header>
-      <slot name="header"></slot>
-    </header>
-    <main>
-      <slot></slot>
-    </main>
-    <footer>
-      <slot name="footer"></slot>
-    </footer>
-  </div>
-</template>
-```
+    &lt;template v-slot:footer&gt;
+      &lt;p&gt;Here&#39;s footer info&lt;/p&gt;
+    &lt;/template&gt;
+  &lt;/myslot&gt;
+&lt;/template&gt;
 
-一个不带 name 的 ``<slot>`` 出口会带有隐含的名字“default”。 父组件在向具名插槽提供内容的时候，我们可以在一个 ``<template>`` 元素上使用 v-slot 指令，并以 v-slot 的参数的形式提供其名称：
-```vue
-<template>
-  <myslot>
-    <div>大家好我是父组件</div>
-    <template v-slot:header>
-      <h1>Here might be a page title</h1>
-    </template>
-
-    <p>A paragraph for the main content.</p>
-    <p>And another one.</p>
-
-    <template v-slot:footer>
-      <p>Here's footer info</p>
-    </template>
-  </myslot>
-</template>
-
-<script>
-  import myslot from './myslot';
+&lt;script&gt;
+  import myslot from &#39;./myslot&#39;;
   export default {
     components: {
       myslot
     }
   }
-</script>
-<style>
-</style>
-```
-
-最终的渲染结果可以看到
-```
-Here might be a page title
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;
+</code></pre>
+<p>最终的渲染结果可以看到</p>
+<pre><code>Here might be a page title
 大家好我是父组件
 A paragraph for the main content.
 
 And another one.
 
-Here's footer info
-```
+Here&#39;s footer info
+</code></pre><p>父组件中会向子组件中具名传递对应的模板内容，而没有指定名字的模板内容会传递给子组件中不带 name 的 <code>&lt;slot&gt;</code> 当然，如果父组件中</p>
+<pre><code>&lt;template v-slot:default&gt;
+    &lt;p&gt;A paragraph for the main content.&lt;/p&gt;
+    &lt;p&gt;And another one.&lt;/p&gt;
+&lt;/template&gt;
+</code></pre><ul>
+<li>同样是传递给子组件中不带 name 的 <code>&lt;slot&gt;</code> 注意: v-slot 只能添加在 <code>&lt;template&gt;</code> 上 具名插槽在书写的时候可以使用缩写,v-slot用<code>#</code>来代替</li>
+</ul>
+<pre><code class="vue">&lt;template&gt;
+  &lt;myslot&gt;
+    &lt;div&gt;大家好我是父组件&lt;/div&gt;
+    &lt;template #header&gt;
+      &lt;h1&gt;Here might be a page title&lt;/h1&gt;
+    &lt;/template&gt;
 
-父组件中会向子组件中具名传递对应的模板内容，而没有指定名字的模板内容会传递给子组件中不带 name 的 ``<slot>`` 当然，如果父组件中
-```
-<template v-slot:default>
-    <p>A paragraph for the main content.</p>
-    <p>And another one.</p>
-</template>
-```
+    &lt;p&gt;A paragraph for the main content.&lt;/p&gt;
+    &lt;p&gt;And another one.&lt;/p&gt;
 
-* 同样是传递给子组件中不带 name 的 ``<slot>`` 注意: v-slot 只能添加在 ``<template>`` 上 具名插槽在书写的时候可以使用缩写,v-slot用``#``来代替
-```vue
-<template>
-  <myslot>
-    <div>大家好我是父组件</div>
-    <template #header>
-      <h1>Here might be a page title</h1>
-    </template>
+    &lt;template #footer&gt;
+      &lt;p&gt;Here&#39;s footer info&lt;/p&gt;
+    &lt;/template&gt;
+  &lt;/myslot&gt;
+&lt;/template&gt;
 
-    <p>A paragraph for the main content.</p>
-    <p>And another one.</p>
-
-    <template #footer>
-      <p>Here's footer info</p>
-    </template>
-  </myslot>
-</template>
-
-<script>
-  import myslot from './myslot';
+&lt;script&gt;
+  import myslot from &#39;./myslot&#39;;
   export default {
     components: {
       myslot
     }
   }
-</script>
+&lt;/script&gt;
 
-<style>
-</style>
-```
+&lt;style&gt;
+&lt;/style&gt;
+</code></pre>
+<h5 id="1-21-3-3-作用域插槽"><a href="#1-21-3-3-作用域插槽" class="headerlink" title="1.21.3.3 作用域插槽"></a>1.21.3.3 作用域插槽</h5><p>这里主要解决的是父组件在向子组件插槽传递模板内容时存在访问子组件数据的问题 还记得默认插槽吗？如果子组件中写在 <code>&lt;slot&gt;</code> 标签内后备内容是与 该组件的data属性双向数据绑定的</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;span&gt;
+      &lt;slot&gt;{{user.firstName}}&lt;/slot&gt;
+    &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
 
-##### 1.21.3.3 作用域插槽
-这里主要解决的是父组件在向子组件插槽传递模板内容时存在访问子组件数据的问题 还记得默认插槽吗？如果子组件中写在 ``<slot>`` 标签内后备内容是与 该组件的data属性双向数据绑定的
-```vue
-<template>
-  <div>
-    <span>
-      <slot></slot>
-    </span>
-  </div>
-</template>
-
-<script>
+&lt;script&gt;
   export default {
     data () {
       return {
         user:{
-          firstName:'gerace',
-          lastName:'haLi'
+          firstName:&#39;gerace&#39;,
+          lastName:&#39;haLi&#39;
         }
       }
     }
   }
-</script>
-<style>
-</style>
-```
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;
+</code></pre>
+<p>父组件在引用子组件时，希望能够换掉备用内容</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;myslot&gt;{{ user.firstName }}&lt;/myslot&gt;
+&lt;/template&gt;
 
-父组件在引用子组件时，希望能够换掉备用内容
-```vue
-<template>
-  <myslot></myslot>
-</template>
-
-<script>
-  import myslot from './myslot';
+&lt;script&gt;
+  import myslot from &#39;./myslot&#39;;
   export default {
     components: {
       myslot
     }
   }
-</script>
-<style>
-</style>
-```
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;
+</code></pre>
+<p>运行代码这时你会发现提示报错</p>
+<pre><code>Property or method &quot;user&quot; is not defined on the instance but referenced during render.
+TypeError: Cannot read property &#39;firstName&#39; of undefined
+</code></pre><p>这里为什么？vue官方文档给出了答案 父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的 那应该怎么解决这个问题？ 为了让 user 在父级的插槽内容中可用，我们可以将 user 作为 <code>&lt;slot&gt;</code> 元素的一个 attribute 绑定上去：</p>
+<pre><code>&lt;span&gt;
+  &lt;slot v-bind:user=&quot;user&quot;&gt;
+    {{ user.lastName }}
+  &lt;/slot&gt;
+&lt;/span&gt;
+</code></pre><p>绑定在 <code>&lt;slot&gt;</code> 元素上的 attribute 被称为插槽 prop。现在在父级作用域中，我们可以使用带值的 v-slot 来定义我们提供的插槽 prop 的名字：</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;myslot&gt;
+      &lt;template v-slot:default=&quot;slotProps&quot;&gt;
+      {{ slotProps.user.firstName }}
+      &lt;/template&gt;
+  &lt;/myslot&gt;
+&lt;/template&gt;
 
-运行代码这时你会发现提示报错
-```
-Property or method "user" is not defined on the instance but referenced during render.
-TypeError: Cannot read property 'firstName' of undefined
-```
-
-这里为什么？vue官方文档给出了答案 父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的 那应该怎么解决这个问题？ 为了让 user 在父级的插槽内容中可用，我们可以将 user 作为 ``<slot>`` 元素的一个 attribute 绑定上去：
-```
-<span>
-  <slot v-bind:user="user">
-    
-  </slot>
-</span>
-```
-
-绑定在 ``<slot>`` 元素上的 attribute 被称为插槽 prop。现在在父级作用域中，我们可以使用带值的 v-slot 来定义我们提供的插槽 prop 的名字：
-```vue
-<template>
-  <myslot>
-      <template v-slot:default="slotProps">
-      
-      </template>
-  </myslot>
-</template>
-
-<script>
-  import myslot from './myslot';
+&lt;script&gt;
+  import myslot from &#39;./myslot&#39;;
   export default {
     components: {
       myslot
     }
-</script>
-<style>
-</style>
-```
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;
+</code></pre>
+<p>上面例子，我们选择将包含所有插槽 prop 的对象命名为 slotProps，但你也可以使用任意你喜欢的名字。 针对上面只给默认插槽传递模板内容的例子，在写法上可以采用默认插槽的缩写语法</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;myslot v-slot:default=&quot;slotProps&quot;&gt;
+     {{ slotProps.user.firstName }}
+  &lt;/myslot&gt;
+&lt;/template&gt;
 
-上面例子，我们选择将包含所有插槽 prop 的对象命名为 slotProps，但你也可以使用任意你喜欢的名字。 针对上面只给默认插槽传递模板内容的例子，在写法上可以采用默认插槽的缩写语法
-```vue
-<template>
-  <myslot v-slot:default="slotProps">
-     
-  </myslot>
-</template>
-
-<script>
-  import myslot from './myslot';
+&lt;script&gt;
+  import myslot from &#39;./myslot&#39;;
   export default {
     components: {
       myslot
     }
-</script>
-<style>
-</style>
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;
 
-<p>↓↓↓</p>
-<template><br>  <myslot v-slot="slotProps"><br>     <br>  </myslot><br></template>
+↓↓↓
+&lt;template&gt;
+  &lt;myslot v-slot=&quot;slotProps&quot;&gt;
+     {{ slotProps.user.firstName }}
+  &lt;/myslot&gt;
+&lt;/template&gt;
 
-<pre><code>
-&gt;注意： 默认插槽的缩写语法不能和具名插槽混用，因为它会导致作用域不明确：
-</code></pre><template><br>  <myslot v-slot="slotProps"><br>     <br>     <template v-slot:other="otherSlotProps"><br>           slotProps is NOT available here<br>     </template><br>  </myslot><br></template><br><code>* 下面再看一下多个插槽的情况 子组件</code>vue<br><template><br>  <div><br>    <span><br>      <slot v-bind:userdata="user" name="header"><br>        <br>      </slot><br>      <slot v-bind:hobbydata="hobby" name="footer"><br>        <br>      </slot><br>    </span><br>  </div><br></template>
+</code></pre>
+<blockquote>
+<p>注意： 默认插槽的缩写语法不能和具名插槽混用，因为它会导致作用域不明确：<br><code>`</code></p>
+</blockquote>
+<template><br>  <myslot v-slot="slotProps"><br>     <br>     <template v-slot:other="otherSlotProps"><br>           slotProps is NOT available here<br>     </template><br>  </myslot><br></template><br><code>* 下面再看一下多个插槽的情况 子组件</code>vue<br><template><br>  <div><br>    <span><br>      <slot v-bind:userdata="user" name="header"><br>        <br>      </slot><br>      <slot v-bind:hobbydata="hobby" name="footer"><br>        <br>      </slot><br>    </span><br>  </div><br></template>
 
-<p><script><br>  export default {<br>    data () {<br>      return {<br>        user:{<br>          firstName: ‘gerace’,<br>          lastName: ‘haLi’,<br>        },<br>        hobby:{<br>          fruit: “apple”,<br>          color: “blue”<br>        }<br>      }<br>    }<br>  }<br></script></p>
+<p><script><br>  export default {<br>    data () {<br>      return {<br>        user:{<br>          firstName: &#39;gerace&#39;,<br>          lastName: &#39;haLi&#39;,<br>        },<br>        hobby:{<br>          fruit: &quot;apple&quot;,<br>          color: &quot;blue&quot;<br>        }<br>      }<br>    }<br>  }<br></script></p>
 <p><style><br></style></p>
 <pre><code>
 父组件
@@ -1109,14 +1074,32 @@ const vm = new Vue({
 </ol>
 <h4 id="2-1-3-vuex中有几个核心属性，分别是什么？"><a href="#2-1-3-vuex中有几个核心属性，分别是什么？" class="headerlink" title="2.1.3 vuex中有几个核心属性，分别是什么？"></a>2.1.3 vuex中有几个核心属性，分别是什么？</h4><p>一共有5个核心属性，分别是:</p>
 <ol>
-<li><code>state</code> 唯一数据源,Vue 实例中的 data 遵循相同的规则</li>
-<li><code>getters</code> 可以认为是 store 的计算属性,就像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。Getter 会暴露为 store.getters 对象，你可以以属性的形式访问这些值.<br><code>`</code>javascript<br>const store = new Vuex.Store({<br>state: {<br> todos: [<br>   { id: 1, text: ‘…’, done: true },<br>   { id: 2, text: ‘…’, done: false }<br> ]<br>},<br>getters: {<br> doneTodos: state =&gt; {<br>   return state.todos.filter(todo =&gt; todo.done)<br> }<br>}<br>})</li>
+<li><p><code>state</code> 唯一数据源,Vue 实例中的 data 遵循相同的规则</p>
+</li>
+<li><p><code>getters</code> 可以认为是 store 的计算属性,就像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。Getter 会暴露为 store.getters 对象，你可以以属性的形式访问这些值.</p>
+</li>
 </ol>
-<p>store.getters.doneTodos // -&gt; [{ id: 1, text: ‘…’, done: true }]</p>
-<pre><code>
-3. ``mutation`` 更改 Vuex 的 store 中的状态的唯一方法是提交 mutation,非常类似于事件,通过store.commit 方法触发
-```javascript
-const store = new Vuex.Store({
+<pre><code class="javascript">const store = new Vuex.Store({
+  state: {
+    todos: [
+      { id: 1, text: &#39;...&#39;, done: true },
+      { id: 2, text: &#39;...&#39;, done: false }
+    ]
+  },
+  getters: {
+    doneTodos: state =&gt; {
+      return state.todos.filter(todo =&gt; todo.done)
+    }
+  }
+})
+
+store.getters.doneTodos // -&gt; [{ id: 1, text: &#39;...&#39;, done: true }]
+
+</code></pre>
+<ol start="3">
+<li><code>mutation</code> 更改 Vuex 的 store 中的状态的唯一方法是提交 mutation,非常类似于事件,通过store.commit 方法触发</li>
+</ol>
+<pre><code class="javascript">const store = new Vuex.Store({
   state: {
     count: 1
   },
@@ -1129,52 +1112,68 @@ const store = new Vuex.Store({
 })
 
 store.commit(&#39;increment&#39;)
-</code></pre><ol start="4">
-<li><p><code>action</code> Action 类似于 mutation，不同在于Action 提交的是 mutation，而不是直接变更状态，Action 可以包含任意异步操作</p>
+</code></pre>
+<ol start="4">
+<li><code>action</code> Action 类似于 mutation，不同在于Action 提交的是 mutation，而不是直接变更状态，Action 可以包含任意异步操作</li>
+</ol>
 <pre><code class="javascript">const store = new Vuex.Store({
-state: {
- count: 0
-},
-mutations: {
- increment (state) {
-   state.count++
- }
-},
-actions: {
- increment (context) {
-   context.commit(&#39;increment&#39;)
- }
-}
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+    }
+  },
+  actions: {
+    increment (context) {
+      context.commit(&#39;increment&#39;)
+    }
+  }
 })
 </code></pre>
-</li>
-<li><p><code>module</code>  由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，store 对象就有可能变得相当臃肿。为了解决以上问题，Vuex 允许我们将 store 分割成模块（module）。<br><code>`</code>javascript<br>const moduleA = {<br>state: () =&gt; ({ … }),<br>mutations: { … },<br>actions: { … },<br>getters: { … }<br>}</p>
-</li>
+<ol start="5">
+<li><code>module</code>  由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，store 对象就有可能变得相当臃肿。为了解决以上问题，Vuex 允许我们将 store 分割成模块（module）。</li>
 </ol>
-<p>const moduleB = {<br>  state: () =&gt; ({ … }),<br>  mutations: { … },<br>  actions: { … }<br>}</p>
-<p>const store = new Vuex.Store({<br>  modules: {<br>    a: moduleA,<br>    b: moduleB<br>  }<br>})</p>
-<p>store.state.a // -&gt; moduleA 的状态<br>store.state.b // -&gt; moduleB 的状态</p>
-<pre><code>
-#### 2.1.4 ajax请求代码应该写在组件的methods中还是vuex的actions中
-如果请求来的数据是不是要被其他组件公用，仅仅在请求的组件内使用，就不需要放入vuex 的state里。
+<pre><code class="javascript">const moduleA = {
+  state: () =&gt; ({ ... }),
+  mutations: { ... },
+  actions: { ... },
+  getters: { ... }
+}
 
-如果被其他地方复用，这个很大几率上是需要的，如果需要，请将请求放入action里，方便复用。
+const moduleB = {
+  state: () =&gt; ({ ... }),
+  mutations: { ... },
+  actions: { ... }
+}
 
-#### 2.1.5 从vuex中获取的数据能直接更改吗？
-从vuex中取的数据，不能直接更改，需要浅拷贝对象之后更改，否则报错；
+const store = new Vuex.Store({
+  modules: {
+    a: moduleA,
+    b: moduleB
+  }
+})
 
-#### 2.1.6 vuex中的数据在页面刷新后数据消失
-用sessionstorage 或者 localstorage 存储数据
-</code></pre><p>存储： sessionStorage.setItem( ‘名’, JSON.stringify(值) )<br>使用： sessionStorage.getItem(‘名’) —得到的值为字符串类型，用JSON.parse()去引号；</p>
-<pre><code>
-&gt; 也可以引入插件vuex-persist，使用方法如下：
-
-* 安装
-```javascript
-npm install --save vuex-persist
+store.state.a // -&gt; moduleA 的状态
+store.state.b // -&gt; moduleB 的状态
+</code></pre>
+<h4 id="2-1-4-ajax请求代码应该写在组件的methods中还是vuex的actions中"><a href="#2-1-4-ajax请求代码应该写在组件的methods中还是vuex的actions中" class="headerlink" title="2.1.4 ajax请求代码应该写在组件的methods中还是vuex的actions中"></a>2.1.4 ajax请求代码应该写在组件的methods中还是vuex的actions中</h4><p>如果请求来的数据是不是要被其他组件公用，仅仅在请求的组件内使用，就不需要放入vuex 的state里。</p>
+<p>如果被其他地方复用，这个很大几率上是需要的，如果需要，请将请求放入action里，方便复用。</p>
+<h4 id="2-1-5-从vuex中获取的数据能直接更改吗？"><a href="#2-1-5-从vuex中获取的数据能直接更改吗？" class="headerlink" title="2.1.5 从vuex中获取的数据能直接更改吗？"></a>2.1.5 从vuex中获取的数据能直接更改吗？</h4><p>从vuex中取的数据，不能直接更改，需要浅拷贝对象之后更改，否则报错；</p>
+<h4 id="2-1-6-vuex中的数据在页面刷新后数据消失"><a href="#2-1-6-vuex中的数据在页面刷新后数据消失" class="headerlink" title="2.1.6 vuex中的数据在页面刷新后数据消失"></a>2.1.6 vuex中的数据在页面刷新后数据消失</h4><p>用sessionstorage 或者 localstorage 存储数据</p>
+<pre><code>存储： sessionStorage.setItem( &#39;名&#39;, JSON.stringify(值) )
+使用： sessionStorage.getItem(&#39;名&#39;) ---得到的值为字符串类型，用JSON.parse()去引号；
+</code></pre><blockquote>
+<p>也可以引入插件vuex-persist，使用方法如下：</p>
+</blockquote>
+<ul>
+<li><p>安装</p>
+<pre><code class="javascript">npm install --save vuex-persist
 or
 yarn add vuex-persist
-</code></pre><ul>
+</code></pre>
+</li>
 <li><p>引入</p>
 <pre><code class="javascript">import VuexPersistence from &#39;vuex-persist&#39;
 </code></pre>
@@ -1216,24 +1215,24 @@ methods:{
     })
 }
 </code></pre>
-<p>然后调用this.setNumber(10)相当调用this.$store.commit(‘SET_NUMBER’,10)</p>
+<p>然后调用this.setNumber(10)相当调用this.$store.commit(&#39;SET_NUMBER&#39;,10)</p>
 <h4 id="2-1-10-mutation和action有什么区别"><a href="#2-1-10-mutation和action有什么区别" class="headerlink" title="2.1.10 mutation和action有什么区别"></a>2.1.10 mutation和action有什么区别</h4><ul>
 <li>action 提交的是 mutation，而不是直接变更状态。mutation可以直接变更状态</li>
 <li>action 可以包含任意异步操作。mutation只能是同步操作</li>
 <li>提交方式不同</li>
 </ul>
 <blockquote>
-<p>action 是用this.store.dispatch(‘ACTION_NAME’,data)来提交。</p>
-<p>mutation是用this.$store.commit(‘SET_NUMBER’,10)来提交</p>
+<p>action 是用this.store.dispatch(&#39;ACTION_NAME&#39;,data)来提交。</p>
+<p>mutation是用this.$store.commit(&#39;SET_NUMBER&#39;,10)来提交</p>
 </blockquote>
 <ul>
 <li>接收参数不同，mutation第一个参数是state，而action第一个参数是context，其包含了<pre><code>{
-state,      // 等同于 `store.state`，若在模块中则为局部状态
-rootState,  // 等同于 `store.state`，只存在于模块中
-commit,     // 等同于 `store.commit`
-dispatch,   // 等同于 `store.dispatch`
-getters,    // 等同于 `store.getters`
-rootGetters // 等同于 `store.getters`，只存在于模块中
+  state,      // 等同于 `store.state`，若在模块中则为局部状态
+  rootState,  // 等同于 `store.state`，只存在于模块中
+  commit,     // 等同于 `store.commit`
+  dispatch,   // 等同于 `store.dispatch`
+  getters,    // 等同于 `store.getters`
+  rootGetters // 等同于 `store.getters`，只存在于模块中
 }
 </code></pre></li>
 </ul>
@@ -1264,9 +1263,9 @@ computed: {
 <h4 id="2-2-2-怎么使用vue-router"><a href="#2-2-2-怎么使用vue-router" class="headerlink" title="2.2.2 怎么使用vue-router"></a>2.2.2 怎么使用vue-router</h4><ol>
 <li>第一步安装<pre><code>npm install vue-router -S
 </code></pre></li>
-<li>第二步在main.js中使用Vue Router组件<br><code>`</code>javascript<br>import Vue from ‘vue’<br>import App from ‘./App.vue’<br>import VueRouter from ‘vue-router’<br>Vue.use(VueRouter)</li>
+<li>第二步在main.js中使用Vue Router组件<br><code>`</code>javascript<br>import Vue from &#39;vue&#39;<br>import App from &#39;./App.vue&#39;<br>import VueRouter from &#39;vue-router&#39;<br>Vue.use(VueRouter)</li>
 </ol>
-<p>new Vue({<br>  el: ‘#app’,<br>  render: h=&gt; h(App)<br>})</p>
+<p>new Vue({<br>  el: &#39;#app&#39;,<br>  render: h=&gt; h(App)<br>})</p>
 <pre><code>
 3. 第三步配置路由
 
@@ -1353,7 +1352,7 @@ params: {
 </blockquote>
 </li>
 </ul>
-<p>// 对应路由配置<br>{<br>  path: ‘/particulars’,<br>  name: ‘particulars’,<br>  component: particulars<br>}</p>
+<p>// 对应路由配置<br>{<br>  path: &#39;/particulars&#39;,<br>  name: &#39;particulars&#39;,<br>  component: particulars<br>}</p>
 <p>// 对应子组件：这样来获取参数<br>this.$route.params.id</p>
 <pre><code>
 * 使用query方法传入的参数
@@ -1387,7 +1386,7 @@ this.$route.query.id
 <li><p><code>router</code>为VueRouter实例，想要导航到不同URL，则使用router.push方法</p>
 </li>
 </ul>
-<h4 id="2-2-7-路由-TypeError-Cannot-read-property-‘matched’-of-undefined-的错误问题"><a href="#2-2-7-路由-TypeError-Cannot-read-property-‘matched’-of-undefined-的错误问题" class="headerlink" title="2.2.7 路由 TypeError: Cannot read property ‘matched’ of undefined 的错误问题"></a>2.2.7 路由 TypeError: Cannot read property ‘matched’ of undefined 的错误问题</h4><p>找到入口文件main.js里的new Vue()，必须使用router名，不能把router改成Router或者其他的别名</p>
+<h4 id="2-2-7-路由-TypeError-Cannot-read-property-39-matched-39-of-undefined-的错误问题"><a href="#2-2-7-路由-TypeError-Cannot-read-property-39-matched-39-of-undefined-的错误问题" class="headerlink" title="2.2.7 路由 TypeError: Cannot read property &#39;matched&#39; of undefined 的错误问题"></a>2.2.7 路由 TypeError: Cannot read property &#39;matched&#39; of undefined 的错误问题</h4><p>找到入口文件main.js里的new Vue()，必须使用router名，不能把router改成Router或者其他的别名</p>
 <pre><code class="javascript">// 引入路由
 import router from &#39;./routers/router.js&#39;
 
@@ -1490,10 +1489,10 @@ console.log(error) // 错误处理，相当于error
 })
 </code></pre>
 </li>
-<li><p>axios API通过相关配置传递给axios完成请求<br><code>`</code>javascript<br>axios({<br>method: ‘delete’,<br>url: ‘xxx’,<br>cache: false,<br>params: { id: 123 },<br>headers: xxx<br>})</p>
+<li><p>axios API通过相关配置传递给axios完成请求<br><code>`</code>javascript<br>axios({<br>method: &#39;delete&#39;,<br>url: &#39;xxx&#39;,<br>cache: false,<br>params: { id: 123 },<br>headers: xxx<br>})</p>
 </li>
 </ul>
-<p>/<em> ———————– </em>/<br>axios({<br>  method: ‘post’,<br>  url: ‘/user/12345’,<br>  data: {<br>    firstName: ‘monkey’,<br>    lastName: ‘soft’<br>  }<br>})</p>
+<p>/<em> ----------------------- </em>/<br>axios({<br>  method: &#39;post&#39;,<br>  url: &#39;/user/12345&#39;,<br>  data: {<br>    firstName: &#39;monkey&#39;,<br>    lastName: &#39;soft&#39;<br>  }<br>})</p>
 <pre><code>
 直接使用api的方式虽然简单，但是不同请求参数的名字不一样，在实际开发过程中很容易写错或者忽略，容易为开发造成不必要的时间损失。
 
@@ -1546,10 +1545,10 @@ const request = function({ url, params, config, method }) {
 </blockquote>
 <h3 id="3-1-publicPath"><a href="#3-1-publicPath" class="headerlink" title="3.1 publicPath"></a>3.1 publicPath</h3><ul>
 <li>类型：String</li>
-<li>默认：’/‘</li>
+<li>默认：&#39;/&#39;</li>
 </ul>
 <p>部署应用包时的基本 URL。默认情况下，Vue CLI会假设你的应用是被部署在一个域名的根路径上，例如<a href="https://www.my-app.com/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在https://www.my-app.com/my-app/，则设置publicPath为/my-app/" target="_blank" rel="noopener">https://www.my-app.com/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在https://www.my-app.com/my-app/，则设置publicPath为/my-app/</a></p>
-<p>这个值也可以被设置为空字符串 (‘’) 或是相对路径 (‘./‘)，这样所有的资源都会被链接为相对路径，这样打出来的包可以被部署在任意路径，也可以用在类似 Cordova hybrid 应用的文件系统中。</p>
+<p>这个值也可以被设置为空字符串 (&#39;&#39;) 或是相对路径 (&#39;./&#39;)，这样所有的资源都会被链接为相对路径，这样打出来的包可以被部署在任意路径，也可以用在类似 Cordova hybrid 应用的文件系统中。</p>
 <h3 id="3-2-productionSourceMap"><a href="#3-2-productionSourceMap" class="headerlink" title="3.2 productionSourceMap"></a>3.2 productionSourceMap</h3><ul>
 <li>类型：boolean</li>
 <li>默认：true</li>
@@ -1558,8 +1557,8 @@ const request = function({ url, params, config, method }) {
 <blockquote>
 <p>注 Source map的作用：针对打包后的代码进行的处理，就是一个信息文件，里面储存着位置信息。也就是说，转换后的代码的每一个位置，所对应的转换前的位置。有了它，出错的时候，除错工具将直接显示原始代码，而不是转换后的代码。这无疑给开发者带来了很大方便</p>
 </blockquote>
-<h3 id="3-3-assetsDir"><a href="#3-3-assetsDir" class="headerlink" title="3.3 assetsDir"></a>3.3 assetsDir</h3><p>放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录,默认是’’,</p>
-<h3 id="3-4-indexPath"><a href="#3-4-indexPath" class="headerlink" title="3.4 indexPath"></a>3.4 indexPath</h3><p>指定生成的 index.html 的输出路径(相对于outputDir)。也可以是一个绝对路径。默认是’index.html’</p>
+<h3 id="3-3-assetsDir"><a href="#3-3-assetsDir" class="headerlink" title="3.3 assetsDir"></a>3.3 assetsDir</h3><p>放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录,默认是&#39;&#39;,</p>
+<h3 id="3-4-indexPath"><a href="#3-4-indexPath" class="headerlink" title="3.4 indexPath"></a>3.4 indexPath</h3><p>指定生成的 index.html 的输出路径(相对于outputDir)。也可以是一个绝对路径。默认是&#39;index.html&#39;</p>
 <h3 id="3-5-lintOnSave"><a href="#3-5-lintOnSave" class="headerlink" title="3.5 lintOnSave"></a>3.5 lintOnSave</h3><p>是否在每次保存时使用eslint检查，这个对语法的要求比较严格，对自己有要求的同学可以使用</p>
 <h3 id="3-6-css"><a href="#3-6-css" class="headerlink" title="3.6 css"></a>3.6 css</h3><pre><code class="javascript">css: {
   // 是否启用css分离插件，默认是true，如果不启用css样式分离插件，打包出来的css是通过内联样式的方式注入至dom中的，
@@ -1628,7 +1627,7 @@ const request = function({ url, params, config, method }) {
 <li><a href="https://juejin.im/post/6847009771493523464" target="_blank" rel="noopener">锋利码农武器之vscode</a></li>
 <li><a href="https://juejin.im/post/6847009771371888653" target="_blank" rel="noopener">面试宝典带你走上人生巅峰</a></li>
 </ol>
-</slot></slot></slot></template></slot></slot></template></slot></slot></submit-button></slot></button></submit-button></slot></slot></slot></slot>
+
         </div>
         <!-- .entry-content -->
         <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>

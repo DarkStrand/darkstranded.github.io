@@ -1174,7 +1174,7 @@ watermark.set(&quot;绝密档案&quot;, &quot;严禁外泄&quot;)
 <li>@description </li>
 <li>移动端<code>swiper</code>组件，如果需要兼容<code>pc</code>自行修改对应的<code>touch</code>到<code>mouse</code>事件即可。现成效果预览：<a href="https://huangjingsheng.gitee.io/hjs/cv/demo/face/" target="_blank" rel="noopener">https://huangjingsheng.gitee.io/hjs/cv/demo/face/</a><br>*/<br>function swiper(params) {<br> /**<ul>
 <li>css class 命名列表</li>
-<li>@dec [“滑动列表”,”滑动item”,”圆点容器”,”底部圆点”,”圆点高亮”]<br><em>/<br>const classNames = [“.swiper_list”, “.swiper_item”, “.swiper_pagination”, “.swiper_dot”, “.swiper_dot_active”];<br>/** 滑动结束函数 </em>/<br>const slideEnd = params.slideCallback || function() {};<br>/**</li>
+<li>@dec [&quot;滑动列表&quot;,&quot;滑动item&quot;,&quot;圆点容器&quot;,&quot;底部圆点&quot;,&quot;圆点高亮&quot;]<br><em>/<br>const classNames = [&quot;.swiper_list&quot;, &quot;.swiper_item&quot;, &quot;.swiper_pagination&quot;, &quot;.swiper_dot&quot;, &quot;.swiper_dot_active&quot;];<br>/** 滑动结束函数 </em>/<br>const slideEnd = params.slideCallback || function() {};<br>/**</li>
 <li>组件节点</li>
 <li>@type {HTMLElement}<br>*/<br>let node = null;<br>/**</li>
 <li>item列表容器</li>
@@ -1672,28 +1672,28 @@ function upLoadImage(el) {
 <li>@param {HTMLElement} option.el 下拉元素（必选）</li>
 <li>@param {number} option.distance 下拉距离[px]（可选）</li>
 <li>@param {number} option.deviation 顶部往下偏移量[px]（可选）</li>
-<li><p>@param {string} option.loadIcon 下拉中的 icon html（可选）<br><em>/<br>function dropDownRefresh(option) {<br> const doc = document;<br> /** 整体节点 </em>/<br> const page = option.el;<br> /<strong> 下拉距离 */<br> const distance = option.distance || 88;<br> /</strong> 顶部往下偏移量 <em>/<br> const deviation = option.deviation || 0;<br> /** 顶层节点 </em>/<br> const topNode = doc.createElement(“div”);<br> /*<em> 下拉时遮罩 </em>/<br> const maskNode = doc.createElement(“div”);</p>
-<p> topNode.innerHTML = <code>&lt;div refresh-icon style=&quot;transition: .2s all;&quot;&gt;&lt;svg style=&quot;transform: rotate(90deg); display: block;&quot; t=&quot;1570593064555&quot; viewBox=&quot;0 0 1575 1024&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; p-id=&quot;26089&quot; width=&quot;48&quot; height=&quot;48&quot;&gt;&lt;path d=&quot;M1013.76 0v339.968H484.115692V679.778462h529.644308v339.968l529.644308-485.612308v-48.600616L1013.76 0zM243.396923 679.857231h144.462769V339.968H243.396923V679.778462z m-240.797538 0h144.462769V339.968H2.599385V679.778462z&quot; fill=&quot;#000000&quot; fill-opacity=&quot;.203&quot; p-id=&quot;26090&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div refresh-loading style=&quot;display: none; animation: refresh-loading 1s linear infinite;&quot;&gt;${option.loadIcon || &#39;&lt;p style=&quot;font-size: 15px; color: #666;&quot;&gt;loading...&lt;/p&gt;&#39;}&lt;/div&gt;</code>;<br> topNode.style.cssText = <code>width: 100%; height: ${distance}px; position: fixed; top: ${-distance + deviation}px; left: 0; z-index: 10; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; box-sizing: border-box; margin: 0; padding: 0;</code>;<br> maskNode.style.cssText = “position: fixed; top: 0; left: 0; width: 100%; height: 100vh; box-sizing: border-box; margin: 0; padding: 0; background-color: rgba(0,0,0,0); z-index: 999;”;<br> page.parentNode.insertBefore(topNode, page);</p>
+<li><p>@param {string} option.loadIcon 下拉中的 icon html（可选）<br><em>/<br>function dropDownRefresh(option) {<br> const doc = document;<br> /** 整体节点 </em>/<br> const page = option.el;<br> /<strong> 下拉距离 */<br> const distance = option.distance || 88;<br> /</strong> 顶部往下偏移量 <em>/<br> const deviation = option.deviation || 0;<br> /** 顶层节点 </em>/<br> const topNode = doc.createElement(&quot;div&quot;);<br> /*<em> 下拉时遮罩 </em>/<br> const maskNode = doc.createElement(&quot;div&quot;);</p>
+<p> topNode.innerHTML = <code>&lt;div refresh-icon style=&quot;transition: .2s all;&quot;&gt;&lt;svg style=&quot;transform: rotate(90deg); display: block;&quot; t=&quot;1570593064555&quot; viewBox=&quot;0 0 1575 1024&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; p-id=&quot;26089&quot; width=&quot;48&quot; height=&quot;48&quot;&gt;&lt;path d=&quot;M1013.76 0v339.968H484.115692V679.778462h529.644308v339.968l529.644308-485.612308v-48.600616L1013.76 0zM243.396923 679.857231h144.462769V339.968H243.396923V679.778462z m-240.797538 0h144.462769V339.968H2.599385V679.778462z&quot; fill=&quot;#000000&quot; fill-opacity=&quot;.203&quot; p-id=&quot;26090&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div refresh-loading style=&quot;display: none; animation: refresh-loading 1s linear infinite;&quot;&gt;${option.loadIcon || &#39;&lt;p style=&quot;font-size: 15px; color: #666;&quot;&gt;loading...&lt;/p&gt;&#39;}&lt;/div&gt;</code>;<br> topNode.style.cssText = <code>width: 100%; height: ${distance}px; position: fixed; top: ${-distance + deviation}px; left: 0; z-index: 10; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; box-sizing: border-box; margin: 0; padding: 0;</code>;<br> maskNode.style.cssText = &quot;position: fixed; top: 0; left: 0; width: 100%; height: 100vh; box-sizing: border-box; margin: 0; padding: 0; background-color: rgba(0,0,0,0); z-index: 999;&quot;;<br> page.parentNode.insertBefore(topNode, page);</p>
 <p> /**</p>
 <ul>
 <li>设置动画时间</li>
-<li><p>@param {number} n 秒数<br>*/<br>function setAnimation(n) {<br> page.style.transition = topNode.style.transition = n + “s all”;<br>}</p>
+<li><p>@param {number} n 秒数<br>*/<br>function setAnimation(n) {<br> page.style.transition = topNode.style.transition = n + &quot;s all&quot;;<br>}</p>
 <p>/**</p>
 </li>
 <li>设置滑动距离</li>
 <li><p>@param {number} n 滑动的距离（像素）<br>*/<br>function setSlide(n) {<br> page.style.transform = topNode.style.transform = <code>translate3d(0px, ${n}px, 0px)</code>;<br>}</p>
-<p>/<strong> 下拉提示 icon */<br>const icon = topNode.querySelector(“[refresh-icon]”);<br>/</strong> 下拉 loading 动画 */<br>const loading = topNode.querySelector(“[refresh-loading]”);</p>
+<p>/<strong> 下拉提示 icon */<br>const icon = topNode.querySelector(&quot;[refresh-icon]&quot;);<br>/</strong> 下拉 loading 动画 */<br>const loading = topNode.querySelector(&quot;[refresh-loading]&quot;);</p>
 <p>return {<br> /**</p>
 <ul>
 <li>监听开始刷新</li>
 <li>@param {Function} callback 下拉结束回调</li>
 <li><p>@param {(n: number) =&gt; void} rangeCallback 下拉状态回调<br><em>/<br>onRefresh(callback, rangeCallback = null) {<br> /** 顶部距离 </em>/<br> let scrollTop = 0;<br> /<strong> 开始距离 */<br> let startDistance = 0;<br> /</strong> 结束距离 <em>/<br> let endDistance = 0;<br> /** 最后移动的距离 </em>/<br> let range = 0;</p>
-<p> // 触摸开始<br> page.addEventListener(“touchstart”, function (e) {</p>
+<p> // 触摸开始<br> page.addEventListener(&quot;touchstart&quot;, function (e) {</p>
 <pre><code> startDistance = e.touches[0].pageY;
  scrollTop = 1;
  setAnimation(0);
 </code></pre><p> });</p>
-<p> // 触摸移动<br> page.addEventListener(“touchmove”, function (e) {</p>
+<p> // 触摸移动<br> page.addEventListener(&quot;touchmove&quot;, function (e) {</p>
 <pre><code> scrollTop = doc.documentElement.scrollTop === 0 ? doc.body.scrollTop : doc.documentElement.scrollTop;
  // 没到达顶部就停止
  if (scrollTop != 0) return;
@@ -1716,7 +1716,7 @@ function upLoadImage(el) {
      if (typeof rangeCallback === &quot;function&quot;) rangeCallback(range);
  }
 </code></pre><p> });</p>
-<p> // 触摸结束<br> page.addEventListener(“touchend”, function () {</p>
+<p> // 触摸结束<br> page.addEventListener(&quot;touchend&quot;, function () {</p>
 <pre><code> setAnimation(0.3);
  // console.log(`移动的距离：${range}, 最大距离：${distance}`);
  if (range &gt; distance &amp;&amp; range &gt; 1 &amp;&amp; scrollTop === 0) {
@@ -1732,7 +1732,7 @@ function upLoadImage(el) {
      setSlide(0);
  }
 </code></pre><p> });</p>
-<p>},<br>/*<em> 结束下拉 </em>/<br>end() {<br> maskNode.parentNode.removeChild(maskNode);<br> setAnimation(0.3);<br> setSlide(0);<br> icon.style.display = “block”;<br> loading.style.display = “none”;<br>}<br>}<br>}</p>
+<p>},<br>/*<em> 结束下拉 </em>/<br>end() {<br> maskNode.parentNode.removeChild(maskNode);<br> setAnimation(0.3);<br> setSlide(0);<br> icon.style.display = &quot;block&quot;;<br> loading.style.display = &quot;none&quot;;<br>}<br>}<br>}</p>
 </li>
 </ul>
 </li>
@@ -2013,7 +2013,7 @@ html{ font-size: calc(100vw / 750); }
  * formatDate(1603264465956, &quot;Y年M月D日&quot;);
  *
 </code></pre>
-<p> */<br>function formatDate(value = Date.now(), format = “Y-M-D h:m:s”) {<br>    const formatNumber = n =&gt; <code>0${n}</code>.slice(-2);<br>    const date = new Date(value);<br>    const formatList = [“Y”, “M”, “D”, “h”, “m”, “s”];<br>    const resultList = [];<br>    resultList.push(date.getFullYear().toString());<br>    resultList.push(formatNumber(date.getMonth() + 1));<br>    resultList.push(formatNumber(date.getDate()));<br>    resultList.push(formatNumber(date.getHours()));<br>    resultList.push(formatNumber(date.getMinutes()));<br>    resultList.push(formatNumber(date.getSeconds()));<br>    for (let i = 0; i &lt; resultList.length; i++) {<br>        format = format.replace(formatList[i], resultList[i]);<br>    }<br>    return format;<br>}</p>
+<p> */<br>function formatDate(value = Date.now(), format = &quot;Y-M-D h:m:s&quot;) {<br>    const formatNumber = n =&gt; <code>0${n}</code>.slice(-2);<br>    const date = new Date(value);<br>    const formatList = [&quot;Y&quot;, &quot;M&quot;, &quot;D&quot;, &quot;h&quot;, &quot;m&quot;, &quot;s&quot;];<br>    const resultList = [];<br>    resultList.push(date.getFullYear().toString());<br>    resultList.push(formatNumber(date.getMonth() + 1));<br>    resultList.push(formatNumber(date.getDate()));<br>    resultList.push(formatNumber(date.getHours()));<br>    resultList.push(formatNumber(date.getMinutes()));<br>    resultList.push(formatNumber(date.getSeconds()));<br>    for (let i = 0; i &lt; resultList.length; i++) {<br>        format = format.replace(formatList[i], resultList[i]);<br>    }<br>    return format;<br>}</p>
 <pre><code>
 ## 网页定位
 这里使用百度定位，无论代码封装、调用方式还是位置准确性都比微信sdk那个好用太多了，包括在任何网页端；

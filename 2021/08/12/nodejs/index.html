@@ -367,7 +367,7 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="01-Node-js基础"><a href="#01-Node-js基础" class="headerlink" title="01-Node.js基础"></a>01-Node.js基础</h1><h2 id="一、Node-js是什么"><a href="#一、Node-js是什么" class="headerlink" title="一、Node.js是什么"></a>一、Node.js是什么</h2><p>Node.js is a JavaScript runtime built on Chrome’s V8 JavaScript engine.</p>
+          <h1 id="01-Node-js基础"><a href="#01-Node-js基础" class="headerlink" title="01-Node.js基础"></a>01-Node.js基础</h1><h2 id="一、Node-js是什么"><a href="#一、Node-js是什么" class="headerlink" title="一、Node.js是什么"></a>一、Node.js是什么</h2><p>Node.js is a JavaScript runtime built on Chrome&#39;s V8 JavaScript engine.</p>
 <h3 id="1、-特性"><a href="#1、-特性" class="headerlink" title="1、 特性"></a>1、 特性</h3><p>Node.js可以解析JS代码（没有浏览器安全级别的限制）提供很多系统级别的API，如：</p>
 <ul>
 <li>文件的读写（File System）</li>
@@ -475,8 +475,8 @@ $ npm list | grep underscore  // 查看underscore包的树(依赖关系)
 $ cat package.json
 
 </code></pre><blockquote>
-<p>“dependencies”：这些包是你的应用程序在生产环境中所需要的。</p>
-<p>“devDepedencies”：这些包只是在开发和测试中需要的。</p>
+<p>&quot;dependencies&quot;：这些包是你的应用程序在生产环境中所需要的。</p>
+<p>&quot;devDepedencies&quot;：这些包只是在开发和测试中需要的。</p>
 </blockquote>
 <p><img src="https://img-blog.csdn.net/2018071517553381?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p3bF93aWxsb24=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="npm"></p>
 <pre><code>// package.json
@@ -685,7 +685,7 @@ console.log(process.env.npm_package_version); // 1.2.5
 <pre><code>$ npm config set foo:port 80
 
 </code></pre><p>最后，env命令可以列出所有环境变量。</p>
-<p>“env”:”env” </p>
+<p>&quot;env&quot;:&quot;env&quot; </p>
 <h4 id="2-10-npm安装git上发布的包"><a href="#2-10-npm安装git上发布的包" class="headerlink" title="2.10 npm安装git上发布的包"></a>2.10 npm安装git上发布的包</h4><pre><code># 这样适合安装公司内部的git服务器上的项目
 npm install git+https://git@github.com:lurongtao/gp-project.git
 
@@ -741,10 +741,10 @@ $ npx ls
 <p>注意，只要npx后面的模块无法在本地发现，就会下载同名模块。比如，本地没有安装http-server模块，下面的命令会自动下载该模块，在当前目录启动一个Web服务。</p>
 <pre><code>$ npx http-server
 
-</code></pre><h4 id="4-3-–no–install参数和–ignore-existing参数"><a href="#4-3-–no–install参数和–ignore-existing参数" class="headerlink" title="4.3 –no–install参数和–ignore-existing参数"></a>4.3 –no–install参数和–ignore-existing参数</h4><p>如果想让npx强制使用本地模块，不下载远程模块，可以使用–no-install参数。如果本地不存在该模块，就会报错。</p>
+</code></pre><h4 id="4-3-no-install参数和-ignore-existing参数"><a href="#4-3-no-install参数和-ignore-existing参数" class="headerlink" title="4.3 --no--install参数和--ignore-existing参数"></a>4.3 --no--install参数和--ignore-existing参数</h4><p>如果想让npx强制使用本地模块，不下载远程模块，可以使用--no-install参数。如果本地不存在该模块，就会报错。</p>
 <pre><code>$ npx --no-install http-server
 
-</code></pre><p>反过来，如果忽略本地的同名模块，强制安装使用远程模块，可以使用–ignore-existing参数。比如，本地已经安装了http-server，但还是想使用远程模块，就用这个参数。</p>
+</code></pre><p>反过来，如果忽略本地的同名模块，强制安装使用远程模块，可以使用--ignore-existing参数。比如，本地已经安装了http-server，但还是想使用远程模块，就用这个参数。</p>
 <pre><code>$ npx --ignore-existing http-server
 
 </code></pre><h3 id="5、node的浏览端调试"><a href="#5、node的浏览端调试" class="headerlink" title="5、node的浏览端调试"></a>5、node的浏览端调试</h3><ul>
@@ -943,7 +943,7 @@ console.log(parsed)
 
 </code></pre>
 <h4 id="2-2-stringify"><a href="#2-2-stringify" class="headerlink" title="2.2 stringify"></a>2.2 stringify</h4><blockquote>
-<p>将对象转换成字符串，字符串里多个参数将用 ‘&amp;’ 分隔，将用 ‘=’ 赋值。</p>
+<p>将对象转换成字符串，字符串里多个参数将用 ‘&amp;&#39; 分隔，将用 ‘=&#39; 赋值。</p>
 </blockquote>
 <p><code>querystring.stringify(obj[, sep[, eq[, options]]])</code></p>
 <ul>
@@ -1535,7 +1535,7 @@ $ cd myapp
 <p>接下来安装Express并将其保存到依赖列表中：</p>
 <pre><code>$ npm install express --save
 
-</code></pre><p>如果只是临时安装Express，不想将它添加到依赖列表中，只需略去–save参数即可：</p>
+</code></pre><p>如果只是临时安装Express，不想将它添加到依赖列表中，只需略去--save参数即可：</p>
 <pre><code>$ npm install express
 
 </code></pre><blockquote>
@@ -1561,7 +1561,7 @@ var server = app.listen(3000, function () {
 </code></pre>
 <p>上面的代码启动一个服务并监听从3000端口进入的所有连接请求。他将对所有(/)URL或 路由返回“Hello World！”字符串。对于其他所有路径全部返回 404 Not Found。</p>
 <blockquote>
-<p>req (请求) 和 res (响应) 与 Node 提供的对象完全一致，因此，你可以调用 req.pipe()、req.on(‘data’, callback) 以及任何 Node 提供的方法。</p>
+<p>req (请求) 和 res (响应) 与 Node 提供的对象完全一致，因此，你可以调用 req.pipe()、req.on(&#39;data&#39;, callback) 以及任何 Node 提供的方法。</p>
 </blockquote>
 <p>通过如下命令启动此应用：</p>
 <pre><code>$ node app.js
@@ -1608,7 +1608,7 @@ app.delete(&#39;/user&#39;, function (req, res) {
 <p>有些路由方法名不是合规的 JavaScript 变量名，此时使用括号记法，比如：<code>app[&#39;m-search&#39;](&#39;/&#39;, function ...)</code></p>
 </blockquote>
 <p>app.all()是一个特殊的路由方法，没有任何HTTP方法与其对应，它的作用是对于一个路径上的所有请求加载中间件。</p>
-<p>在下面的例子中，来自”/secret”的请求，不管使用 GET、POST、PUT、DELETE或其他任何http模块支持的HTTP请求，句柄都会得到执行。</p>
+<p>在下面的例子中，来自&quot;/secret&quot;的请求，不管使用 GET、POST、PUT、DELETE或其他任何http模块支持的HTTP请求，句柄都会得到执行。</p>
 <pre><code class="js">app.all(&#39;/secret&#39;, function (req, res, next) {
   console.log(&#39;Accessing the secret section ...&#39;)
   next(); // pass control to the next handler
@@ -1789,7 +1789,7 @@ app.get(&#39;/example/d&#39;, [cb0, cb1], function (req, res, next) {
   });
 
 </code></pre>
-<h3 id="6、express-Router"><a href="#6、express-Router" class="headerlink" title="6、express.Router"></a>6、express.Router</h3><p>可使用express.Router类创建模块化、可挂载的路由句柄。Router实例是一个完整的中间件和路由系统，因此常称其为一个’mini-app’。</p>
+<h3 id="6、express-Router"><a href="#6、express-Router" class="headerlink" title="6、express.Router"></a>6、express.Router</h3><p>可使用express.Router类创建模块化、可挂载的路由句柄。Router实例是一个完整的中间件和路由系统，因此常称其为一个&#39;mini-app&#39;。</p>
 <p>下面的实例程序创建了一个路由模块，并加载 了一个中间件，定义了一些路由，并且将它们挂载至应用的路径上。</p>
 <p>在app目录下创建名为bird.js的文件，内容如下：</p>
 <pre><code class="js">var express = require(&#39;express&#39;);
@@ -2027,7 +2027,7 @@ app.use(&#39;/&#39;, router)
 <td>index</td>
 <td>发送目录索引文件，设置为false禁用目录索引</td>
 <td>Mixed</td>
-<td>“index.html”</td>
+<td>&quot;index.html&quot;</td>
 </tr>
 <tr>
 <td>lastModified</td>
