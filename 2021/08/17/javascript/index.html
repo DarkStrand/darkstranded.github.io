@@ -373,27 +373,27 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>js全称javascript，是一门运行在浏览器端的脚本语言，现在也可以运行在服务器端（node.js）</p>
-<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><p>现在说的javasript包含3个组成部分</p>
+          <h2 id="1、介绍"><a href="#1、介绍" class="headerlink" title="1、介绍"></a>1、介绍</h2><p>js全称javascript，是一门运行在浏览器端的脚本语言，现在也可以运行在服务器端（node.js）</p>
+<h2 id="2、组成"><a href="#2、组成" class="headerlink" title="2、组成"></a>2、组成</h2><p>现在说的javasript包含3个组成部分</p>
 <ol>
 <li><strong>ECMAScript</strong> 语法标准，语法规则</li>
 <li><strong>DOM</strong> 专门用于操作页面元素的方法</li>
 <li><strong>BOM</strong> 专门用于操作浏览器的方法</li>
 </ol>
 <p><code>webapi</code>有时用来统称1和2</p>
-<h2 id="js书写位置"><a href="#js书写位置" class="headerlink" title="js书写位置"></a>js书写位置</h2><ol>
+<h2 id="3、js书写位置"><a href="#3、js书写位置" class="headerlink" title="3、js书写位置"></a>3、js书写位置</h2><ol>
 <li>直接将内容编写在script标签中</li>
 <li>可以直接在一个单独的js文件中编写，需要引入</li>
 </ol>
 <blockquote>
 <p>注意点：只要script标签，设置了src属性，标签内的内容将被忽略</p>
 </blockquote>
-<h2 id="js的注释"><a href="#js的注释" class="headerlink" title="js的注释"></a>js的注释</h2><p>注释给开发者看的，浏览器不会执行，方便维护</p>
+<h2 id="4、js的注释"><a href="#4、js的注释" class="headerlink" title="4、js的注释"></a>4、js的注释</h2><p>注释给开发者看的，浏览器不会执行，方便维护</p>
 <ul>
 <li>单行注释// 快捷键<code>ctrl+/</code></li>
 <li>多行注释/**/ 快捷键<code>alt+shift+a</code></li>
 </ul>
-<h2 id="js的输出语句"><a href="#js的输出语句" class="headerlink" title="js的输出语句"></a>js的输出语句</h2><blockquote>
+<h2 id="5、js的输出语句"><a href="#5、js的输出语句" class="headerlink" title="5、js的输出语句"></a>5、js的输出语句</h2><blockquote>
 <p>指的就是往页面中输出的方式</p>
 <ul>
 <li><code>alert</code> 警告框</li>
@@ -404,7 +404,7 @@
 <li><code>console.log</code> 在控制台打印内容，专门用于调试的，给开发者看</li>
 </ul>
 </blockquote>
-<h2 id="变量（就是可以变化的量）"><a href="#变量（就是可以变化的量）" class="headerlink" title="变量（就是可以变化的量）"></a>变量（就是可以变化的量）</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>存储数据，为了将来可以运算使用</p>
+<h2 id="6、变量（就是可以变化的量）"><a href="#6、变量（就是可以变化的量）" class="headerlink" title="6、变量（就是可以变化的量）"></a>6、变量（就是可以变化的量）</h2><h3 id="6-1-作用"><a href="#6-1-作用" class="headerlink" title="6.1 作用"></a>6.1 作用</h3><p>存储数据，为了将来可以运算使用</p>
 <ol>
 <li>先声明，后赋值<pre><code class="javascript">var age;
 age = 18;
@@ -422,22 +422,22 @@ console.log(age3);
 <li>不声明，不赋值，直接用  xxx is not defined 一定是没有声明赋值的变量直接用了，会报错</li>
 <li>可以同时声明赋值多个变量（本质上，只是省略了var）</li>
 </ol>
-<h3 id="变量命名规则和规范"><a href="#变量命名规则和规范" class="headerlink" title="变量命名规则和规范"></a>变量命名规则和规范</h3><h4 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h4><ul>
+<h3 id="6-2-变量命名规则和规范"><a href="#6-2-变量命名规则和规范" class="headerlink" title="6.2 变量命名规则和规范"></a>6.2 变量命名规则和规范</h3><h4 id="6-2-1-规则"><a href="#6-2-1-规则" class="headerlink" title="6.2.1 规则"></a>6.2.1 规则</h4><ul>
 <li>变量名必须由字母 数字 下划线和 $组成，不能以数字开头（后来也引入中文，但是不要这么做）</li>
 <li>变量名不能是关键字或者是保留字</li>
 <li>变量区分大小写</li>
 </ul>
-<h4 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h4><ul>
+<h4 id="6-2-2-规范"><a href="#6-2-2-规范" class="headerlink" title="6.2.2 规范"></a>6.2.2 规范</h4><ul>
 <li>声明的变量要有意义</li>
 <li>声明的变量，如果很长，遵循驼峰命名（从第二个字母开始，首字母大写，用于分割单词，可读性高）</li>
 </ul>
-<h3 id="变量的作用域（变量起作用的区域）"><a href="#变量的作用域（变量起作用的区域）" class="headerlink" title="变量的作用域（变量起作用的区域）"></a>变量的作用域（变量起作用的区域）</h3><ul>
+<h3 id="6-3-变量的作用域（变量起作用的区域）"><a href="#6-3-变量的作用域（变量起作用的区域）" class="headerlink" title="6.3 变量的作用域（变量起作用的区域）"></a>6.3 变量的作用域（变量起作用的区域）</h3><ul>
 <li>全局作用域（在script标签内，在函数外的区域）<br>  声明在全局作用域的变量，就叫全局变量<br>  特征：在任何地方都可以使用</li>
 <li>局部作用域（函数内部的区域，就是局部作用域）<br>  声明在函数内部的变量，就叫局部变量<br>  特征：只在当前函数内可以使用，出了函数，就不能用了</li>
 </ul>
-<h3 id="变量的访问规则"><a href="#变量的访问规则" class="headerlink" title="变量的访问规则"></a>变量的访问规则</h3><p>如果自己的作用域内有这个变量，直接用，改自己的<br>如果没有，才会往外面找（找全局）,用外面的，改外面的 </p>
-<h3 id="隐式全局变量"><a href="#隐式全局变量" class="headerlink" title="隐式全局变量"></a>隐式全局变量</h3><p>如果一个没有声明过的变量，直接赋值，就叫隐式全局变量（将来要避免）</p>
-<h3 id="预解析（预先解析，浏览器会先查看有多少的变量和函数）"><a href="#预解析（预先解析，浏览器会先查看有多少的变量和函数）" class="headerlink" title="预解析（预先解析，浏览器会先查看有多少的变量和函数）"></a>预解析（预先解析，浏览器会先查看有多少的变量和函数）</h3><ol>
+<h3 id="6-4-变量的访问规则"><a href="#6-4-变量的访问规则" class="headerlink" title="6.4 变量的访问规则"></a>6.4 变量的访问规则</h3><p>如果自己的作用域内有这个变量，直接用，改自己的<br>如果没有，才会往外面找（找全局）,用外面的，改外面的 </p>
+<h3 id="6-5-隐式全局变量"><a href="#6-5-隐式全局变量" class="headerlink" title="6.5 隐式全局变量"></a>6.5 隐式全局变量</h3><p>如果一个没有声明过的变量，直接赋值，就叫隐式全局变量（将来要避免）</p>
+<h3 id="6-6-预解析（预先解析，浏览器会先查看有多少的变量和函数）"><a href="#6-6-预解析（预先解析，浏览器会先查看有多少的变量和函数）" class="headerlink" title="6.6 预解析（预先解析，浏览器会先查看有多少的变量和函数）"></a>6.6 预解析（预先解析，浏览器会先查看有多少的变量和函数）</h3><ol>
 <li>所有的变量声明，都会提升到最顶部，只提升声明，不提升赋值</li>
 <li>所有的函数声明，都会提升到最顶部，只提升声明，不提升调用<blockquote>
 <p>补充说明:</p>
@@ -453,8 +453,8 @@ console.log(age3);
 </li>
 </ol>
 <p>预解析，虽然可以提升我们的声明，但是我们开发时，还是要<strong>先声明，后使用</strong>！！！</p>
-<h2 id="js的数据类型"><a href="#js的数据类型" class="headerlink" title="js的数据类型"></a>js的数据类型</h2><p>分为：<code>简单数据类型</code>和<code>复杂数据类型</code> （数组、函数、对象）</p>
-<h3 id="简单数据类型"><a href="#简单数据类型" class="headerlink" title="简单数据类型"></a>简单数据类型</h3><h4 id="number类型（数字类型）"><a href="#number类型（数字类型）" class="headerlink" title="number类型（数字类型）"></a>number类型（数字类型）</h4><ol>
+<h2 id="7、js的数据类型"><a href="#7、js的数据类型" class="headerlink" title="7、js的数据类型"></a>7、js的数据类型</h2><p>分为：<code>简单数据类型</code>和<code>复杂数据类型</code> （数组、函数、对象）</p>
+<h3 id="7-1-简单数据类型"><a href="#7-1-简单数据类型" class="headerlink" title="7.1 简单数据类型"></a>7.1 简单数据类型</h3><h4 id="7-1-1-number类型（数字类型）"><a href="#7-1-1-number类型（数字类型）" class="headerlink" title="7.1.1 number类型（数字类型）"></a>7.1.1 number类型（数字类型）</h4><ol>
 <li><p>整数（一般使用的是十进制  逢十进一）</p>
 <p> <code>八进制，逢八进一，0开头</code></p>
 <pre><code class="javascript"> var num3 = 011  //就是1*8+1 为9;
@@ -475,7 +475,7 @@ console.log(age3);
 </blockquote>
 </li>
 </ol>
-<h4 id="string类型-字符串类型"><a href="#string类型-字符串类型" class="headerlink" title="string类型 字符串类型"></a>string类型 字符串类型</h4><ul>
+<h4 id="7-1-2-string类型-字符串类型"><a href="#7-1-2-string类型-字符串类型" class="headerlink" title="7.1.2 string类型 字符串类型"></a>7.1.2 string类型 字符串类型</h4><ul>
 <li>通过 &#39;&#39; 或者 &quot;&quot; 包裹的就是字符串，js中单双引号，没有区别，推荐&#39;&#39;.</li>
 <li><p>字符串通过length，可以获取长度</p>
 <pre><code>  console.log（str.length）;
@@ -493,22 +493,22 @@ console.log(age3);
 <li>只要两边有字符串（黑色），进行的就是拼串</li>
 <li>只有两边都是数字（蓝色），才进行运算</li>
 </ol>
-<h4 id="boolean类型-布尔类型"><a href="#boolean类型-布尔类型" class="headerlink" title="boolean类型 布尔类型"></a>boolean类型 布尔类型</h4><p>只有两个值，true真 false假<br>一般用于比较</p>
-<h4 id="undefined-未定义的，变量声明了，但是未赋值，默认值就是underfined"><a href="#undefined-未定义的，变量声明了，但是未赋值，默认值就是underfined" class="headerlink" title="undefined 未定义的，变量声明了，但是未赋值，默认值就是underfined"></a>undefined 未定义的，变量声明了，但是未赋值，默认值就是underfined</h4><h4 id="null-空对象"><a href="#null-空对象" class="headerlink" title="null 空对象"></a>null 空对象</h4><h3 id="复杂数据类型"><a href="#复杂数据类型" class="headerlink" title="复杂数据类型"></a>复杂数据类型</h3><h2 id="变量与简单数据类型的说明"><a href="#变量与简单数据类型的说明" class="headerlink" title="变量与简单数据类型的说明"></a>变量与简单数据类型的说明</h2><ul>
+<h4 id="7-1-3-boolean类型-布尔类型"><a href="#7-1-3-boolean类型-布尔类型" class="headerlink" title="7.1.3 boolean类型 布尔类型"></a>7.1.3 boolean类型 布尔类型</h4><p>只有两个值，true真 false假<br>一般用于比较</p>
+<h4 id="7-1-4-undefined-未定义的，变量声明了，但是未赋值，默认值就是underfined"><a href="#7-1-4-undefined-未定义的，变量声明了，但是未赋值，默认值就是underfined" class="headerlink" title="7.1.4 undefined 未定义的，变量声明了，但是未赋值，默认值就是underfined"></a>7.1.4 undefined 未定义的，变量声明了，但是未赋值，默认值就是underfined</h4><h4 id="7-1-5-null-空对象"><a href="#7-1-5-null-空对象" class="headerlink" title="7.1.5 null 空对象"></a>7.1.5 null 空对象</h4><h3 id="7-2-复杂数据类型"><a href="#7-2-复杂数据类型" class="headerlink" title="7.2 复杂数据类型"></a>7.2 复杂数据类型</h3><h2 id="8、变量与简单数据类型的说明"><a href="#8、变量与简单数据类型的说明" class="headerlink" title="8、变量与简单数据类型的说明"></a>8、变量与简单数据类型的说明</h2><ul>
 <li>对于简单数据类型，浏览器直接认识（直接量 或者 字面量）</li>
 <li>若是将字符串当成了变量（未声明，未赋值的变量直接使用，会报错）</li>
 <li>字符串需要引号包裹</li>
 </ul>
-<h2 id="运算符（操作符）"><a href="#运算符（操作符）" class="headerlink" title="运算符（操作符）"></a>运算符（操作符）</h2><h3 id="算术运算符-取余"><a href="#算术运算符-取余" class="headerlink" title="算术运算符 + - * / %(取余)"></a>算术运算符 <code>+ - * / %(取余)</code></h3><ul>
+<h2 id="9、运算符（操作符）"><a href="#9、运算符（操作符）" class="headerlink" title="9、运算符（操作符）"></a>9、运算符（操作符）</h2><h3 id="9-1-算术运算符-取余"><a href="#9-1-算术运算符-取余" class="headerlink" title="9.1 算术运算符 + - * / %(取余)"></a>9.1 算术运算符 <code>+ - * / %(取余)</code></h3><ul>
 <li><code>+</code> 不仅有拼串的功能，还可以运算</li>
 <li>其他算数运算符，只有运算的功能，如果遇到了字符串，也会转成数字运算<pre><code class="javascript">&quot;2&quot; - 1 = &gt;1
 </code></pre>
-<h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符 ="></a>赋值运算符 =</h3>=（就是赋值）   +=   -=   *=   /=   %=<pre><code class="javascript">var num = 10;
+<h3 id="9-2-赋值运算符"><a href="#9-2-赋值运算符" class="headerlink" title="9.2 赋值运算符 ="></a>9.2 赋值运算符 =</h3>=（就是赋值）   +=   -=   *=   /=   %=<pre><code class="javascript">var num = 10;
 num += 10; //等价 num = num + 10
 </code></pre>
 </li>
 </ul>
-<h3 id="自增或自减运算符（一元运算符）"><a href="#自增或自减运算符（一元运算符）" class="headerlink" title="自增或自减运算符（一元运算符）"></a>自增或自减运算符（一元运算符）</h3><h4 id="自增：让变量的值，在原来的基础上-1"><a href="#自增：让变量的值，在原来的基础上-1" class="headerlink" title="自增：让变量的值，在原来的基础上+1"></a>自增：让变量的值，在原来的基础上+1</h4><ul>
+<h3 id="9-3-自增或自减运算符（一元运算符）"><a href="#9-3-自增或自减运算符（一元运算符）" class="headerlink" title="9.3 自增或自减运算符（一元运算符）"></a>9.3 自增或自减运算符（一元运算符）</h3><h4 id="9-3-1-自增：让变量的值，在原来的基础上-1"><a href="#9-3-1-自增：让变量的值，在原来的基础上-1" class="headerlink" title="9.3.1 自增：让变量的值，在原来的基础上+1"></a>9.3.1 自增：让变量的值，在原来的基础上+1</h4><ul>
 <li><p>语法：<br><code>++num</code> 前自增，规则：先让值+1，再返回这个值<br><code>num++</code> 后自增，规则：先返回这个值，再让值+1</p>
 </li>
 <li><p>注意点： </p>
@@ -518,9 +518,9 @@ num += 10; //等价 num = num + 10
 </ul>
 </li>
 </ul>
-<h4 id="自减：让变量的值，在原来的基础上-1"><a href="#自减：让变量的值，在原来的基础上-1" class="headerlink" title="自减：让变量的值，在原来的基础上-1"></a>自减：让变量的值，在原来的基础上-1</h4><p>*语法：<br><code>--num</code><br><code>num--</code></p>
-<h3 id="逻辑运算符（与或非）"><a href="#逻辑运算符（与或非）" class="headerlink" title="逻辑运算符（与或非）"></a>逻辑运算符（与或非）</h3><p><code>&amp;&amp;</code> 并且 两边都要成立，结果才是 true，只要有一个不成立，就是false<br><code>||</code> 或 两边只要有一个成立，结果就是true<br><code>!</code> 取反</p>
-<h3 id="比较运算符-gt-lt-gt-lt"><a href="#比较运算符-gt-lt-gt-lt" class="headerlink" title="比较运算符 &gt;  &lt;  &gt;=  &lt;=  ==   !=  ===   !=="></a>比较运算符 &gt;  &lt;  &gt;=  &lt;=  ==   !=  ===   !==</h3><p><code>==</code> 规则：只看值，不看类型（只要值相等，就是相等）<br><code>===</code> 规则：看值，又看类型（值和类型都要相等）<br><code>!=</code> 规则：只看值，不看类型（只要值不等，就是true）<br><code>!==</code> 规则：看值，又看类型（只要值或者类型有一个不等，就是不等，返回true）</p>
+<h4 id="9-3-2-自减：让变量的值，在原来的基础上-1"><a href="#9-3-2-自减：让变量的值，在原来的基础上-1" class="headerlink" title="9.3.2 自减：让变量的值，在原来的基础上-1"></a>9.3.2 自减：让变量的值，在原来的基础上-1</h4><p>*语法：<br><code>--num</code><br><code>num--</code></p>
+<h3 id="9-4-逻辑运算符（与或非）"><a href="#9-4-逻辑运算符（与或非）" class="headerlink" title="9.4 逻辑运算符（与或非）"></a>9.4 逻辑运算符（与或非）</h3><p><code>&amp;&amp;</code> 并且 两边都要成立，结果才是 true，只要有一个不成立，就是false<br><code>||</code> 或 两边只要有一个成立，结果就是true<br><code>!</code> 取反</p>
+<h3 id="9-5-比较运算符-gt-lt-gt-lt"><a href="#9-5-比较运算符-gt-lt-gt-lt" class="headerlink" title="9.5 比较运算符 &gt;  &lt;  &gt;=  &lt;=  ==   !=  ===   !=="></a>9.5 比较运算符 &gt;  &lt;  &gt;=  &lt;=  ==   !=  ===   !==</h3><p><code>==</code> 规则：只看值，不看类型（只要值相等，就是相等）<br><code>===</code> 规则：看值，又看类型（值和类型都要相等）<br><code>!=</code> 规则：只看值，不看类型（只要值不等，就是true）<br><code>!==</code> 规则：看值，又看类型（只要值或者类型有一个不等，就是不等，返回true）</p>
 <blockquote>
 <p>==有一定规则（如果类型不同，转换成相同类型，然后比较）</p>
 <ol>
@@ -532,7 +532,7 @@ num += 10; //等价 num = num + 10
 <li>都是复杂数据类型，比较的是内存地址</li>
 </ol>
 </blockquote>
-<h3 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h3><ol>
+<h3 id="9-6-运算符优先级"><a href="#9-6-运算符优先级" class="headerlink" title="9.6 运算符优先级"></a>9.6 运算符优先级</h3><ol>
 <li>括号的优先级最高</li>
 <li>一元运算符 ++  --  !</li>
 <li>算数运算符  先乘除%，后加减</li>
@@ -542,8 +542,8 @@ num += 10; //等价 num = num + 10
 <blockquote>
 <p>记忆：（1）括号的优先级最高，逻辑运算符的优先级最低<br>         （2）先乘除，后加减</p>
 </blockquote>
-<h2 id="如何判断数据的类型"><a href="#如何判断数据的类型" class="headerlink" title="如何判断数据的类型"></a>如何判断数据的类型</h2><h3 id="直接打印看颜色（调试，看颜色）"><a href="#直接打印看颜色（调试，看颜色）" class="headerlink" title="直接打印看颜色（调试，看颜色）"></a>直接打印看颜色（调试，看颜色）</h3><p>蓝色的数字，number<br>黑色         string<br>蓝色的布尔值 boolean<br>灰色        undefined和null</p>
-<h3 id="typeof-变量-它的返回值，也是一个字符串类型"><a href="#typeof-变量-它的返回值，也是一个字符串类型" class="headerlink" title="typeof 变量    它的返回值，也是一个字符串类型"></a>typeof 变量    它的返回值，也是一个字符串类型</h3><ol>
+<h2 id="10、如何判断数据的类型"><a href="#10、如何判断数据的类型" class="headerlink" title="10、如何判断数据的类型"></a>10、如何判断数据的类型</h2><h3 id="10-1-直接打印看颜色（调试，看颜色）"><a href="#10-1-直接打印看颜色（调试，看颜色）" class="headerlink" title="10.1 直接打印看颜色（调试，看颜色）"></a>10.1 直接打印看颜色（调试，看颜色）</h3><p>蓝色的数字，number<br>黑色         string<br>蓝色的布尔值 boolean<br>灰色        undefined和null</p>
+<h3 id="10-2-typeof-变量-它的返回值，也是一个字符串类型"><a href="#10-2-typeof-变量-它的返回值，也是一个字符串类型" class="headerlink" title="10.2 typeof 变量    它的返回值，也是一个字符串类型"></a>10.2 typeof 变量    它的返回值，也是一个字符串类型</h3><ol>
 <li>number</li>
 <li>string</li>
 <li>boolean</li>
@@ -551,30 +551,30 @@ num += 10; //等价 num = num + 10
 <blockquote>
 <p>bug: typeof null = object;</p>
 </blockquote>
-<h2 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h2><h3 id="转成数字"><a href="#转成数字" class="headerlink" title="转成数字"></a>转成数字</h3><ul>
+<h2 id="11、数据类型转换"><a href="#11、数据类型转换" class="headerlink" title="11、数据类型转换"></a>11、数据类型转换</h2><h3 id="11-1-转成数字"><a href="#11-1-转成数字" class="headerlink" title="11.1 转成数字"></a>11.1 转成数字</h3><ul>
 <li><code>Number（xx）</code> 如果拿到的是一个非数字，浏览器也不会报错，返回 <code>NaN</code>,not  a number </li>
 <li><code>parseInt（xx）</code> 从第一个字符开始解析，一直解析到第一个非数字为止</li>
 <li><code>parseFloat（xx）</code> 从第一个字符开始解析，可以识别一个<code>.</code>  然后解析到非数字为止</li>
 <li>直接运算 -  *  /  %    +正号（用的最多，例如+age）  -负号        </li>
 </ul>
-<h3 id="转成字符串"><a href="#转成字符串" class="headerlink" title="转成字符串"></a>转成字符串</h3><ul>
+<h3 id="11-2-转成字符串"><a href="#11-2-转成字符串" class="headerlink" title="11.2 转成字符串"></a>11.2 转成字符串</h3><ul>
 <li>String（xx）</li>
 <li>xx.toString()</li>
 <li>直接拼串 （常用）<br>  console.log(age+ &quot;&quot;);</li>
 </ul>
-<h3 id="转成布尔类型"><a href="#转成布尔类型" class="headerlink" title="转成布尔类型"></a>转成布尔类型</h3><p><strong>所有的值，都可以转成布尔类型</strong></p>
+<h3 id="11-3-转成布尔类型"><a href="#11-3-转成布尔类型" class="headerlink" title="11.3 转成布尔类型"></a>11.3 转成布尔类型</h3><p><strong>所有的值，都可以转成布尔类型</strong></p>
 <p><strong>规则</strong>：只有这6种情况， 0  &quot;&quot;  NaN  null  undefined   false  可以转成false，其他所有值，都是true</p>
 <ul>
 <li>Boolean（）</li>
 <li>!!</li>
 </ul>
-<h3 id="NaN的说明（表示非数字，指一个无法用数字表示的数字，not-a-number）"><a href="#NaN的说明（表示非数字，指一个无法用数字表示的数字，not-a-number）" class="headerlink" title="NaN的说明（表示非数字，指一个无法用数字表示的数字，not a number）"></a>NaN的说明（表示非数字，指一个无法用数字表示的数字，not a number）</h3><ul>
+<h3 id="11-4-NaN的说明（表示非数字，指一个无法用数字表示的数字，not-a-number）"><a href="#11-4-NaN的说明（表示非数字，指一个无法用数字表示的数字，not-a-number）" class="headerlink" title="11.4 NaN的说明（表示非数字，指一个无法用数字表示的数字，not a number）"></a>11.4 NaN的说明（表示非数字，指一个无法用数字表示的数字，not a number）</h3><ul>
 <li>如果浏览器遇到了一个无法用数字表示的数值，就用NaN表示</li>
 <li>只要看到了NaN，说明代码的执行有问题</li>
 <li>NaN的类型是number类型</li>
 <li>NaN不等于任何值，包括他自己</li>
 </ul>
-<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><h3 id="顺序结构（从上到下执行的，默认）"><a href="#顺序结构（从上到下执行的，默认）" class="headerlink" title="顺序结构（从上到下执行的，默认）"></a>顺序结构（从上到下执行的，默认）</h3><h3 id="分支结构（选择结构）"><a href="#分支结构（选择结构）" class="headerlink" title="分支结构（选择结构）"></a>分支结构（选择结构）</h3><h4 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h4><ul>
+<h2 id="12、流程控制"><a href="#12、流程控制" class="headerlink" title="12、流程控制"></a>12、流程控制</h2><h3 id="12-1-顺序结构（从上到下执行的，默认）"><a href="#12-1-顺序结构（从上到下执行的，默认）" class="headerlink" title="12.1 顺序结构（从上到下执行的，默认）"></a>12.1 顺序结构（从上到下执行的，默认）</h3><h3 id="12-2-分支结构（选择结构）"><a href="#12-2-分支结构（选择结构）" class="headerlink" title="12.2 分支结构（选择结构）"></a>12.2 分支结构（选择结构）</h3><h4 id="12-2-1-if语句"><a href="#12-2-1-if语句" class="headerlink" title="12.2.1 if语句"></a>12.2.1 if语句</h4><ul>
 <li><p>语法1</p>
 <pre><code class="javascript">if（条件）{
 语句1;
@@ -604,8 +604,8 @@ else {
 </code></pre></li>
 </ul>
 <p>如果条件1成立，执行语句1<br>如果条件1不成立，看条件2，如果条件2成立，执行语句2<br>如果都不成立，执行语句3</p>
-<h4 id="三元运算符（三个值参与运算，只适用于比较简单的判断，可以更加简洁）"><a href="#三元运算符（三个值参与运算，只适用于比较简单的判断，可以更加简洁）" class="headerlink" title="三元运算符（三个值参与运算，只适用于比较简单的判断，可以更加简洁）"></a>三元运算符（三个值参与运算，只适用于比较简单的判断，可以更加简洁）</h4><p>语法  var 结果 = 条件 ？ A ：B；（如果条件满足，就是A 否则B）</p>
-<h4 id="switch-case（根据变量的具体，进行判断）"><a href="#switch-case（根据变量的具体，进行判断）" class="headerlink" title="switch-case（根据变量的具体，进行判断）"></a>switch-case（根据变量的具体，进行判断）</h4><pre><code class="javascript">switch（变量）{
+<h4 id="12-2-2-三元运算符（三个值参与运算，只适用于比较简单的判断，可以更加简洁）"><a href="#12-2-2-三元运算符（三个值参与运算，只适用于比较简单的判断，可以更加简洁）" class="headerlink" title="12.2.2 三元运算符（三个值参与运算，只适用于比较简单的判断，可以更加简洁）"></a>12.2.2 三元运算符（三个值参与运算，只适用于比较简单的判断，可以更加简洁）</h4><p>语法  var 结果 = 条件 ？ A ：B；（如果条件满足，就是A 否则B）</p>
+<h4 id="12-2-3-switch-case（根据变量的具体，进行判断）"><a href="#12-2-3-switch-case（根据变量的具体，进行判断）" class="headerlink" title="12.2.3 switch-case（根据变量的具体，进行判断）"></a>12.2.3 switch-case（根据变量的具体，进行判断）</h4><pre><code class="javascript">switch（变量）{
   case 值1:
       语句1;
       break;（break表示跳出switch，接着往下执行）
@@ -621,12 +621,12 @@ else {
 </code></pre>
 <p><strong>判断变量的值</strong><br>    如果值，等于值1，执行语句1<br>    如果值，等于值2，执行语句2<br>    。。。<br>    如果都不满足，执行默认语句</p>
 <p><strong>注意点</strong>：<br>    （1）进行的值的比较，进行的是全等比较<br>    （2）养成写break的习惯（不写break，会一直往下执行）</p>
-<h4 id="三种分支结构的使用场景："><a href="#三种分支结构的使用场景：" class="headerlink" title="三种分支结构的使用场景："></a>三种分支结构的使用场景：</h4><ul>
+<h4 id="12-2-4-三种分支结构的使用场景："><a href="#12-2-4-三种分支结构的使用场景：" class="headerlink" title="12.2.4 三种分支结构的使用场景："></a>12.2.4 三种分支结构的使用场景：</h4><ul>
 <li>if else            适用于范围形的判断</li>
 <li>三元运算符        只适用于比较简单的判断，条件只能写一个，但是简洁</li>
 <li>switch。。 case。。适用于具体值的判断</li>
 </ul>
-<h3 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h3><h4 id="while（当条件成立时，循环执行某件事）"><a href="#while（当条件成立时，循环执行某件事）" class="headerlink" title="while（当条件成立时，循环执行某件事）"></a>while（当条件成立时，循环执行某件事）</h4><pre><code class="javascript">while（条件）{
+<h3 id="12-3-循环结构"><a href="#12-3-循环结构" class="headerlink" title="12.3 循环结构"></a>12.3 循环结构</h3><h4 id="12-3-1-while（当条件成立时，循环执行某件事）"><a href="#12-3-1-while（当条件成立时，循环执行某件事）" class="headerlink" title="12.3.1 while（当条件成立时，循环执行某件事）"></a>12.3.1 while（当条件成立时，循环执行某件事）</h4><pre><code class="javascript">while（条件）{
   循环体; //循环执行的内容
 }
 </code></pre>
@@ -636,7 +636,7 @@ else {
 <li>i++一般放在{..}的最后面</li>
 <li>while循环可以用于实现不明确循环次数的循环</li>
 </ul>
-<h4 id="do-while"><a href="#do-while" class="headerlink" title="do while"></a>do while</h4><pre><code class="javascript">do {
+<h4 id="12-3-2-do-while"><a href="#12-3-2-do-while" class="headerlink" title="12.3.2 do while"></a>12.3.2 do while</h4><pre><code class="javascript">do {
   循环体; //重复执行的内容
 }while（条件)
 </code></pre>
@@ -644,7 +644,7 @@ else {
 <blockquote>
 <p>do while一般只适合：不管条件成立不成立，都执行一次<br>while 和 do while的区别：<br>    while 如果条件不成立，一次都不执行<br>    do while不管条件成立与否，至少执行一次</p>
 </blockquote>
-<h4 id="for（适用于明确范围的循环）"><a href="#for（适用于明确范围的循环）" class="headerlink" title="for（适用于明确范围的循环）"></a>for（适用于明确范围的循环）</h4><pre><code>for（初始化语句;判断条件;自增或自减）{
+<h4 id="12-3-3-for（适用于明确范围的循环）"><a href="#12-3-3-for（适用于明确范围的循环）" class="headerlink" title="12.3.3 for（适用于明确范围的循环）"></a>12.3.3 for（适用于明确范围的循环）</h4><pre><code>for（初始化语句;判断条件;自增或自减）{
   循环体;
 }
 </code></pre><p>例：</p>
@@ -662,20 +662,20 @@ else {
 </li>
 </ol>
 <p>执行流程分析：1243 243 243 243...<br>执行流程：<br>  先初始化语句，判断条件，执行循环体，自增或自减；<br>    判断条件，执行循环体，自增或自减；<br>    。。。<br>    条件不成立，跳出循环；</p>
-<h4 id="双重for循环，就是在for循环的外面再套一个for循环"><a href="#双重for循环，就是在for循环的外面再套一个for循环" class="headerlink" title="双重for循环，就是在for循环的外面再套一个for循环"></a>双重for循环，就是在for循环的外面再套一个for循环</h4><ul>
+<h4 id="12-3-4-双重for循环，就是在for循环的外面再套一个for循环"><a href="#12-3-4-双重for循环，就是在for循环的外面再套一个for循环" class="headerlink" title="12.3.4 双重for循环，就是在for循环的外面再套一个for循环"></a>12.3.4 双重for循环，就是在for循环的外面再套一个for循环</h4><ul>
 <li>外层控制行数</li>
 <li><p>内层控制一行打印多少个</p>
 <p>  break：如果循环遇到了break，跳出整个循环，整个循环就结束了，后面的次数都不执行了<br>  continue：如果循环遇到了continue，跳出本次循环，执行下一次循环</p>
 </li>
 </ul>
-<h4 id="循环的使用场景："><a href="#循环的使用场景：" class="headerlink" title="循环的使用场景："></a>循环的使用场景：</h4><ul>
+<h4 id="12-3-5-循环的使用场景："><a href="#12-3-5-循环的使用场景：" class="headerlink" title="12.3.5 循环的使用场景："></a>12.3.5 循环的使用场景：</h4><ul>
 <li>while比较适合不明确执行次数的循环（循环表白案例）</li>
 <li>do while（少用）只适用于不管成立与否，至少执行一次循环体的情况</li>
 <li>for比较适合于明确范围的循环</li>
 </ul>
-<h2 id="断点调试"><a href="#断点调试" class="headerlink" title="断点调试"></a>断点调试</h2><p>（1）F12打开控制台，sources,点开对应的文件<br>（2）在对应行的行号上，点击打断点，刷新后，浏览器会自动执行停留在断点的位置<br>操作：<br>（1）watch监视，监视变量的变化<br>（2）F10，让代码往下一步执行<br>（3）F8，从当前位置，执行到下一个断点的位置，如果后面没有断点了，就会一直执行完</p>
-<h2 id="数组（是一个有序的值的集合，可以存储大量的数据）"><a href="#数组（是一个有序的值的集合，可以存储大量的数据）" class="headerlink" title="数组（是一个有序的值的集合，可以存储大量的数据）"></a>数组（是一个有序的值的集合，可以存储大量的数据）</h2><p>简单数据类型，在存储大量数据时，一个一个的存，非常的浪费</p>
-<h3 id="创建数组的方式"><a href="#创建数组的方式" class="headerlink" title="创建数组的方式"></a>创建数组的方式</h3><ol>
+<h2 id="13、断点调试"><a href="#13、断点调试" class="headerlink" title="13、断点调试"></a>13、断点调试</h2><p>（1）F12打开控制台，sources,点开对应的文件<br>（2）在对应行的行号上，点击打断点，刷新后，浏览器会自动执行停留在断点的位置<br>操作：<br>（1）watch监视，监视变量的变化<br>（2）F10，让代码往下一步执行<br>（3）F8，从当前位置，执行到下一个断点的位置，如果后面没有断点了，就会一直执行完</p>
+<h2 id="14、数组（是一个有序的值的集合，可以存储大量的数据）"><a href="#14、数组（是一个有序的值的集合，可以存储大量的数据）" class="headerlink" title="14、数组（是一个有序的值的集合，可以存储大量的数据）"></a>14、数组（是一个有序的值的集合，可以存储大量的数据）</h2><p>简单数据类型，在存储大量数据时，一个一个的存，非常的浪费</p>
+<h3 id="14-1-创建数组的方式"><a href="#14-1-创建数组的方式" class="headerlink" title="14.1 创建数组的方式"></a>14.1 创建数组的方式</h3><ol>
 <li><p>字面量的方式（字面量，直接量，从字面上直接就能看出是什么值的量）</p>
 <pre><code> 123  false  &#39;abc&#39;  undefined  null  [ ]:表示数组
 </code></pre><p><code>var arr =[ ]</code>创建一个空数组</p>
@@ -687,13 +687,13 @@ else {
 <pre><code class="javascript"> var arr = new Array(); ---创建一个空数组
  var arr = new Array(5);---浪费空间，五个空的位置，没有具体值
 </code></pre>
-<h3 id="数组的长度-arr-length"><a href="#数组的长度-arr-length" class="headerlink" title="数组的长度 arr.length"></a>数组的长度 arr.length</h3><h3 id="数组的下标（索引）：数组中的每一项，都会有一个唯一的下标"><a href="#数组的下标（索引）：数组中的每一项，都会有一个唯一的下标" class="headerlink" title="数组的下标（索引）：数组中的每一项，都会有一个唯一的下标"></a>数组的下标（索引）：数组中的每一项，都会有一个唯一的下标</h3></li>
+<h3 id="14-2-数组的长度-arr-length"><a href="#14-2-数组的长度-arr-length" class="headerlink" title="14.2 数组的长度 arr.length"></a>14.2 数组的长度 arr.length</h3><h3 id="14-3-数组的下标（索引）：数组中的每一项，都会有一个唯一的下标"><a href="#14-3-数组的下标（索引）：数组中的每一项，都会有一个唯一的下标" class="headerlink" title="14.3 数组的下标（索引）：数组中的每一项，都会有一个唯一的下标"></a>14.3 数组的下标（索引）：数组中的每一项，都会有一个唯一的下标</h3></li>
 </ol>
 <ul>
 <li>从0开始，最大下标arr.length-1</li>
 <li>数组中下标的范围：0 -----&gt; arr.length-1</li>
 </ul>
-<h3 id="数组的取值和存值"><a href="#数组的取值和存值" class="headerlink" title="数组的取值和存值"></a>数组的取值和存值</h3><ul>
+<h3 id="14-4-数组的取值和存值"><a href="#14-4-数组的取值和存值" class="headerlink" title="14.4 数组的取值和存值"></a>14.4 数组的取值和存值</h3><ul>
 <li><p>取值：<br><strong>语法：数组名[下标]</strong></p>
 <ol>
 <li>如果下标存在，直接返回对应项的值</li>
@@ -713,7 +713,7 @@ else {
 </ol>
 </li>
 </ul>
-<h3 id="数组的遍历：遍及所有，从数组的第一项，访问到数组的最后一项"><a href="#数组的遍历：遍及所有，从数组的第一项，访问到数组的最后一项" class="headerlink" title="数组的遍历：遍及所有，从数组的第一项，访问到数组的最后一项"></a>数组的遍历：遍及所有，从数组的第一项，访问到数组的最后一项</h3><ul>
+<h3 id="14-5-数组的遍历：遍及所有，从数组的第一项，访问到数组的最后一项"><a href="#14-5-数组的遍历：遍及所有，从数组的第一项，访问到数组的最后一项" class="headerlink" title="14.5 数组的遍历：遍及所有，从数组的第一项，访问到数组的最后一项"></a>14.5 数组的遍历：遍及所有，从数组的第一项，访问到数组的最后一项</h3><ul>
 <li><p>数组正序遍历</p>
 <pre><code class="javascript">for (var i = 0; i &lt; arr.length; i++) {
 `console.log(arr[i]);
@@ -726,11 +726,11 @@ console.log(arr[i]);
 }
 </code></pre></li>
 </ul>
-<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><ol>
+<h3 id="14-6-冒泡排序"><a href="#14-6-冒泡排序" class="headerlink" title="14.6 冒泡排序"></a>14.6 冒泡排序</h3><ol>
 <li>冒泡（指得是排序的方式）</li>
 <li>排序（就是讲一组没有按照顺序排列的数，经过排列后，按照一定的顺序排列）<br> 价格排序，成绩排序<br> 编程界，有十大排序</li>
 </ol>
-<h3 id="初级版"><a href="#初级版" class="headerlink" title="初级版"></a>初级版</h3><ol>
+<h3 id="14-7-初级版"><a href="#14-7-初级版" class="headerlink" title="14.7 初级版"></a>14.7 初级版</h3><ol>
 <li>先排出一趟，排出一个最大值<ol>
 <li>遍历数组</li>
 <li>让arr[i] 和 arr[i+1] 比较</li>
@@ -739,8 +739,8 @@ console.log(arr[i]);
 </li>
 <li>双重for循环，多排几次，就排好了</li>
 </ol>
-<h3 id="中级版（优化）：一趟可以比出一个最大值，每趟下来都可以少比一次"><a href="#中级版（优化）：一趟可以比出一个最大值，每趟下来都可以少比一次" class="headerlink" title="中级版（优化）：一趟可以比出一个最大值，每趟下来都可以少比一次"></a>中级版（优化）：一趟可以比出一个最大值，每趟下来都可以少比一次</h3><pre><code>    内循环-j
-</code></pre><h3 id="高级版（优化）：假设成立法，如果已经排好序了，后面就不用再排了"><a href="#高级版（优化）：假设成立法，如果已经排好序了，后面就不用再排了" class="headerlink" title="高级版（优化）：假设成立法，如果已经排好序了，后面就不用再排了"></a>高级版（优化）：假设成立法，如果已经排好序了，后面就不用再排了</h3><ol>
+<h3 id="14-8-中级版（优化）：一趟可以比出一个最大值，每趟下来都可以少比一次"><a href="#14-8-中级版（优化）：一趟可以比出一个最大值，每趟下来都可以少比一次" class="headerlink" title="14.8 中级版（优化）：一趟可以比出一个最大值，每趟下来都可以少比一次"></a>14.8 中级版（优化）：一趟可以比出一个最大值，每趟下来都可以少比一次</h3><pre><code>    内循环-j
+</code></pre><h3 id="14-9-高级版（优化）：假设成立法，如果已经排好序了，后面就不用再排了"><a href="#14-9-高级版（优化）：假设成立法，如果已经排好序了，后面就不用再排了" class="headerlink" title="14.9 高级版（优化）：假设成立法，如果已经排好序了，后面就不用再排了"></a>14.9 高级版（优化）：假设成立法，如果已经排好序了，后面就不用再排了</h3><ol>
 <li>在每趟排列前，先假设，已经排好了</li>
 <li>一趟下来，如果一次交换都没有发生，flag值就是true<pre><code class="javascript">var arr = [7, 6, 5, 4, 3, 2, 1];
 // 外层控制趟数, 一趟可以比出一个最大值, 7个数, 比6趟即可
@@ -765,17 +765,17 @@ console.log(arr);
 </code></pre>
 </li>
 </ol>
-<h2 id="函数（可以将一段重复的代码进行封装，一次声明，可以多次调用）"><a href="#函数（可以将一段重复的代码进行封装，一次声明，可以多次调用）" class="headerlink" title="函数（可以将一段重复的代码进行封装，一次声明，可以多次调用）"></a>函数（可以将一段重复的代码进行封装，一次声明，可以多次调用）</h2><p><strong>好处</strong>：可维护性高</p>
-<h3 id="声明函数"><a href="#声明函数" class="headerlink" title="声明函数"></a>声明函数</h3><p><strong>函数名的规范</strong>：一般都是动词+名词（一般函数都是要做某一件事情）</p>
+<h2 id="15、函数（可以将一段重复的代码进行封装，一次声明，可以多次调用）"><a href="#15、函数（可以将一段重复的代码进行封装，一次声明，可以多次调用）" class="headerlink" title="15、函数（可以将一段重复的代码进行封装，一次声明，可以多次调用）"></a>15、函数（可以将一段重复的代码进行封装，一次声明，可以多次调用）</h2><p><strong>好处</strong>：可维护性高</p>
+<h3 id="15-1-声明函数"><a href="#15-1-声明函数" class="headerlink" title="15.1 声明函数"></a>15.1 声明函数</h3><p><strong>函数名的规范</strong>：一般都是动词+名词（一般函数都是要做某一件事情）</p>
 <pre><code>function 函数名(){
   函数体;
 }
 </code></pre><blockquote>
 <p>函数光声明，是不会执行的。</p>
 </blockquote>
-<h4 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h4><pre><code>函数();
+<h4 id="15-1-1-调用函数"><a href="#15-1-1-调用函数" class="headerlink" title="15.1.1 调用函数"></a>15.1.1 调用函数</h4><pre><code>函数();
 </code></pre><p>函数一次声明，可以多次调用！！！</p>
-<h4 id="函数的参数（在函数中，需要发生变化的值，可以定义成函数的参数）"><a href="#函数的参数（在函数中，需要发生变化的值，可以定义成函数的参数）" class="headerlink" title="函数的参数（在函数中，需要发生变化的值，可以定义成函数的参数）"></a>函数的参数（在函数中，需要发生变化的值，可以定义成函数的参数）</h4><ul>
+<h4 id="15-1-2-函数的参数（在函数中，需要发生变化的值，可以定义成函数的参数）"><a href="#15-1-2-函数的参数（在函数中，需要发生变化的值，可以定义成函数的参数）" class="headerlink" title="15.1.2 函数的参数（在函数中，需要发生变化的值，可以定义成函数的参数）"></a>15.1.2 函数的参数（在函数中，需要发生变化的值，可以定义成函数的参数）</h4><ul>
 <li><p>形参---形式参数（函数在声明时，函数名括号内的参数）<br>  形参默认没有值或类型！！！只在函数调用时，形参才会有具体的值或类型<br>  作用：占位置</p>
 </li>
 <li><p>实参---实际参数（函数调用时传递给函数的参数）<br>  实参有具体的值或者类型<br>  作用：在函数调用时将数据传递给形参</p>
@@ -784,11 +784,11 @@ console.log(arr);
 <blockquote>
 <p>注意点：形参和实参一一对应！！！</p>
 </blockquote>
-<h4 id="函数的声明和调用进阶写法"><a href="#函数的声明和调用进阶写法" class="headerlink" title="函数的声明和调用进阶写法"></a>函数的声明和调用进阶写法</h4><pre><code class="javascript">function 函数名（形参1，形参2，形参3...）{
+<h4 id="15-1-3-函数的声明和调用进阶写法"><a href="#15-1-3-函数的声明和调用进阶写法" class="headerlink" title="15.1.3 函数的声明和调用进阶写法"></a>15.1.3 函数的声明和调用进阶写法</h4><pre><code class="javascript">function 函数名（形参1，形参2，形参3...）{
   函数体;
 }
 </code></pre>
-<h4 id="函数的返回值"><a href="#函数的返回值" class="headerlink" title="函数的返回值"></a>函数的返回值</h4><p>函数内部声明的变量 或者 形参，只能在函数内使用，出了函数就用不了了<br>如果希望函数的执行，有结果，需要通过<code>return</code>返回内容</p>
+<h4 id="15-1-4-函数的返回值"><a href="#15-1-4-函数的返回值" class="headerlink" title="15.1.4 函数的返回值"></a>15.1.4 函数的返回值</h4><p>函数内部声明的变量 或者 形参，只能在函数内使用，出了函数就用不了了<br>如果希望函数的执行，有结果，需要通过<code>return</code>返回内容</p>
 <blockquote>
 <p>函数的三要素---决定了一个函数怎么去使用</p>
 <ol>
@@ -797,7 +797,7 @@ console.log(arr);
 <li><code>返回值</code>：可有可无，但是如果需要拿到函数的执行结果，就必须要return</li>
 </ol>
 </blockquote>
-<h4 id="函数参数与返回值的说明"><a href="#函数参数与返回值的说明" class="headerlink" title="函数参数与返回值的说明"></a>函数参数与返回值的说明</h4><ul>
+<h4 id="15-1-5-函数参数与返回值的说明"><a href="#15-1-5-函数参数与返回值的说明" class="headerlink" title="15.1.5 函数参数与返回值的说明"></a>15.1.5 函数参数与返回值的说明</h4><ul>
 <li><p>开发的时候，函数的参数要一一对应</p>
 <ol>
 <li>传递的参数，如果少了，没接收到值的形参，值就是undefined（数字和undefined加起来就是NaN）</li>
@@ -807,13 +807,13 @@ console.log(arr);
 <li><p>返回值的问题<br>  1.return的值，就是函数的执行结果<br>  2.return后面的代码，不执行了！return表示函数的结束！！</p>
 </li>
 </ul>
-<h4 id="函数调试说明"><a href="#函数调试说明" class="headerlink" title="函数调试说明"></a>函数调试说明</h4><ul>
+<h4 id="15-1-6-函数调试说明"><a href="#15-1-6-函数调试说明" class="headerlink" title="15.1.6 函数调试说明"></a>15.1.6 函数调试说明</h4><ul>
 <li>函数可以在内部调用函数</li>
 <li>F10 让代码往下一步执行，如果遇到了函数调用，会跳过函数的执行过程，直接看结果</li>
 <li>F11让代码往下一步执行，如果遇到了函数调用，会进入函数一步步执行</li>
 <li>shift + F11 跳出函数的执行（将当前函数的调用的剩余代码全部执行完，直接看结果）</li>
 </ul>
-<h4 id="声明函数的两种方式"><a href="#声明函数的两种方式" class="headerlink" title="声明函数的两种方式"></a>声明函数的两种方式</h4><ol>
+<h4 id="15-1-7-声明函数的两种方式"><a href="#15-1-7-声明函数的两种方式" class="headerlink" title="15.1.7 声明函数的两种方式"></a>15.1.7 声明函数的两种方式</h4><ol>
 <li><p><code>函数声明式</code>（可以先调用，后声明---预解析，会提升函数的声明）</p>
 <pre><code class="javascript">function fn( ) {
 console.log(&#39;嘿嘿&#39;);
@@ -826,7 +826,7 @@ console.log(&#39;哈哈&#39;);
 };
 </code></pre></li>
 </ol>
-<h3 id="匿名函数（没有名字的函数，不能直接使用）"><a href="#匿名函数（没有名字的函数，不能直接使用）" class="headerlink" title="匿名函数（没有名字的函数，不能直接使用）"></a>匿名函数（没有名字的函数，不能直接使用）</h3><p>使用场景：</p>
+<h3 id="15-2-匿名函数（没有名字的函数，不能直接使用）"><a href="#15-2-匿名函数（没有名字的函数，不能直接使用）" class="headerlink" title="15.2 匿名函数（没有名字的函数，不能直接使用）"></a>15.2 匿名函数（没有名字的函数，不能直接使用）</h3><p>使用场景：</p>
 <ol>
 <li>函数表达式 var fn = function(){...}</li>
 <li>匿名函数自调用（自执行)<blockquote>
@@ -840,14 +840,14 @@ console.log(&#39;哈哈&#39;);
 </ol>
 <p><strong>沙箱模式--匿名函数自调用的应用=&gt;可以用于解决全局变量污染问题</strong><br>由于全局变量，可以在任何地方都可以访问，所以不能乱用<br>一般都会用函数自调用包裹起来</p>
 <pre><code>（function() {...}）
-</code></pre><h2 id="对象（如果需要描述现实生活对象的特征和行为，就需要js中的对象）"><a href="#对象（如果需要描述现实生活对象的特征和行为，就需要js中的对象）" class="headerlink" title="对象（如果需要描述现实生活对象的特征和行为，就需要js中的对象）"></a>对象（如果需要描述现实生活对象的特征和行为，就需要js中的对象）</h2><h3 id="概念：无序的键值对的集合"><a href="#概念：无序的键值对的集合" class="headerlink" title="概念：无序的键值对的集合"></a>概念：无序的键值对的集合</h3><h3 id="创建对象的方式"><a href="#创建对象的方式" class="headerlink" title="创建对象的方式"></a>创建对象的方式</h3><ol>
+</code></pre><h2 id="16、对象（如果需要描述现实生活对象的特征和行为，就需要js中的对象）"><a href="#16、对象（如果需要描述现实生活对象的特征和行为，就需要js中的对象）" class="headerlink" title="16、对象（如果需要描述现实生活对象的特征和行为，就需要js中的对象）"></a>16、对象（如果需要描述现实生活对象的特征和行为，就需要js中的对象）</h2><h3 id="16-1-概念：无序的键值对的集合"><a href="#16-1-概念：无序的键值对的集合" class="headerlink" title="16.1 概念：无序的键值对的集合"></a>16.1 概念：无序的键值对的集合</h3><h3 id="16-2-创建对象的方式"><a href="#16-2-创建对象的方式" class="headerlink" title="16.2 创建对象的方式"></a>16.2 创建对象的方式</h3><ol>
 <li>字面量<br>1 ‘abc’ true undefined null [ ] { }<br><code>var obj = { }</code>创建空对象</li>
 </ol>
 <p>键值对的集合，多个键值对通过&quot;，&quot;隔开<br>特征：对象的属性<br>行为：对象的方法---对象的函数</p>
 <ol start="2">
 <li>构造函数的方式（了解）<br>var obj = new Object({...});</li>
 </ol>
-<h3 id="取值和赋值（点语法）"><a href="#取值和赋值（点语法）" class="headerlink" title="取值和赋值（点语法）"></a>取值和赋值（点语法）</h3><ul>
+<h3 id="16-3-取值和赋值（点语法）"><a href="#16-3-取值和赋值（点语法）" class="headerlink" title="16.3 取值和赋值（点语法）"></a>16.3 取值和赋值（点语法）</h3><ul>
 <li><p>取值：<br>语法：对象名.属性名  对象名.方法名( );---方法的调用，得到整个函数</p>
 <ul>
 <li>有这个属性名，返回对应值</li>
@@ -861,16 +861,16 @@ console.log(&#39;哈哈&#39;);
 </ul>
 </li>
 </ul>
-<h4 id="点语法（简洁方便，不支持变量）"><a href="#点语法（简洁方便，不支持变量）" class="headerlink" title="点语法（简洁方便，不支持变量）"></a>点语法（简洁方便，不支持变量）</h4><p>对象名.属性名</p>
-<h4 id="中括号语法（支持字符串或变量，更加的灵活）"><a href="#中括号语法（支持字符串或变量，更加的灵活）" class="headerlink" title="中括号语法（支持字符串或变量，更加的灵活）"></a>中括号语法（支持字符串或变量，更加的灵活）</h4><p>对象的取值：对象名[&#39;属性名&#39;]<br>对象的赋值：对象名[&#39;属性名&#39;] = &quot;新的值&quot;<br><strong>只要访问对象属性时，需要用到变量，只能用中括号语法</strong></p>
-<h3 id="对象的遍历（访问对象的所有属性）"><a href="#对象的遍历（访问对象的所有属性）" class="headerlink" title="对象的遍历（访问对象的所有属性）"></a>对象的遍历（访问对象的所有属性）</h3><p>固定语法 （key就是键，属性名）</p>
+<h4 id="16-3-1-点语法（简洁方便，不支持变量）"><a href="#16-3-1-点语法（简洁方便，不支持变量）" class="headerlink" title="16.3.1 点语法（简洁方便，不支持变量）"></a>16.3.1 点语法（简洁方便，不支持变量）</h4><p>对象名.属性名</p>
+<h4 id="16-3-2-中括号语法（支持字符串或变量，更加的灵活）"><a href="#16-3-2-中括号语法（支持字符串或变量，更加的灵活）" class="headerlink" title="16.3.2 中括号语法（支持字符串或变量，更加的灵活）"></a>16.3.2 中括号语法（支持字符串或变量，更加的灵活）</h4><p>对象的取值：对象名[&#39;属性名&#39;]<br>对象的赋值：对象名[&#39;属性名&#39;] = &quot;新的值&quot;<br><strong>只要访问对象属性时，需要用到变量，只能用中括号语法</strong></p>
+<h3 id="16-4-对象的遍历（访问对象的所有属性）"><a href="#16-4-对象的遍历（访问对象的所有属性）" class="headerlink" title="16.4 对象的遍历（访问对象的所有属性）"></a>16.4 对象的遍历（访问对象的所有属性）</h3><p>固定语法 （key就是键，属性名）</p>
 <pre><code class="javascript">for （var key in obj）{
   console.log(key);
   console.log(obj[key]);---打印属性值
 }
 </code></pre>
-<h3 id="批量创建对象（将来网站用户，不可能只有一个，就需要批量创建对象）"><a href="#批量创建对象（将来网站用户，不可能只有一个，就需要批量创建对象）" class="headerlink" title="批量创建对象（将来网站用户，不可能只有一个，就需要批量创建对象）"></a>批量创建对象（将来网站用户，不可能只有一个，就需要批量创建对象）</h3><p>设计模式（工厂模式、单例模式、观察者模式）<br>在对象的方法中，this指代当前对象（对象名）</p>
-<h4 id="工厂函数（可以将创建对象的代码封装在一个函数中，这个函数就叫工厂函数）"><a href="#工厂函数（可以将创建对象的代码封装在一个函数中，这个函数就叫工厂函数）" class="headerlink" title="工厂函数（可以将创建对象的代码封装在一个函数中，这个函数就叫工厂函数）"></a>工厂函数（可以将创建对象的代码封装在一个函数中，这个函数就叫工厂函数）</h4><p>通过工厂函数创建的对象，没有具体的类型，都是Object</p>
+<h3 id="16-5-批量创建对象（将来网站用户，不可能只有一个，就需要批量创建对象）"><a href="#16-5-批量创建对象（将来网站用户，不可能只有一个，就需要批量创建对象）" class="headerlink" title="16.5 批量创建对象（将来网站用户，不可能只有一个，就需要批量创建对象）"></a>16.5 批量创建对象（将来网站用户，不可能只有一个，就需要批量创建对象）</h3><p>设计模式（工厂模式、单例模式、观察者模式）<br>在对象的方法中，this指代当前对象（对象名）</p>
+<h4 id="16-5-1-工厂函数（可以将创建对象的代码封装在一个函数中，这个函数就叫工厂函数）"><a href="#16-5-1-工厂函数（可以将创建对象的代码封装在一个函数中，这个函数就叫工厂函数）" class="headerlink" title="16.5.1 工厂函数（可以将创建对象的代码封装在一个函数中，这个函数就叫工厂函数）"></a>16.5.1 工厂函数（可以将创建对象的代码封装在一个函数中，这个函数就叫工厂函数）</h4><p>通过工厂函数创建的对象，没有具体的类型，都是Object</p>
 <pre><code class="javascript">function Student(sno,name,gender,major){
     obj=new Object();
     obj.sno=sno;
@@ -890,7 +890,7 @@ for(var i in s){
 <p>这里Student()函数相当于一个工厂，在其内部生产对象。这种方式简化了代码，但是无法细分对象，也会造成共有方法和属性的内存浪费。无法细分对象就是生产出的对象的constructor是Object，而不是自定义的</p>
 <pre><code>console.log(s.constructor);
 </code></pre><p><img src="https://img-blog.csdnimg.cn/20200831171959364.png#" alt><br>内存浪费就是因为方法声明在了对象的内部，每一个对象都有同一个方法，造成了浪费。</p>
-<h4 id="构造函数（给新建的对象，添加属性和方法-实例化对象）"><a href="#构造函数（给新建的对象，添加属性和方法-实例化对象）" class="headerlink" title="构造函数（给新建的对象，添加属性和方法----实例化对象）"></a>构造函数（给新建的对象，添加属性和方法----实例化对象）</h4><ol>
+<h4 id="16-5-2-构造函数（给新建的对象，添加属性和方法-实例化对象）"><a href="#16-5-2-构造函数（给新建的对象，添加属性和方法-实例化对象）" class="headerlink" title="16.5.2 构造函数（给新建的对象，添加属性和方法----实例化对象）"></a>16.5.2 构造函数（给新建的对象，添加属性和方法----实例化对象）</h4><ol>
 <li>就是一个函数</li>
 <li>首字母大写</li>
 <li>js中，内置了一些构造函数，比如：<code>Object</code>，<code>Array</code></li>
@@ -918,7 +918,7 @@ document.write(i+&quot; : &quot;+s[i]+&quot;&lt;br&gt;&quot;);
 </ul>
 </li>
 </ul>
-<h4 id="构造函数-原型对象模式"><a href="#构造函数-原型对象模式" class="headerlink" title="构造函数+原型对象模式"></a>构造函数+原型对象模式</h4><pre><code class="javascript">function Student(sno,name,gender,major){
+<h4 id="16-5-3-构造函数-原型对象模式"><a href="#16-5-3-构造函数-原型对象模式" class="headerlink" title="16.5.3 构造函数+原型对象模式"></a>16.5.3 构造函数+原型对象模式</h4><pre><code class="javascript">function Student(sno,name,gender,major){
     this.sno=sno;
     this.name=name;
     this.gender=gender;
@@ -933,13 +933,13 @@ for(var i in s){
 }
 </code></pre>
 <p>这种模式和构造函模式类似，不同点是该模式把公有的属性和方法声明到构造函数的原型对象中，解决了内存浪费。</p>
-<h4 id="new的作用（创建对象）"><a href="#new的作用（创建对象）" class="headerlink" title="new的作用（创建对象）"></a>new的作用（创建对象）</h4><ul>
+<h4 id="16-5-4-new的作用（创建对象）"><a href="#16-5-4-new的作用（创建对象）" class="headerlink" title="16.5.4 new的作用（创建对象）"></a>16.5.4 new的作用（创建对象）</h4><ul>
 <li>会新建一个对象，指定对象的类型</li>
 <li>让构造函数的this，指向新创建的对象----this.name = &#39;张三&#39;;</li>
 <li>执行构造函数（给新建的对象，添加属性和方法）</li>
 <li>将新创建的对象返回</li>
 </ul>
-<h3 id="内置对象（js语法中，内置的一些对象，提供了很多的属性和方法，可以直接用）"><a href="#内置对象（js语法中，内置的一些对象，提供了很多的属性和方法，可以直接用）" class="headerlink" title="内置对象（js语法中，内置的一些对象，提供了很多的属性和方法，可以直接用）"></a>内置对象（js语法中，内置的一些对象，提供了很多的属性和方法，可以直接用）</h3><h4 id="Math对象（提供了一系列和数学相关的属性和方法）"><a href="#Math对象（提供了一系列和数学相关的属性和方法）" class="headerlink" title="Math对象（提供了一系列和数学相关的属性和方法）"></a>Math对象（提供了一系列和数学相关的属性和方法）</h4><ol>
+<h3 id="16-6-内置对象（js语法中，内置的一些对象，提供了很多的属性和方法，可以直接用）"><a href="#16-6-内置对象（js语法中，内置的一些对象，提供了很多的属性和方法，可以直接用）" class="headerlink" title="16.6 内置对象（js语法中，内置的一些对象，提供了很多的属性和方法，可以直接用）"></a>16.6 内置对象（js语法中，内置的一些对象，提供了很多的属性和方法，可以直接用）</h3><h4 id="16-6-1-Math对象（提供了一系列和数学相关的属性和方法）"><a href="#16-6-1-Math对象（提供了一系列和数学相关的属性和方法）" class="headerlink" title="16.6.1 Math对象（提供了一系列和数学相关的属性和方法）"></a>16.6.1 Math对象（提供了一系列和数学相关的属性和方法）</h4><ol>
 <li>PI Math.PI</li>
 <li>求最大最小值 max min<br>var max = Math.max(3,5,6,110);<br>console.log(max);</li>
 <li>取整 ceil floor round<br>（1）ceil向上取整，取大的那个数---天花板函数<br>（2）floor向下取整，取小的那个数---地板函数<br>（3）round四舍五入，离哪个近取哪个</li>
@@ -948,7 +948,7 @@ for(var i in s){
 <li>求次方pow</li>
 <li>求开方sqrt</li>
 </ol>
-<h4 id="Date日期对象"><a href="#Date日期对象" class="headerlink" title="Date日期对象"></a>Date日期对象</h4><p>js中提供的Date构造函数，可以创建日期对象</p>
+<h4 id="16-6-2-Date日期对象"><a href="#16-6-2-Date日期对象" class="headerlink" title="16.6.2 Date日期对象"></a>16.6.2 Date日期对象</h4><p>js中提供的Date构造函数，可以创建日期对象</p>
 <ol>
 <li><p>如何创建日期对象</p>
 <pre><code class="javascript">var now = new Date(); // 构造函数不传参，创建的是当前时间
@@ -999,7 +999,7 @@ console.log(end - begin);
 </li>
 <li>用于秒杀倒计时</li>
 </ul>
-<h2 id="数组对象Array"><a href="#数组对象Array" class="headerlink" title="数组对象Array"></a>数组对象Array</h2><ol>
+<h2 id="17、数组对象Array"><a href="#17、数组对象Array" class="headerlink" title="17、数组对象Array"></a>17、数组对象Array</h2><ol>
 <li><p><code>.join(分隔符)</code>：将数组中的值拼接成一个字符串，返回这个字符串<br>默认分隔符&quot; , &quot;</p>
 </li>
 <li><p>数组的增删操作<code>push</code> <code>pop</code> <code>unshift</code>  <code>shift</code> <strong><em>会更改原数组</em></strong><br>.push在数组的最后面，添加一个或多个项，返回数组的长度<br>.pop在数组的最后面，删除一个项，返回删除的项<br>.unshift在数组的最前面，添加一个或多个项，返回数组的长度<br>.shift在数组的最前面，删除一项，返回删除的项</p>
@@ -1038,17 +1038,17 @@ arr.splice(0,arr.length)
 </code></pre>
 </li>
 </ol>
-<h2 id="基本包装类型（解释了简单数据类型，为什么可以直接使用属性和方法）"><a href="#基本包装类型（解释了简单数据类型，为什么可以直接使用属性和方法）" class="headerlink" title="基本包装类型（解释了简单数据类型，为什么可以直接使用属性和方法）"></a>基本包装类型（解释了简单数据类型，为什么可以直接使用属性和方法）</h2><p><strong>js内部，对于除了undefined和null的简单数据类型，都提供了一个对应的复杂数据类型</strong></p>
+<h2 id="18、基本包装类型（解释了简单数据类型，为什么可以直接使用属性和方法）"><a href="#18、基本包装类型（解释了简单数据类型，为什么可以直接使用属性和方法）" class="headerlink" title="18、基本包装类型（解释了简单数据类型，为什么可以直接使用属性和方法）"></a>18、基本包装类型（解释了简单数据类型，为什么可以直接使用属性和方法）</h2><p><strong>js内部，对于除了undefined和null的简单数据类型，都提供了一个对应的复杂数据类型</strong></p>
 <p>简答数据类型：没有属性和方法，只有值<br>复杂数据类型：可以有多个属性和方法</p>
 <ul>
 <li>在js中，如果简单数据类型，在访问复杂数据类型的属性或方法时</li>
 <li>为了方便，自动将简单数据类型，包装成复杂数据类型，然后获取对应的值</li>
 <li>会将值变回简单数据类型    </li>
 </ul>
-<h3 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h3><pre><code>通过new Number()创建的对象，``toString``   ``toFixed``两个方法
+<h3 id="18-1-Number"><a href="#18-1-Number" class="headerlink" title="18.1 Number"></a>18.1 Number</h3><pre><code>通过new Number()创建的对象，``toString``   ``toFixed``两个方法
 num.toFixed(3) 保留3位小数
-</code></pre><h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h3><pre><code>    通过new Boolean()创建的对象，toString
-</code></pre><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><ol>
+</code></pre><h3 id="18-2-Boolean"><a href="#18-2-Boolean" class="headerlink" title="18.2 Boolean"></a>18.2 Boolean</h3><pre><code>    通过new Boolean()创建的对象，toString
+</code></pre><h3 id="18-3-String"><a href="#18-3-String" class="headerlink" title="18.3 String"></a>18.3 String</h3><ol>
 <li>字符串可以和数组一样，进行遍历，字符串不是数组，不能混用方法</li>
 <li><code>indexOf</code>和<code>lastIndexOf</code> 查找值在字符串中第一次/最后一次出现的下标</li>
 <li><code>trim</code>去除字符串<code>首尾</code>的空格</li>
@@ -1103,21 +1103,21 @@ num.toFixed(3) 保留3位小数
 </li>
 </ol>
 <p>想要全部替换，需要用到正则<code>str.replace(/aa/g,&#39;bb&#39;)</code>;</p>
-<h2 id="值类型和引用类型"><a href="#值类型和引用类型" class="headerlink" title="值类型和引用类型"></a>值类型和引用类型</h2><p>从内存的存储角度，分成了<code>值类型</code>和<code>引用类型</code>（内存是可以释放，可以重复利用的）</p>
+<h2 id="19、值类型和引用类型"><a href="#19、值类型和引用类型" class="headerlink" title="19、值类型和引用类型"></a>19、值类型和引用类型</h2><p>从内存的存储角度，分成了<code>值类型</code>和<code>引用类型</code>（内存是可以释放，可以重复利用的）</p>
 <p><strong>值类型（简单数据类型）</strong>：存储在变量中，存的是值本身<br><strong>引用类型（复杂数据类型）</strong>：存储在变量中，存的是<code>内存地址</code>----会单独在内存中开辟一块空间存储</p>
-<h3 id="值类型和引用类型的赋值类型"><a href="#值类型和引用类型的赋值类型" class="headerlink" title="值类型和引用类型的赋值类型"></a>值类型和引用类型的赋值类型</h3><ul>
+<h3 id="19-1-值类型和引用类型的赋值类型"><a href="#19-1-值类型和引用类型的赋值类型" class="headerlink" title="19.1 值类型和引用类型的赋值类型"></a>19.1 值类型和引用类型的赋值类型</h3><ul>
 <li>值类型：存储在变量中 ，存的是<code>值本身</code>，所以在赋值给其他变量时，赋值的是<code>值本身</code></li>
 <li>引用类型：存储在变量中，存的是<code>内存地址</code>，所以在赋值给其他变量时，赋值的是<code>内存地址</code></li>
 </ul>
-<h3 id="值类型和引用类型的值传递（让值作为函数的参数进行传递）"><a href="#值类型和引用类型的值传递（让值作为函数的参数进行传递）" class="headerlink" title="值类型和引用类型的值传递（让值作为函数的参数进行传递）"></a>值类型和引用类型的值传递（让值作为函数的参数进行传递）</h3><ul>
+<h3 id="19-2-值类型和引用类型的值传递（让值作为函数的参数进行传递）"><a href="#19-2-值类型和引用类型的值传递（让值作为函数的参数进行传递）" class="headerlink" title="19.2 值类型和引用类型的值传递（让值作为函数的参数进行传递）"></a>19.2 值类型和引用类型的值传递（让值作为函数的参数进行传递）</h3><ul>
 <li>值类型：存储在变量中，存的是值本身，所以在值传递时，传的也是值本身</li>
 <li>引用类型：存储在变量中，存的是内存地址，所以在值传递时，传的也是内存地址</li>
 </ul>
-<h2 id="typeof-关键字"><a href="#typeof-关键字" class="headerlink" title="typeof 关键字"></a>typeof 关键字</h2><ol>
+<h2 id="20、typeof-关键字"><a href="#20、typeof-关键字" class="headerlink" title="20、typeof 关键字"></a>20、typeof 关键字</h2><ol>
 <li>typeof获取简单数据类型，可以直接返回对应的类型<br><strong><em>特例</em></strong>：typeof null  返回object</li>
 <li>typeof获取复杂数据类型，一般返回object<br><strong><em>特例</em></strong>：typeof 函数  返回function    函数是js的一等公民</li>
 </ol>
-<h2 id="逻辑中断（短路运算）-amp-amp"><a href="#逻辑中断（短路运算）-amp-amp" class="headerlink" title="逻辑中断（短路运算）&amp;&amp; ||"></a>逻辑中断（短路运算）&amp;&amp; ||</h2><p>&amp;&amp;找假值，只要遇到了假值，就中断短路（后面的不看了）<br>||找真值，只要看到了真值，就中断短路（后面的不看了）</p>
+<h2 id="21、逻辑中断（短路运算）-amp-amp"><a href="#21、逻辑中断（短路运算）-amp-amp" class="headerlink" title="21、逻辑中断（短路运算）&amp;&amp; ||"></a>21、逻辑中断（短路运算）&amp;&amp; ||</h2><p>&amp;&amp;找假值，只要遇到了假值，就中断短路（后面的不看了）<br>||找真值，只要看到了真值，就中断短路（后面的不看了）</p>
 <pre><code class="javascript">function demo(fn){
   fn&amp;&amp;fn(); //fn存在，才去调用
 }    
@@ -1134,7 +1134,7 @@ demo();
   return sum;
 }
 </code></pre>
-<h2 id="如何拷贝一个对象"><a href="#如何拷贝一个对象" class="headerlink" title="如何拷贝一个对象"></a>如何拷贝一个对象</h2><p>封装一个方法，可以拷贝一个对象，返回（浅拷贝，只拷贝了 一层）</p>
+<h2 id="22、如何拷贝一个对象"><a href="#22、如何拷贝一个对象" class="headerlink" title="22、如何拷贝一个对象"></a>22、如何拷贝一个对象</h2><p>封装一个方法，可以拷贝一个对象，返回（浅拷贝，只拷贝了 一层）</p>
 <pre><code class="javascript">function copy(obj){
   var newObj = {};
   for (var k in obj){
@@ -1197,15 +1197,15 @@ function deepClone(obj) {
   return newObj
 }
 </code></pre>
-<h2 id="面向过程：注重点是过程和步骤，亲力亲为，事无巨细的！！"><a href="#面向过程：注重点是过程和步骤，亲力亲为，事无巨细的！！" class="headerlink" title="面向过程：注重点是过程和步骤，亲力亲为，事无巨细的！！"></a>面向过程：注重点是过程和步骤，亲力亲为，事无巨细的！！</h2><h2 id="面向对象：关注的是找一个对象，去做某件事"><a href="#面向对象：关注的是找一个对象，去做某件事" class="headerlink" title="面向对象：关注的是找一个对象，去做某件事"></a>面向对象：关注的是找一个对象，去做某件事</h2><p><strong><em>面向对象不是面向过程的替代，是面向过程的封装</em></strong></p>
-<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h3><ol>
+<h2 id="23、面向过程：注重点是过程和步骤，亲力亲为，事无巨细的！！"><a href="#23、面向过程：注重点是过程和步骤，亲力亲为，事无巨细的！！" class="headerlink" title="23、面向过程：注重点是过程和步骤，亲力亲为，事无巨细的！！"></a>23、面向过程：注重点是过程和步骤，亲力亲为，事无巨细的！！</h2><h2 id="24、面向对象：关注的是找一个对象，去做某件事"><a href="#24、面向对象：关注的是找一个对象，去做某件事" class="headerlink" title="24、面向对象：关注的是找一个对象，去做某件事"></a>24、面向对象：关注的是找一个对象，去做某件事</h2><p><strong><em>面向对象不是面向过程的替代，是面向过程的封装</em></strong></p>
+<h3 id="24-1-特性："><a href="#24-1-特性：" class="headerlink" title="24.1 特性："></a>24.1 特性：</h3><ol>
 <li>封装性</li>
 <li>继承性</li>
 <li>多态性（js中没有）</li>
 </ol>
-<h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><p>JavaScript是一门基于原型的语言，在软件设计模式中，有一种模式叫做原型模式，JavaScript正是利用这种模式而被创建出来</p>
-<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>原型模式是用于创建重复的对象，同时又能保证性能，这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。<br>原型模式的<code>目的</code>是用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象，也就是说利用已有的一个原型对象，可以快速地生成和原型对象一样的新对象实例</p>
-<h3 id="原型：一个可以被复制（或者叫克隆）的一个类，通过复制原型可以创建一个一模一样的新对象，也可以说原型就是一个模板，在设计语言中更准确的说是一个对象模板"><a href="#原型：一个可以被复制（或者叫克隆）的一个类，通过复制原型可以创建一个一模一样的新对象，也可以说原型就是一个模板，在设计语言中更准确的说是一个对象模板" class="headerlink" title="原型：一个可以被复制（或者叫克隆）的一个类，通过复制原型可以创建一个一模一样的新对象，也可以说原型就是一个模板，在设计语言中更准确的说是一个对象模板"></a>原型：一个可以被复制（或者叫克隆）的一个类，通过复制原型可以创建一个一模一样的新对象，也可以说原型就是一个模板，在设计语言中更准确的说是一个对象模板</h3><ol>
+<h2 id="25、原型"><a href="#25、原型" class="headerlink" title="25、原型"></a>25、原型</h2><p>JavaScript是一门基于原型的语言，在软件设计模式中，有一种模式叫做原型模式，JavaScript正是利用这种模式而被创建出来</p>
+<h3 id="25-1-原型模式"><a href="#25-1-原型模式" class="headerlink" title="25.1 原型模式"></a>25.1 原型模式</h3><p>原型模式是用于创建重复的对象，同时又能保证性能，这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。<br>原型模式的<code>目的</code>是用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象，也就是说利用已有的一个原型对象，可以快速地生成和原型对象一样的新对象实例</p>
+<h3 id="25-2-原型：一个可以被复制（或者叫克隆）的一个类，通过复制原型可以创建一个一模一样的新对象，也可以说原型就是一个模板，在设计语言中更准确的说是一个对象模板"><a href="#25-2-原型：一个可以被复制（或者叫克隆）的一个类，通过复制原型可以创建一个一模一样的新对象，也可以说原型就是一个模板，在设计语言中更准确的说是一个对象模板" class="headerlink" title="25.2 原型：一个可以被复制（或者叫克隆）的一个类，通过复制原型可以创建一个一模一样的新对象，也可以说原型就是一个模板，在设计语言中更准确的说是一个对象模板"></a>25.2 原型：一个可以被复制（或者叫克隆）的一个类，通过复制原型可以创建一个一模一样的新对象，也可以说原型就是一个模板，在设计语言中更准确的说是一个对象模板</h3><ol>
 <li>原型是定义了一些公用的属性和方法，利用原型创建出来的新对象实例会共享原型的所有属性和方法<br>实例代码：<br><code>`</code>javascript<br>// 创建原型<br>var Person = function(name){<br> this.name = name;<br>};</li>
 </ol>
 <p>// 原型的方法<br>Person.prototype.sayHello = function(){<br>    console.log(this.name+&quot;,hello&quot;);<br>};</p>
@@ -1273,27 +1273,27 @@ person2.sayHello();
 通过给Calculator对象的prototype属性赋值对象字面量来设定Calculator对象的原型
 在赋值原型prototype的时候使用function立即执行的表达式来赋值，可以封装私有的function，通过return的形式暴露出简单的使用名称，以达到public/private的效果
 
-#### 原型链
+#### 25.2.1 原型链
 原型链是原型对象创建过程的历史记录，当访问一个对象的某个属性时，会先在这个对象本身属性上查找，如果没有找到，则会去它的__proto__隐式原型上查找，即它的构造函数的prototype，如果还没有找到就会再在构造函数的prototype的__proto__中查找，这样一层一层向上查找就会形成一个链式结构
 
-#### 原型设计的问题
+#### 25.2.2 原型设计的问题
 当查找一个对象的属性时，JavaScript 会根据原型链向上遍历对象的原型，直到找到给定名称的属性为止，直到到达原型链的顶部仍然没有找到指定的属性，就会返回 undefined
 也可以理解为原型链继承时查找属性的过程是先查找自身属性，当自身属性不存在时，会在原型链中逐级查找
 
-#### hasOwnProperty 函数：
+#### 25.2.3 hasOwnProperty 函数：
 可以用来检查对象自身是否含有某个属性，返回值是布尔值，当属性不存在时不会向上查找对象原型链，*hasOwnProperty是 JavaScript 中``唯一一个``处理属性但是不查找原型链的函数*
 
-#### getOwnPropertyNames 函数
+#### 25.2.4 getOwnPropertyNames 函数
 可以获取对象所有的自身属性，返回值是由对象自身属性名称组成的数组，同样不会向上查找对象原型链
 
-#### 原型链的小结：
+#### 25.2.5 原型链的小结：
 一直往上层查找，直到到null还没有找到，则返回undefined
 Object.prototype.__proto__ === null
 所有从原型或更高级原型中的得到、执行的方法，其中的this在执行时，指向当前这个触发事件执行的对象
 
 6）JavaScript的原型是为了实现对象间的联系，解决构造函数无法数据共享而引入的一个属性，而原型链是一个实现对象间联系即继承的主要方法
 
-#### 常见面试题
+#### 25.2.6 常见面试题
 
 * 谈谈你对原型的理解？
 在 JavaScript 中，每当定义一个对象（函数也是对象）时候，对象中都会包含一些预定义的属性。其中每个函数对象都有一个prototype 属性，这个属性指向函数的原型对象，使用原型对象的好处是所有对象实例共享它所包含的属性和方法
@@ -1309,18 +1309,18 @@ Object.prototype.__proto__ === null
  2. __proto__是每个实例都有的属性，可以访问 [[prototype]] 属性
  3. 实例的__proto__与其构造函数的prototype指向的是同一个对象
 
-### 补充（原先的）
-#### 属性搜索原则：自己有就访问自己的，自己没有，去原型链中就近查找
+### 25.3 补充（原先的）
+#### 25.3.1 属性搜索原则：自己有就访问自己的，自己没有，去原型链中就近查找
 1. 如果自己有这个属性，就访问自己的
 2. 如果自己没有这个属性，会到原型中找，如果找到，不找了，直接返回
 3. 如果原型中也没有，会到原型的原型中找...
 4. 一直找到Object.prototype，如果老祖宗也没有，返回undefined
 
-#### 设置属性：
+#### 25.3.2 设置属性：
 如果有这个属性，直接修改赋值
 如果自己没有这个属性，给自己添加一个新属性（不会改到原型）
 
-#### Object.prototype的成员
+#### 25.3.3 Object.prototype的成员
 1. ``hasOwnProperty``
     语法：``对象.hasOwnProperty(&#39;属性名&#39;)`` ---判断属性是否是自己的，而不是原型的（不是继承来的）
     for in 遍历，不仅自己的属性可以遍历，原型上的属性也会遍历到（对于constructor等浏览器内置的属性，被浏览器进行来了处理，不会被for in便利出来）
@@ -1342,8 +1342,8 @@ Object.prototype.__proto__ === null
 ```javascript
 console.log(p.constructor.name)---可以用来打印类型
 Object.prototype.toString.call([]) ---可以用来获取复杂数据是什么类型 ---[object Array]
-</code></pre><h2 id="js数据类型"><a href="#js数据类型" class="headerlink" title="js数据类型"></a>js数据类型</h2><p>堆和栈（只是将Java中概念，拿过来类比了）<br>js中没有特别明确的堆和栈的概念，而且js的实现，也不需要堆和栈的概念<br>java中堆内存和栈内存<br>1.所有的<code>简单数据</code>类型，存在<code>栈</code>中<br>2.所有的<code>复杂数据</code>类型，存在<code>堆</code>中---真实存在变量中的，也是地址</p>
-<h2 id="this的规则："><a href="#this的规则：" class="headerlink" title="this的规则："></a>this的规则：</h2><p>xx.fn();---fn函数调用时里面的this，指向调用者（谁调用的，this就指向谁）</p>
+</code></pre><h2 id="26、js数据类型"><a href="#26、js数据类型" class="headerlink" title="26、js数据类型"></a>26、js数据类型</h2><p>堆和栈（只是将Java中概念，拿过来类比了）<br>js中没有特别明确的堆和栈的概念，而且js的实现，也不需要堆和栈的概念<br>java中堆内存和栈内存<br>1.所有的<code>简单数据</code>类型，存在<code>栈</code>中<br>2.所有的<code>复杂数据</code>类型，存在<code>堆</code>中---真实存在变量中的，也是地址</p>
+<h2 id="27、this的规则："><a href="#27、this的规则：" class="headerlink" title="27、this的规则："></a>27、this的规则：</h2><p>xx.fn();---fn函数调用时里面的this，指向调用者（谁调用的，this就指向谁）</p>
 <ol>
 <li>如果是直接调用的方法，this指向window<pre><code> （1）function fn(){console.log(this)}
           fn();
@@ -1353,7 +1353,7 @@ Object.prototype.toString.call([]) ---可以用来获取复杂数据是什么类
 <li>特例，构造函数中执行的this，this指向新创建的对象</li>
 </ol>
 <p>全局的var a = 123;  等价于 window.a = 123;</p>
-<h2 id="继承（拿来主义，自己没有的属性和方法，别人有，拿过来用，就实现了继承）⭐️⭐️⭐️"><a href="#继承（拿来主义，自己没有的属性和方法，别人有，拿过来用，就实现了继承）⭐️⭐️⭐️" class="headerlink" title="继承（拿来主义，自己没有的属性和方法，别人有，拿过来用，就实现了继承）⭐️⭐️⭐️"></a>继承（拿来主义，自己没有的属性和方法，别人有，拿过来用，就实现了继承）⭐️⭐️⭐️</h2><h3 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h3><pre><code class="javascript">function Person() {
+<h2 id="28、继承（拿来主义，自己没有的属性和方法，别人有，拿过来用，就实现了继承）⭐️⭐️⭐️"><a href="#28、继承（拿来主义，自己没有的属性和方法，别人有，拿过来用，就实现了继承）⭐️⭐️⭐️" class="headerlink" title="28、继承（拿来主义，自己没有的属性和方法，别人有，拿过来用，就实现了继承）⭐️⭐️⭐️"></a>28、继承（拿来主义，自己没有的属性和方法，别人有，拿过来用，就实现了继承）⭐️⭐️⭐️</h2><h3 id="28-1-原型链继承"><a href="#28-1-原型链继承" class="headerlink" title="28.1 原型链继承"></a>28.1 原型链继承</h3><pre><code class="javascript">function Person() {
   this.name = &#39;Hello World&#39;;
 }
 Person.prototype.getName = function() {
@@ -1374,7 +1374,7 @@ child1.getName() // Hello World
 <li>继承单一。</li>
 <li>所有新实例都会共享父类实例的属性。（原型上的属性是共享的，一个实例修改了原型属性，另一个实例的原型属性 也会被修改！）</li>
 </ol>
-<h3 id="构造函数继承"><a href="#构造函数继承" class="headerlink" title="构造函数继承"></a>构造函数继承</h3><pre><code class="javascript">function Person(){
+<h3 id="28-2-构造函数继承"><a href="#28-2-构造函数继承" class="headerlink" title="28.2 构造函数继承"></a>28.2 构造函数继承</h3><pre><code class="javascript">function Person(){
   this.name = &#39;xiaoming&#39;;
   this.colors = [&#39;red&#39;, &#39;blue&#39;, &#39;green&#39;];
 }
@@ -1409,7 +1409,7 @@ console.log(child2.colors); // [&quot;red&quot;, &quot;blue&quot;, &quot;green&q
 <li>无法实现构造函数的复用。（每次用每次都要重新调用）</li>
 <li>每个新实例都有父类构造函数的副本，臃肿。</li>
 </ol>
-<h3 id="组合继承（组合原型链继承和借用构造函数继承）（常用）"><a href="#组合继承（组合原型链继承和借用构造函数继承）（常用）" class="headerlink" title="组合继承（组合原型链继承和借用构造函数继承）（常用）"></a>组合继承（组合原型链继承和借用构造函数继承）（常用）</h3><pre><code class="javascript">function Parent(name){
+<h3 id="28-3-组合继承（组合原型链继承和借用构造函数继承）（常用）"><a href="#28-3-组合继承（组合原型链继承和借用构造函数继承）（常用）" class="headerlink" title="28.3 组合继承（组合原型链继承和借用构造函数继承）（常用）"></a>28.3 组合继承（组合原型链继承和借用构造函数继承）（常用）</h3><pre><code class="javascript">function Parent(name){
     this.name = name;
     this.colors = [&#39;red&#39;, &#39;blue&#39;, &#39;green&#39;];
 }
@@ -1434,7 +1434,7 @@ var child2 = new Child(&#39;lulu&#39;,19);
 <li>可以继承父类原型上的属性，可以传参，可复用。<br>2、每个新实例引入的构造函数属性是私有的。</li>
 </ol>
 <p><strong><em>缺点：</em></strong><br>调用了两次父类构造函数（耗内存），子类的构造函数会代替原型上的那个父类构造函数。</p>
-<h3 id="原型式继承"><a href="#原型式继承" class="headerlink" title="原型式继承"></a>原型式继承</h3><pre><code class="javascript">function CreateObj(o){
+<h3 id="28-4-原型式继承"><a href="#28-4-原型式继承" class="headerlink" title="28.4 原型式继承"></a>28.4 原型式继承</h3><pre><code class="javascript">function CreateObj(o){
     function F(){}
     F.prototype = o;
     console.log(o.__proto__ === Object.prototype);
@@ -1469,7 +1469,7 @@ person1.friend = [&#39;lulu&#39;];
 <li>所有实例都会继承原型上的属性。</li>
 <li>无法实现复用。（新实例属性都是后面添加的）</li>
 </ol>
-<h3 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="寄生式继承"></a>寄生式继承</h3><pre><code class="javascript">var ob = {
+<h3 id="28-5-寄生式继承"><a href="#28-5-寄生式继承" class="headerlink" title="28.5 寄生式继承"></a>28.5 寄生式继承</h3><pre><code class="javascript">var ob = {
     name: &#39;xiaopao&#39;,
     friends: [&#39;lulu&#39;,&#39;huahua&#39;]
 }
@@ -1500,7 +1500,7 @@ p1.sayName(); // xiaopao
 <p><strong><em>重点：</em></strong><br>就是给原型式继承外面套了个壳子。</p>
 <p><strong><em>优点：</em></strong><br>没有创建自定义类型，因为只是套了个壳子返回对象（这个），这个函数顺理成章就成了创建的新对象。</p>
 <p><strong><em>缺点：</em></strong><br>没用到原型，无法复用。</p>
-<h3 id="寄生组合式继承（常用）"><a href="#寄生组合式继承（常用）" class="headerlink" title="寄生组合式继承（常用）"></a>寄生组合式继承（常用）</h3><pre><code class="javascript">function Parent(name){
+<h3 id="28-6-寄生组合式继承（常用）"><a href="#28-6-寄生组合式继承（常用）" class="headerlink" title="28.6 寄生组合式继承（常用）"></a>28.6 寄生组合式继承（常用）</h3><pre><code class="javascript">function Parent(name){
     this.name = name;
     this.colors = [&#39;red&#39;, &#39;blue&#39;, &#39;green&#39;];
 }
@@ -1532,7 +1532,7 @@ var child1 = new Child(&#39;xiaopao&#39;, 18);
 console.log(child1); 
 </code></pre>
 <p><strong><em>重点：</em></strong><br>修复了组合继承的问题</p>
-<h3 id="class继承"><a href="#class继承" class="headerlink" title="class继承"></a>class继承</h3><pre><code class="javascript">class Parent5 {
+<h3 id="28-7-class继承"><a href="#28-7-class继承" class="headerlink" title="28.7 class继承"></a>28.7 class继承</h3><pre><code class="javascript">class Parent5 {
   constructor() {
     this.name = [&#39;super5&#39;]
   }
@@ -1548,16 +1548,16 @@ class Child5 extends Parent5 {
 var child51 = new Child5()
 var child52 = new Child5()
 </code></pre>
-<h2 id="定义函数的三种方式"><a href="#定义函数的三种方式" class="headerlink" title="定义函数的三种方式"></a>定义函数的三种方式</h2><h3 id="函数声明式"><a href="#函数声明式" class="headerlink" title="函数声明式"></a>函数声明式</h3><pre><code>function fn(){}
+<h2 id="29、定义函数的三种方式"><a href="#29、定义函数的三种方式" class="headerlink" title="29、定义函数的三种方式"></a>29、定义函数的三种方式</h2><h3 id="29-1-函数声明式"><a href="#29-1-函数声明式" class="headerlink" title="29.1 函数声明式"></a>29.1 函数声明式</h3><pre><code>function fn(){}
 fn();
-</code></pre><h3 id="函数表达式"><a href="#函数表达式" class="headerlink" title="函数表达式"></a>函数表达式</h3><pre><code>var fn = function(){};
+</code></pre><h3 id="29-2-函数表达式"><a href="#29-2-函数表达式" class="headerlink" title="29.2 函数表达式"></a>29.2 函数表达式</h3><pre><code>var fn = function(){};
 fn();
-</code></pre><h3 id="构造函数的方式"><a href="#构造函数的方式" class="headerlink" title="构造函数的方式"></a>构造函数的方式</h3><pre><code>new Function(...)
+</code></pre><h3 id="29-3-构造函数的方式"><a href="#29-3-构造函数的方式" class="headerlink" title="29.3 构造函数的方式"></a>29.3 构造函数的方式</h3><pre><code>new Function(...)
 </code></pre><p>作用：可以直接执行字符串<br>参数：都是字符串类型，最后一个参数是函数体，前面其他所有参数是定义的形参<br>         只有一个参数，就会当成函数体</p>
 <pre><code class="javascript">var fn = new Function(&#39;a&#39; , &#39;b&#39; , &#39;console.log(a+b)&#39;);
 fn(1,2);
 </code></pre>
-<h2 id="try和catch"><a href="#try和catch" class="headerlink" title="try和catch"></a>try和catch</h2><ul>
+<h2 id="30、try和catch"><a href="#30、try和catch" class="headerlink" title="30、try和catch"></a>30、try和catch</h2><ul>
 <li>try和catch必须一起使用</li>
 <li>try表示尝试执行某段代码，就算发生了错误，js也会继续执行</li>
 <li>catch，只要try中代码发生了错误，就会执行catch中的代码</li>
@@ -1573,25 +1573,25 @@ finally{
 </code></pre>
 </li>
 </ul>
-<h2 id="eval-str-可以执行字符串，非常强大，但是不用（风险性太大，会造成全局变量的污染）"><a href="#eval-str-可以执行字符串，非常强大，但是不用（风险性太大，会造成全局变量的污染）" class="headerlink" title="eval(str)可以执行字符串，非常强大，但是不用（风险性太大，会造成全局变量的污染）"></a>eval(str)可以执行字符串，非常强大，但是不用（风险性太大，会造成全局变量的污染）</h2><pre><code class="javascript">var a = 100;
+<h2 id="31、eval-str-可以执行字符串，非常强大，但是不用（风险性太大，会造成全局变量的污染）"><a href="#31、eval-str-可以执行字符串，非常强大，但是不用（风险性太大，会造成全局变量的污染）" class="headerlink" title="31、eval(str)可以执行字符串，非常强大，但是不用（风险性太大，会造成全局变量的污染）"></a>31、eval(str)可以执行字符串，非常强大，但是不用（风险性太大，会造成全局变量的污染）</h2><pre><code class="javascript">var a = 100;
 var str = &#39;var a = 1; var b = 2; console.log(a + b)&#39;;
 eval(str); 
 </code></pre>
-<h2 id="四种调用模式"><a href="#四种调用模式" class="headerlink" title="四种调用模式"></a>四种调用模式</h2><ul>
+<h2 id="32、四种调用模式"><a href="#32、四种调用模式" class="headerlink" title="32、四种调用模式"></a>32、四种调用模式</h2><ul>
 <li>函数：指的是普通的，不属于任何对象的函数</li>
 <li>方法：作为对象的属性存在的函数（对象中的函数）</li>
 <li>函数内的this指向谁，只跟怎么调用有关系，跟函数定义在什么地方，没有任何关系</li>
 </ul>
-<h3 id="函数调用模式"><a href="#函数调用模式" class="headerlink" title="函数调用模式"></a>函数调用模式</h3><pre><code class="javascript">fn( );   // this指向window
+<h3 id="32-1-函数调用模式"><a href="#32-1-函数调用模式" class="headerlink" title="32.1 函数调用模式"></a>32.1 函数调用模式</h3><pre><code class="javascript">fn( );   // this指向window
 </code></pre>
-<h3 id="方法调用模式"><a href="#方法调用模式" class="headerlink" title="方法调用模式"></a>方法调用模式</h3><pre><code class="javascript">obj.fn();  // this指向obj，谁调用指向谁
+<h3 id="32-2-方法调用模式"><a href="#32-2-方法调用模式" class="headerlink" title="32.2 方法调用模式"></a>32.2 方法调用模式</h3><pre><code class="javascript">obj.fn();  // this指向obj，谁调用指向谁
 </code></pre>
 <blockquote>
 <p>可以把数组当成一个对象，访问0属性，就是方法，方法调用模式，指向arr</p>
 </blockquote>
-<h3 id="构造函数调用模式"><a href="#构造函数调用模式" class="headerlink" title="构造函数调用模式"></a>构造函数调用模式</h3><pre><code class="javascript">var p = new Person();  // this指向实例p---new改变了this的指向，让this指向了新的实例
+<h3 id="32-3-构造函数调用模式"><a href="#32-3-构造函数调用模式" class="headerlink" title="32.3 构造函数调用模式"></a>32.3 构造函数调用模式</h3><pre><code class="javascript">var p = new Person();  // this指向实例p---new改变了this的指向，让this指向了新的实例
 </code></pre>
-<h3 id="上下文调用模式：（this在这边是可以自定义的，想要this指向谁，函数执行时this就指向谁）"><a href="#上下文调用模式：（this在这边是可以自定义的，想要this指向谁，函数执行时this就指向谁）" class="headerlink" title="上下文调用模式：（this在这边是可以自定义的，想要this指向谁，函数执行时this就指向谁）"></a>上下文调用模式：（this在这边是可以自定义的，想要this指向谁，函数执行时this就指向谁）</h3><ol>
+<h3 id="32-4-上下文调用模式：（this在这边是可以自定义的，想要this指向谁，函数执行时this就指向谁）"><a href="#32-4-上下文调用模式：（this在这边是可以自定义的，想要this指向谁，函数执行时this就指向谁）" class="headerlink" title="32.4 上下文调用模式：（this在这边是可以自定义的，想要this指向谁，函数执行时this就指向谁）"></a>32.4 上下文调用模式：（this在这边是可以自定义的，想要this指向谁，函数执行时this就指向谁）</h3><ol>
 <li><p>call</p>
 <ul>
 <li>任何函数（都可以看成一个特殊的对象，也可以设置属性和方法）都有一个call方法</li>
@@ -1635,20 +1635,20 @@ eval(str);
 <blockquote>
 <p>补充：（1）定时器中的this ，指向window<br>      (2）事件处理函数中，浏览器让this指向了事件源</p>
 </blockquote>
-<h2 id="函数也是对象"><a href="#函数也是对象" class="headerlink" title="函数也是对象"></a>函数也是对象</h2><p>函数也是一种特殊的对象，可以添加属性和方法</p>
-<h2 id="js的规则："><a href="#js的规则：" class="headerlink" title="js的规则："></a>js的规则：</h2><ol>
+<h2 id="33、函数也是对象"><a href="#33、函数也是对象" class="headerlink" title="33、函数也是对象"></a>33、函数也是对象</h2><p>函数也是一种特殊的对象，可以添加属性和方法</p>
+<h2 id="34、js的规则："><a href="#34、js的规则：" class="headerlink" title="34、js的规则："></a>34、js的规则：</h2><ol>
 <li>任何<code>函数</code>，都是由<code>Function</code>创建出来的，包括他自己，包括Object函数</li>
 <li>任何的<code>原型对象</code>，都是直接由<code>Object</code>创建出来的</li>
 </ol>
 <p>js中的作用域：词法作用域，静态作用域，函数的作用域在函数声明时，就已经确定好了，跟调用没有关系<br>作用域链：每个函数都有自己的作用域，如果是定义在函数内的函数，里面的函数又会有自己的作用域（一层套一层，形成了作用域链）<br>变量的查询规则：先看自己作用域有没有这个变量，如果没有，往外一层一层的就近查找，如果一直找到全局都没有找到，就会报错</p>
-<h2 id="递归函数：在一个函数内部，自己调用自己"><a href="#递归函数：在一个函数内部，自己调用自己" class="headerlink" title="递归函数：在一个函数内部，自己调用自己"></a>递归函数：在一个函数内部，自己调用自己</h2><p>函数在调用时，其实是占用内存，函数在调用时，会开辟一块内存，进行执行</p>
+<h2 id="35、递归函数：在一个函数内部，自己调用自己"><a href="#35、递归函数：在一个函数内部，自己调用自己" class="headerlink" title="35、递归函数：在一个函数内部，自己调用自己"></a>35、递归函数：在一个函数内部，自己调用自己</h2><p>函数在调用时，其实是占用内存，函数在调用时，会开辟一块内存，进行执行</p>
 <p><strong>特点：</strong></p>
 <ol>
 <li>自己调用自己</li>
 <li>必须要有结束条件，要有出口</li>
 </ol>
 <p><em>递归：是一种算法，一种思想 ，化归思想，复杂的问题简单化</em></p>
-<h3 id="斐波那契数列（兔子数列）：从第三个数开始，后面的数等于前两个数的和"><a href="#斐波那契数列（兔子数列）：从第三个数开始，后面的数等于前两个数的和" class="headerlink" title="斐波那契数列（兔子数列）：从第三个数开始，后面的数等于前两个数的和"></a>斐波那契数列（兔子数列）：从第三个数开始，后面的数等于前两个数的和</h3><pre><code class="javascript">// 直接这么写会有性能问题
+<h3 id="35-1-斐波那契数列（兔子数列）：从第三个数开始，后面的数等于前两个数的和"><a href="#35-1-斐波那契数列（兔子数列）：从第三个数开始，后面的数等于前两个数的和" class="headerlink" title="35.1 斐波那契数列（兔子数列）：从第三个数开始，后面的数等于前两个数的和"></a>35.1 斐波那契数列（兔子数列）：从第三个数开始，后面的数等于前两个数的和</h3><pre><code class="javascript">// 直接这么写会有性能问题
 function getFib(n) {
   if (n === 1 || n === 2) {
     return 1;
@@ -1700,7 +1700,7 @@ var result = (function() {
   return getFib;
 })();
 </code></pre>
-<h2 id="闭包：一个函数的内部，有另一个函数，内部函数引用了外部函数的局部变量，这个模型，称之为闭包"><a href="#闭包：一个函数的内部，有另一个函数，内部函数引用了外部函数的局部变量，这个模型，称之为闭包" class="headerlink" title="闭包：一个函数的内部，有另一个函数，内部函数引用了外部函数的局部变量，这个模型，称之为闭包"></a>闭包：一个函数的内部，有另一个函数，内部函数引用了外部函数的局部变量，这个模型，称之为闭包</h2><ul>
+<h2 id="36、闭包：一个函数的内部，有另一个函数，内部函数引用了外部函数的局部变量，这个模型，称之为闭包"><a href="#36、闭包：一个函数的内部，有另一个函数，内部函数引用了外部函数的局部变量，这个模型，称之为闭包" class="headerlink" title="36、闭包：一个函数的内部，有另一个函数，内部函数引用了外部函数的局部变量，这个模型，称之为闭包"></a>36、闭包：一个函数的内部，有另一个函数，内部函数引用了外部函数的局部变量，这个模型，称之为闭包</h2><ul>
 <li>作用：保护变量（变量私有化）</li>
 <li>闭包的内存，不会直接释放（会占用内存）</li>
 <li>函数执行调用时，必然会开辟一快内存空间，一般来说，执行完就会释放</li>
@@ -1718,14 +1718,14 @@ return function(){
 </code></pre>
 </li>
 </ol>
-<h2 id="js垃圾回收机制（会将一些不用的内存空间，释放掉）"><a href="#js垃圾回收机制（会将一些不用的内存空间，释放掉）" class="headerlink" title="js垃圾回收机制（会将一些不用的内存空间，释放掉）"></a>js垃圾回收机制（会将一些不用的内存空间，释放掉）</h2><p><strong>内存泄漏：</strong>如果一块内存空间，一直得不到释放，就认为这块内存泄漏了<br><strong>机制：</strong></p>
+<h2 id="37、js垃圾回收机制（会将一些不用的内存空间，释放掉）"><a href="#37、js垃圾回收机制（会将一些不用的内存空间，释放掉）" class="headerlink" title="37、js垃圾回收机制（会将一些不用的内存空间，释放掉）"></a>37、js垃圾回收机制（会将一些不用的内存空间，释放掉）</h2><p><strong>内存泄漏：</strong>如果一块内存空间，一直得不到释放，就认为这块内存泄漏了<br><strong>机制：</strong></p>
 <ol>
 <li>引用计数：如果一块空间的引用次数，最终变成0，就会被释放掉<pre><code>bug：如果两个对象，互相引用，形成了循环引用，使用引用计数，就会得不到释放（内存泄漏）
 </code></pre></li>
 <li>标记清除：如果一块内存空间，可以访问到，就不释放；如果访问不到了，就会释放掉<pre><code>闭包用完了，只需要将指向函数内部的引用干掉，此时内存就会释放了
 </code></pre></li>
 </ol>
-<h2 id="正则表达式：用于匹配规律规则的表达式（经常用于表单校验）"><a href="#正则表达式：用于匹配规律规则的表达式（经常用于表单校验）" class="headerlink" title="正则表达式：用于匹配规律规则的表达式（经常用于表单校验）"></a>正则表达式：用于匹配规律规则的表达式（经常用于表单校验）</h2><h3 id="创建正则表达式："><a href="#创建正则表达式：" class="headerlink" title="创建正则表达式："></a>创建正则表达式：</h3><ol>
+<h2 id="38、正则表达式：用于匹配规律规则的表达式（经常用于表单校验）"><a href="#38、正则表达式：用于匹配规律规则的表达式（经常用于表单校验）" class="headerlink" title="38、正则表达式：用于匹配规律规则的表达式（经常用于表单校验）"></a>38、正则表达式：用于匹配规律规则的表达式（经常用于表单校验）</h2><h3 id="38-1-创建正则表达式："><a href="#38-1-创建正则表达式：" class="headerlink" title="38.1 创建正则表达式："></a>38.1 创建正则表达式：</h3><ol>
 <li>通过构造函数 <pre><code class="javascript">var reg = new RegExp(//);
 </code></pre>
 \d 表示数字，0-9，/\d/可以匹配所有的数字<br>通过 <code>test</code> 方法，判断字符串，是否符合正则规则</li>
@@ -1733,7 +1733,7 @@ return function(){
 </code></pre>
 </li>
 </ol>
-<h3 id="正则-元字符"><a href="#正则-元字符" class="headerlink" title="正则-元字符"></a>正则-元字符</h3><h4 id="普通字符：a-b-c"><a href="#普通字符：a-b-c" class="headerlink" title="普通字符：a b c"></a>普通字符：a b c</h4><h4 id="元字符：有特殊含义的"><a href="#元字符：有特殊含义的" class="headerlink" title="元字符：有特殊含义的"></a>元字符：有特殊含义的</h4><ol>
+<h3 id="38-2-正则-元字符"><a href="#38-2-正则-元字符" class="headerlink" title="38.2 正则-元字符"></a>38.2 正则-元字符</h3><h4 id="38-2-1-普通字符：a-b-c"><a href="#38-2-1-普通字符：a-b-c" class="headerlink" title="38.2.1 普通字符：a b c"></a>38.2.1 普通字符：a b c</h4><h4 id="38-2-2-元字符：有特殊含义的"><a href="#38-2-2-元字符：有特殊含义的" class="headerlink" title="38.2.2 元字符：有特殊含义的"></a>38.2.2 元字符：有特殊含义的</h4><ol>
 <li><code>\d</code> 数字，0-9</li>
 <li><code>\D</code> 非数字</li>
 <li><code>\w</code> 匹配单词字符（字母数字下划线），0-9  a-z  A-Z  _</li>
@@ -1742,14 +1742,14 @@ return function(){
 <li><code>\S</code> 匹配可见字符</li>
 <li><code>.</code> 匹配任意字符（除了<code>\n</code>）----a.b可以匹配acb  aab a1b......<br>有时，就需要匹配点，需要转义 .--&gt;表示普通的点</li>
 </ol>
-<h3 id="正则表达式的优先级"><a href="#正则表达式的优先级" class="headerlink" title="正则表达式的优先级"></a>正则表达式的优先级</h3><p><code>|</code> 表示或，优先级最低<br><code>()</code> 优先级最高，一般用于提升优先级</p>
-<h3 id="正则表达式的字符"><a href="#正则表达式的字符" class="headerlink" title="正则表达式的字符"></a>正则表达式的字符</h3><p><code>[ ]</code>这个位置，可以出现的字符---[abc]，这个位置，可以出现a或者b或者c<br><code>[a-z]</code>，这个位置，可以出现a-z的所有小写字符<br><code>[a-zA-Z0-9_]</code>，这个位置，可以出现所有的字母、数字、下划线<br>[ ]内的 ^ 表示非</p>
-<h3 id="正则的边界（严格匹配）"><a href="#正则的边界（严格匹配）" class="headerlink" title="正则的边界（严格匹配）"></a>正则的边界（严格匹配）</h3><p><code>^</code>必须以...开头<br><code>$</code> 必须以...结尾<br>console.log(/^$/);---严格匹配，严格到字符数都是确定的</p>
-<h3 id="正则的量词"><a href="#正则的量词" class="headerlink" title="正则的量词"></a>正则的量词</h3><p><code>*</code> 出现0次或多次<br><code>+</code> 出现1次或多次<br><code>?</code> 出现0次或1次<br><code>{m,n}</code> 表示可以出现m次到n次<br><code>{m,}</code> 表示至少出现m次<br><code>{m}</code> 出现m次<br>汉字也是字符的一种，也有范围[\u4e00-u9fa5]---一 yu</p>
-<h3 id="正则的replace（不严格的替换）"><a href="#正则的replace（不严格的替换）" class="headerlink" title="正则的replace（不严格的替换）"></a>正则的replace（不严格的替换）</h3><p>正则也比较懒，不加参数，只替换一次（加上g，表示 全局替换）</p>
+<h3 id="38-3-正则表达式的优先级"><a href="#38-3-正则表达式的优先级" class="headerlink" title="38.3 正则表达式的优先级"></a>38.3 正则表达式的优先级</h3><p><code>|</code> 表示或，优先级最低<br><code>()</code> 优先级最高，一般用于提升优先级</p>
+<h3 id="38-4-正则表达式的字符"><a href="#38-4-正则表达式的字符" class="headerlink" title="38.4 正则表达式的字符"></a>38.4 正则表达式的字符</h3><p><code>[ ]</code>这个位置，可以出现的字符---[abc]，这个位置，可以出现a或者b或者c<br><code>[a-z]</code>，这个位置，可以出现a-z的所有小写字符<br><code>[a-zA-Z0-9_]</code>，这个位置，可以出现所有的字母、数字、下划线<br>[ ]内的 ^ 表示非</p>
+<h3 id="38-5-正则的边界（严格匹配）"><a href="#38-5-正则的边界（严格匹配）" class="headerlink" title="38.5 正则的边界（严格匹配）"></a>38.5 正则的边界（严格匹配）</h3><p><code>^</code>必须以...开头<br><code>$</code> 必须以...结尾<br>console.log(/^$/);---严格匹配，严格到字符数都是确定的</p>
+<h3 id="38-6-正则的量词"><a href="#38-6-正则的量词" class="headerlink" title="38.6 正则的量词"></a>38.6 正则的量词</h3><p><code>*</code> 出现0次或多次<br><code>+</code> 出现1次或多次<br><code>?</code> 出现0次或1次<br><code>{m,n}</code> 表示可以出现m次到n次<br><code>{m,}</code> 表示至少出现m次<br><code>{m}</code> 出现m次<br>汉字也是字符的一种，也有范围[\u4e00-u9fa5]---一 yu</p>
+<h3 id="38-7-正则的replace（不严格的替换）"><a href="#38-7-正则的replace（不严格的替换）" class="headerlink" title="38.7 正则的replace（不严格的替换）"></a>38.7 正则的replace（不严格的替换）</h3><p>正则也比较懒，不加参数，只替换一次（加上g，表示 全局替换）</p>
 <pre><code class="javascript">str.replace(/aa/g,&#39;xx&#39;)
 </code></pre>
-<h2 id="js校正计算"><a href="#js校正计算" class="headerlink" title="js校正计算"></a>js校正计算</h2><p>/<strong>
+<h2 id="39、js校正计算"><a href="#39、js校正计算" class="headerlink" title="39、js校正计算"></a>39、js校正计算</h2><p>/<strong>
  </strong> 加法函数，用来得到精确的加法结果<br> <strong> 说明：javascript的加法结果会有误差，在两个浮点数相加的时候会比较明显。这个函数返回较为精确的加法结果。
  </strong> 调用：accAdd(arg1,arg2)<br> <strong> 返回值：arg1加上arg2的精确结果
  </strong>/</p>
