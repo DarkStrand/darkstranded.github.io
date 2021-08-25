@@ -1626,7 +1626,126 @@ const request = function({ url, params, config, method }) {
       //引入图片时只需require(&quot;img/img1.png&quot;);即可
 }
 </code></pre>
-<h2 id="4-历史好文推荐"><a href="#4-历史好文推荐" class="headerlink" title="4. 历史好文推荐"></a>4. 历史好文推荐</h2><ol>
+<h2 id="4-webpack优化"><a href="#4-webpack优化" class="headerlink" title="4. webpack优化"></a>4. webpack优化</h2><p><a href="https://segmentfault.com/a/1190000022205477" target="_blank" rel="noopener">带你深度解锁Webpack系列(优化篇)</a></p>
+<p><a href="https://www.cnblogs.com/zhurong/p/12603887.html" target="_blank" rel="noopener">vue-cli中Webpack配置优化（一）</a></p>
+<p><a href="https://www.cnblogs.com/zhurong/p/12611360.html#_label2_1_3" target="_blank" rel="noopener">vue-cli中Webpack配置优化（二）</a></p>
+<h3 id="4-1-量化"><a href="#4-1-量化" class="headerlink" title="4.1 量化"></a>4.1 量化</h3><h4 id="4-1-1-speed-measure-webpack-plugin"><a href="#4-1-1-speed-measure-webpack-plugin" class="headerlink" title="4.1.1 speed-measure-webpack-plugin"></a>4.1.1 speed-measure-webpack-plugin</h4><p><code>speed-measure-webpack-plugin</code> 插件可以测量各个插件和<code>loader</code>所花费的时间，使用之后，构建时，会得到类似下面这样的信息：</p>
+<p><img src="https://image-static.segmentfault.com/334/233/3342331922-6a0fde0ed940ffa7_fix732" alt></p>
+<blockquote>
+<p>Vue-cli 2.x</p>
+</blockquote>
+<pre><code class="js">//webpack.config.js
+const SpeedMeasurePlugin = require(&quot;speed-measure-webpack-plugin&quot;);
+const smp = new SpeedMeasurePlugin();
+
+const config = {
+    //...webpack配置
+}
+
+module.exports = smp.wrap(config);
+</code></pre>
+<blockquote>
+<p>Vue-cli 3.x（主要区别是包裹 configureWebpack ）</p>
+</blockquote>
+<pre><code class="js">const SpeedMeasurePlugin = require(&#39;speed-measure-webpack-plugin&#39;)
+const smp = new SpeedMeasurePlugin({
+  outputFormat: &#39;human&#39;
+})
+module.exports = {
+  configureWebpack: smp.wrap({
+    plugins: []
+  })
+}
+</code></pre>
+<h4 id="4-1-2-webpack-bundle-analyzer"><a href="#4-1-2-webpack-bundle-analyzer" class="headerlink" title="4.1.2 webpack-bundle-analyzer"></a>4.1.2 webpack-bundle-analyzer</h4><p>这个是分析打包后，各个文件的大小，用于分析bundle的</p>
+<blockquote>
+<p>安装</p>
+</blockquote>
+<pre><code>npm i webpack-bundle-analyzer -D
+</code></pre><p>在 Vue-cli 3.x 下，安装这个包会报错，是因为用 Vue-cli 3.x 构建的项目在 node_modules 中已经存在，但是项目的 package.json 中没有引用。</p>
+<p>需要在 node_modules 中删除这个包，重新安装就可以。</p>
+<blockquote>
+<p>使用：（下面是vue-cli 3.x）</p>
+</blockquote>
+<pre><code>const BundleAnalyzerPlugin = require(&#39;webpack-bundle-analyzer&#39;).BundleAnalyzerPlugin
+
+  configureWebpack: smp.wrap({
+    plugins: [
+      // 这个要放在所有 plugins 最后
+      new BundleAnalyzerPlugin()
+    ]
+  })
+</code></pre><p>在构建完成后，会直接启动一个服务，有一个可视化的界面查看构建后的bundle。</p>
+<h3 id="4-2-缓存"><a href="#4-2-缓存" class="headerlink" title="4.2 缓存"></a>4.2 缓存</h3><h4 id="4-2-1-cache-loader"><a href="#4-2-1-cache-loader" class="headerlink" title="4.2.1 cache-loader"></a>4.2.1 cache-loader</h4><p>在一些性能开销较大的<code>loader</code>前面添加<code>cache-loader</code>，将结果缓存在磁盘中</p>
+<blockquote>
+<p>安装：</p>
+</blockquote>
+<pre><code>npm install cache-loader -D
+</code></pre><blockquote>
+<p>使用：</p>
+<p>在vue-cli2.x 中</p>
+</blockquote>
+<pre><code class="js">module.exports = {
+    //...
+    module: {
+        //我的项目中,babel-loader耗时比较长，所以我给它配置了`cache-loader`
+        rules: [
+            {
+                test: /\.jsx?$/,
+                use: [&#39;cache-loader&#39;,&#39;babel-loader&#39;]
+            }
+        ]
+    }
+}
+</code></pre>
+<blockquote>
+<p>在vue-cli3.x中，这个配置是默认的配置，分别对：<code>vue-loader</code>、<code>babel-loader</code>两个进行了缓存，其他的需要缓存再自己配置。</p>
+</blockquote>
+<h4 id="4-2-2-hard-source-webpack-plugin"><a href="#4-2-2-hard-source-webpack-plugin" class="headerlink" title="4.2.2 hard-source-webpack-plugin"></a>4.2.2 hard-source-webpack-plugin</h4><p>这个是为模块提供中间缓存，效率提升很大。</p>
+<blockquote>
+<p>安装</p>
+</blockquote>
+<pre><code>npm i hard-source-webpack-plugin -D
+</code></pre><blockquote>
+<p>使用</p>
+</blockquote>
+<p>直接在 plugins 中 new就可以。</p>
+<pre><code class="js">const HardSourceWebpackPlugin = require(&#39;hard-source-webpack-plugin&#39;)
+module.exports = {
+  configureWebpack: smp.wrap({
+    plugins: [
+      // 为模块提供中间缓存，缓存路径是：node_modules/.cache/hard-source
+      new HardSourceWebpackPlugin(),
+      new BundleAnalyzerPlugin()
+    ]
+  })
+}
+</code></pre>
+<p>构建后效果：</p>
+<p><img src="https://img2020.cnblogs.com/blog/592961/202003/592961-20200331111737573-1701609808.png" alt></p>
+<p><img src="https://img2020.cnblogs.com/blog/592961/202003/592961-20200331111750107-1452016351.png" alt></p>
+<p><img src="https://img2020.cnblogs.com/blog/592961/202003/592961-20200331111800199-1571336442.png" alt></p>
+<p>上面三幅图，分别是配置后第一次、第二次、第三次构建的，第三次构建可以达到80%的提升。</p>
+<h3 id="4-3-exclude-include"><a href="#4-3-exclude-include" class="headerlink" title="4.3 exclude/include"></a>4.3 exclude/include</h3><p>我们可以通过<code>exclue</code>、<code>include</code>配置来确保转移尽可能少的文件。顾名思义，<code>exclude</code>指定要排除的文件，<code>include</code>指定要包含的文件。</p>
+<p><code>exclude</code>的优先级高于<code>include</code>，在<code>include</code>和<code>exclude</code>中使用绝对路径数组，尽量避免<code>exclude</code>，更倾向于使用<code>include</code>。</p>
+<pre><code class="js">//webpack.config.js
+const path = require(&#39;path&#39;);
+module.exports = {
+    //...
+    module: {
+        rules: [
+            {
+                test: /\.js[x]?$/,
+                use: [&#39;babel-loader&#39;],
+                include: [path.resolve(__dirname, &#39;src&#39;)]
+            }
+        ]
+    },
+}
+</code></pre>
+<p>下图是未配置<code>include</code>和配置了<code>include</code>的构建结果对比：</p>
+<p><img src="https://image-static.segmentfault.com/341/005/3410059882-f459f782062d01e1_fix732" alt></p>
+<h2 id="5-历史好文推荐"><a href="#5-历史好文推荐" class="headerlink" title="5. 历史好文推荐"></a>5. 历史好文推荐</h2><ol>
 <li><a href="https://juejin.im/post/6850418118695583758" target="_blank" rel="noopener">【万字长文】史上最强css、html总结~看完涨薪不再是梦</a></li>
 <li><a href="https://juejin.im/post/6854573211451932685" target="_blank" rel="noopener">【万字长文】最全JavaScript基础总结~建议收藏</a></li>
 <li><a href="https://juejin.im/post/6847902222882340872" target="_blank" rel="noopener">Event Loop我知道，宏任务微任务是什么鬼？</a></li>
