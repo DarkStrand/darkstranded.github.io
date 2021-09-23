@@ -37,6 +37,32 @@
   </entry>
   
   <entry>
+    <title>middle-front</title>
+    <link href="/2021/09/18/middle-front/"/>
+    <id>/2021/09/18/middle-front/</id>
+    <published>2021-09-17T16:00:00.000Z</published>
+    <updated>2021-09-23T12:04:47.578Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;1、HTML篇&quot;&gt;&lt;a href=&quot;#1、HTML篇&quot; class=&quot;headerlink&quot; title=&quot;1、HTML篇&quot;&gt;&lt;/a&gt;1、HTML篇&lt;/h1&gt;&lt;h2 id=&quot;1-1-HTML5语义化&quot;&gt;&lt;a href=&quot;#1-1-HTML5语义化&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="front" scheme="/categories/front/"/>
+    
+    
+      <category term="前端" scheme="/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>授权认证</title>
     <link href="/2021/08/30/Authorized-authentication/"/>
     <id>/2021/08/30/Authorized-authentication/</id>
@@ -173,6 +199,46 @@
     
     
       <category term="后端" scheme="/tags/%E5%90%8E%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>日常小知识点</title>
+    <link href="/2021/07/27/workTips/"/>
+    <id>/2021/07/27/workTips/</id>
+    <published>2021-07-27T01:27:11.583Z</published>
+    <updated>2021-09-23T12:07:22.004Z</updated>
+    
+    <summary type="html">
+    
+      js
+    
+    </summary>
+    
+      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="web" scheme="/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端代码规范</title>
+    <link href="/2021/07/15/CodeStandards/"/>
+    <id>/2021/07/15/CodeStandards/</id>
+    <published>2021-07-15T01:10:58.637Z</published>
+    <updated>2021-09-23T12:07:59.499Z</updated>
+    
+    <summary type="html">
+    
+      前端代码规范
+    
+    </summary>
+    
+      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="web" scheme="/tags/web/"/>
     
   </entry>
   
