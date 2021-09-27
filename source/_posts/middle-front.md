@@ -46,7 +46,7 @@ sidebar: auto
 
 
 
-《HTML5：The Missing Manual》中指出了在侧栏使用`<nav>`标签的两个案例：
+/Users/darkstrand/Documents/AllCodes/Blog/hexo-blog《HTML5：The Missing Manual》中指出了在侧栏使用`<nav>`标签的两个案例：
 
 ```html
 <!-- 案例一 -->
