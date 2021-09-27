@@ -1568,7 +1568,216 @@ chainWebpack(config) {
 }
 ```
 
-## 4. 历史好文推荐
+## 4. webpack优化
+[带你深度解锁Webpack系列(优化篇)](https://segmentfault.com/a/1190000022205477)
+
+[vue-cli中Webpack配置优化（一）](https://www.cnblogs.com/zhurong/p/12603887.html)
+
+[vue-cli中Webpack配置优化（二）](https://www.cnblogs.com/zhurong/p/12611360.html#_label2_1_3)
+
+### 4.1 量化
+
+#### 4.1.1 speed-measure-webpack-plugin
+
+`speed-measure-webpack-plugin` 插件可以测量各个插件和`loader`所花费的时间，使用之后，构建时，会得到类似下面这样的信息：
+
+![](https://image-static.segmentfault.com/334/233/3342331922-6a0fde0ed940ffa7_fix732)
+
+
+
+> Vue-cli 2.x
+
+```js
+//webpack.config.js
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
+
+const config = {
+    //...webpack配置
+}
+
+module.exports = smp.wrap(config);
+```
+
+
+
+> Vue-cli 3.x（主要区别是包裹 configureWebpack ）
+
+```js
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const smp = new SpeedMeasurePlugin({
+  outputFormat: 'human'
+})
+module.exports = {
+  configureWebpack: smp.wrap({
+    plugins: []
+  })
+}
+```
+
+
+
+#### 4.1.2 webpack-bundle-analyzer
+
+这个是分析打包后，各个文件的大小，用于分析bundle的
+
+> 安装
+
+```
+npm i webpack-bundle-analyzer -D
+```
+
+
+
+在 Vue-cli 3.x 下，安装这个包会报错，是因为用 Vue-cli 3.x 构建的项目在 node_modules 中已经存在，但是项目的 package.json 中没有引用。
+
+需要在 node_modules 中删除这个包，重新安装就可以。
+
+
+
+> 使用：（下面是vue-cli 3.x）
+
+```
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+  configureWebpack: smp.wrap({
+    plugins: [
+      // 这个要放在所有 plugins 最后
+      new BundleAnalyzerPlugin()
+    ]
+  })
+```
+
+在构建完成后，会直接启动一个服务，有一个可视化的界面查看构建后的bundle。
+
+
+
+### 4.2 缓存
+
+#### 4.2.1 cache-loader
+
+在一些性能开销较大的`loader`前面添加`cache-loader`，将结果缓存在磁盘中
+
+> 安装：
+
+```
+npm install cache-loader -D
+```
+
+
+
+> 使用：
+>
+> 在vue-cli2.x 中
+
+```js
+module.exports = {
+    //...
+    module: {
+        //我的项目中,babel-loader耗时比较长，所以我给它配置了`cache-loader`
+        rules: [
+            {
+                test: /\.jsx?$/,
+                use: ['cache-loader','babel-loader']
+            }
+        ]
+    }
+}
+```
+
+
+
+> 在vue-cli3.x中，这个配置是默认的配置，分别对：`vue-loader`、`babel-loader`两个进行了缓存，其他的需要缓存再自己配置。
+
+
+
+#### 4.2.2 hard-source-webpack-plugin
+
+这个是为模块提供中间缓存，效率提升很大。
+
+> 安装
+
+```
+npm i hard-source-webpack-plugin -D
+```
+
+
+
+> 使用
+
+直接在 plugins 中 new就可以。
+
+```js
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+module.exports = {
+  configureWebpack: smp.wrap({
+    plugins: [
+      // 为模块提供中间缓存，缓存路径是：node_modules/.cache/hard-source
+      new HardSourceWebpackPlugin(),
+      new BundleAnalyzerPlugin()
+    ]
+  })
+}
+```
+
+
+
+构建后效果：
+
+![](https://img2020.cnblogs.com/blog/592961/202003/592961-20200331111737573-1701609808.png)
+
+![](https://img2020.cnblogs.com/blog/592961/202003/592961-20200331111750107-1452016351.png)
+
+![](https://img2020.cnblogs.com/blog/592961/202003/592961-20200331111800199-1571336442.png)
+
+上面三幅图，分别是配置后第一次、第二次、第三次构建的，第三次构建可以达到80%的提升。
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 4.3 exclude/include
+
+我们可以通过`exclue`、`include`配置来确保转移尽可能少的文件。顾名思义，`exclude`指定要排除的文件，`include`指定要包含的文件。
+
+
+
+`exclude`的优先级高于`include`，在`include`和`exclude`中使用绝对路径数组，尽量避免`exclude`，更倾向于使用`include`。
+
+```js
+//webpack.config.js
+const path = require('path');
+module.exports = {
+    //...
+    module: {
+        rules: [
+            {
+                test: /\.js[x]?$/,
+                use: ['babel-loader'],
+                include: [path.resolve(__dirname, 'src')]
+            }
+        ]
+    },
+}
+```
+
+下图是未配置`include`和配置了`include`的构建结果对比：
+
+![](https://image-static.segmentfault.com/341/005/3410059882-f459f782062d01e1_fix732)
+
+
+
+
+
+## 5. 历史好文推荐
 1. [【万字长文】史上最强css、html总结~看完涨薪不再是梦](https://juejin.im/post/6850418118695583758)
 2. [【万字长文】最全JavaScript基础总结~建议收藏](https://juejin.im/post/6854573211451932685)
 3. [Event Loop我知道，宏任务微任务是什么鬼？](https://juejin.im/post/6847902222882340872)

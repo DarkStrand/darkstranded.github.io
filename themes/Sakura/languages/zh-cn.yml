@@ -54,5 +54,8 @@ insight:
 悦读:
     img: https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/banner/reading.jpg
 
+mac:
+    img: https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/banner/reading.jpg
+
 后端:
     img: https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/banner/coding.jpg
