@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">前端代码规范 | DarkStrand</title>
+  <title itemprop="name">日常小知识点 | DarkStrand</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -347,7 +347,7 @@
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      前端代码规范</h1>
+      日常小知识点</h1>
       <p class="entry-census">
         <span>
           <a href="DarkStrand.cn">
@@ -359,7 +359,7 @@
         </span>
         <span class="bull">
         ·</span>
-        2021-7-15<span class="bull">
+        2021-10-13<span class="bull">
         ·</span>
       <span id="busuanzi_value_page_pv"></span>次阅读</p>
     </header>
@@ -373,44 +373,104 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <p><a href="https://www.yuque.com/docs/share/332b7c4f-c991-41a1-8822-d5edc7ef153f" target="_blank" rel="noopener">原文</a></p>
-<p><strong><em>前端编码规范</em></strong></p>
-<h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>编码风格没有太多的好坏之分, 最重要的是风格保持一致，编码规范有助于规范我们编码的风格，使代码具有更好的可读性。本文档风格约定部分可能跟你的喜好有冲突，请尽量用包容的心态来阅读。有任何问题或建议，欢迎跟我们讨论。</p>
-<h2 id="一、通用规范"><a href="#一、通用规范" class="headerlink" title="一、通用规范"></a>一、通用规范</h2><h3 id="1-1-强制-所有代码统一缩进两个空格"><a href="#1-1-强制-所有代码统一缩进两个空格" class="headerlink" title="1.1 强制 所有代码统一缩进两个空格"></a>1.1 <code>强制</code> 所有代码统一缩进两个空格</h3><h3 id="1-2-强制-使用UTF-8编码"><a href="#1-2-强制-使用UTF-8编码" class="headerlink" title="1.2 强制 使用UTF-8编码"></a>1.2 <code>强制</code> 使用UTF-8编码</h3><h2 id="二、VUE编码规范"><a href="#二、VUE编码规范" class="headerlink" title="二、VUE编码规范"></a>二、VUE编码规范</h2><h3 id="2-1-强制-所有单文件组件命名统一首字母大写示例：MyComponent-vue"><a href="#2-1-强制-所有单文件组件命名统一首字母大写示例：MyComponent-vue" class="headerlink" title="2.1 强制 所有单文件组件命名统一首字母大写示例：MyComponent.vue"></a>2.1 <code>强制</code> 所有单文件组件命名统一首字母大写示例：MyComponent.vue</h3><h3 id="2-2-强制指令缩写-统一用-表示-v-bind-和用-表示-v-on"><a href="#2-2-强制指令缩写-统一用-表示-v-bind-和用-表示-v-on" class="headerlink" title="2.2 强制指令缩写 (统一用 : 表示 v-bind: 和用 @ 表示 v-on:)"></a>2.2 <code>强制</code>指令缩写 (统一用 : 表示 v-bind: 和用 @ 表示 v-on:)</h3><p>示例：</p>
-<pre><code class="html">&lt;input
-  :value=&quot;newTodoText&quot;
-  :placeholder=&quot;newTodoInstructions&quot;
-&gt;&lt;input
-  @input=&quot;onInput&quot;
-  @focus=&quot;onFocus&quot;
-&gt;
+          <h2 id="包含数字字母字符串，6-12位"><a href="#包含数字字母字符串，6-12位" class="headerlink" title="包含数字字母字符串，6-12位"></a>包含数字字母字符串，6-12位</h2><pre><code class="javascript">/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&amp;*()_+`\-={}:&quot;;&#39;&lt;&gt;?,.\/]).{6,12}$/
 </code></pre>
-<h3 id="2-3-强制使用-v-for-时配合-key-使用"><a href="#2-3-强制使用-v-for-时配合-key-使用" class="headerlink" title="2.3 强制使用 v-for 时配合 key 使用"></a>2.3 <code>强制</code>使用 v-for 时配合 key 使用</h3><p>示例：<ul><br>  &lt;li<br>    v-for=&quot;todo in todos&quot;<br>    :key=&quot;todo.id&quot;</ul></p>
+<h2 id="对中文进行排序"><a href="#对中文进行排序" class="headerlink" title="对中文进行排序"></a>对中文进行排序</h2><pre><code class="javascript">let arr = [
+  {name: &#39;zs&#39;, age: 1},
+  {name: &#39;zs&#39;, age: 2},
+  {name: &#39;ls&#39;, age: 3},
+  {name: &#39;ww&#39;, age: 4},
+  {name: &#39;zs&#39;, age: 5},
+  {name: &#39;ww&#39;, age: 6},
+  {name: &#39;ls&#39;, age: 7},
+  {name: &#39;zs&#39;, age: 8}
+]
+let new_arr = arr.sort((a,b) =&gt; {
+  return b.name.charCodeAt(0) - a.name.charCodeAt(0)
+})
+</code></pre>
+<h2 id="post请求不希望url拼接参数，但参数形式Query-String-Parameters"><a href="#post请求不希望url拼接参数，但参数形式Query-String-Parameters" class="headerlink" title="post请求不希望url拼接参数，但参数形式Query String Parameters"></a>post请求不希望url拼接参数，但参数形式Query String Parameters</h2><p>希望是：<br><img src="https://segmentfault.com/img/bVbAFBd" alt></p>
+<p>现实是：<br><img src="https://segmentfault.com/img/bVbAFBz" alt></p>
 <blockquote>
+<p>使用params作参数名会自动拼接到url上面，去axios那里把参数名设置为data就好了</p>
 </blockquote>
-<pre><code>{{ todo.text }}
-</code></pre><p>  <br>[强制]单文件组件页的私有样式使用 scoped 锁定作用域避免污染到全局样式示例：<style lang="scss" scoped><br>.button {<br>  border: none;<br>  border-radius: 2px;<br>}<br></style>[建议]组件名应该倾向于完整单词而不是缩写编辑器中的自动补全已经让书写长命名的代价非常之低了，而其带来的明确性却是非常宝贵的。不常用的缩写尤其应该避免。示例：components/<br>|- StudentDashboardSettings.vue<br>|- UserProfileOptions.vue[建议]组件名以高级别的 (通常是一般化描述的) 单词开头，以描述性的修饰词结尾。示例：components/<br>|- SearchButtonClear.vue<br>|- SearchButtonRun.vue<br>|- SearchInputQuery.vue<br>|- SearchInputExcludeGlob.vue<br>|- SettingsCheckboxTerms.vue<br>|- SettingsCheckboxLaunchOnStartup.vue[建议]在声明 prop 的时候，命名用驼峰命名，在模板和 JSX中用短横线拼接命名。示例：props: {<br>  greetingText: String<br>}</p>
-<p><welcome-message greeting-text="hi">三、Javascript编码规范空格与符号[强制]二元运算符的两侧统一加一个空格，一元运算符与操作对象之间不要空格示例：var a = !arr.length;<br>a++;<br>a = b + c;[强制]用作代码块起始的左花括号 { 前必须有一个空格，并且与前面的代码写在同一行，右花括号 } 换第二行。示例：// good<br>if (condition) {<br>}</welcome-message></p>
-<p>// bad<br>if (condition){<br>}<br>if (condition)<br>{<br>}[强制]花括号 { 之间需要加一个空格// good<br>import { button, popup } from &#39;vant&#39;;</p>
-<p>// bad<br>import {button, popup} from &#39;vant&#39;;[强制] if / else / for / while / function / switch / do / try / catch / finally 关键字后，必须有一个空格示例：// good<br>if (condition) {<br>}</p>
-<p>// bad<br>if(condition) {<br>}<br>[强制]在对象创建时，属性中的冒号 : 之后必须有空格，冒号 : 之前不允许有空格示例：// good<br>var obj = {<br>  a: 1,<br>  b: 2,<br>  c: 3<br>};</p>
-<p>// bad<br>var obj = {<br>  a : 1,<br>  b:2,<br>  c :3<br>};[强制]在函数声明、具名函数表达式、函数调用中，函数名和左圆括号 ( 之间不允许有空格。示例：// good<br>function funcName() {<br>}<br>var funcName = function funcName() {<br>};<br>funcName();</p>
-<p>// bad<br>function funcName () {<br>}<br>var funcName = function funcName () {<br>};<br>funcName ();[强制] 逗号 , 和分号 ; 前不允许有空格，逗号 , 之后统一加一个空格示例：// good<br>callFunc(a, b);</p>
-<p>// bad<br>callFunc(a , b) ;<br>callFunc(a,b) ;[强制] () 和 [] 内紧贴括号部分不允许有空格示例：// good<br>save(this.list[this.indexes[i]]);</p>
-<p>// bad<br>callFunc( param1, param2, param3 );<br>save( this.list[ this.indexes[ i ] ] );[强制] 语句结束统一加分号 ; 函数结束统一不加分号（函数表达式除外）注释[强制] 函数注释统一使用 /<strong>/ 的写法并且标明参数与返回值（如果有返回值的话）参数需要标明参数的数据类型返回值尽量标明值、类型及描述示例：/</strong></p>
-<ul>
-<li>@param {string} id 参数描述</li>
-<li>@param {boolean} isTrue 参数描述</li>
-<li>@return {objtct} 返回值描述<br>*/[建议] 单行注释使用 // 尽量独占一行，如果有多行注释尽量使用多个单行注释进行其他[强制]变量、函数的命名统一使用驼峰命名[建议]每行代码尽量不超过120个字符四、HTML编码规范[强制]标签需要对齐，必须有开始标签和结束标签，如果是空标签要加/示例：// good<br><tr><br><td>A</td><br><td>Description of A</td><br></tr>[强制]标签与属性使用小写英文字母[强制]class的命名使用短括号连接方式示例<div class="button-add"></div>[强制]html标签中使用双引号引入属性示例：// good<div class="button-add"></div>
+<h2 id><a href="#" class="headerlink" title="??,?.,??="></a>??,?.,??=</h2><h3 id="（可选链）"><a href="#（可选链）" class="headerlink" title="?.（可选链）"></a><code>?.</code>（可选链）</h3><blockquote>
+<p>举例</p>
+</blockquote>
+<pre><code class="javascript">let a;
+let b = a.name;
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20210319202635609.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1bl9tYXN0ZXI=,size_16,color_FFFFFF,t_70" alt></p>
+<p>这种情况就相当于直接在<code>undefined</code>上面访问<code>name</code>属性。<code>undefined</code>和<code>null</code>是两个比较特殊的数据类型，是不能用点操作符去访问属性的。那么在一个变量可能为<code>null</code>、或者<code>undefined</code>的时候，恰巧我又需要访问这个变量的一个属性，那我们应该这样做</p>
+<pre><code class="js">let a;
+let b;
+if (!!a) {
+    b = a.name;
+} else {
+    b = undefined;
+}
+</code></pre>
+<blockquote>
+<p>简单的方法</p>
+</blockquote>
+<pre><code class="js">let a;
+let b = a?.name;
+</code></pre>
+<h3 id="（空值合并运算符）"><a href="#（空值合并运算符）" class="headerlink" title="??（空值合并运算符）"></a><code>??</code>（空值合并运算符）</h3><blockquote>
+<p>举例</p>
+</blockquote>
+<pre><code class="js">let b;
+let a = 0;
+let c = { name:&#39;buzhimingqianduan&#39; }
 
-</li>
-</ul>
-<p>//bad</p>
-<p><div class="button-add"></div></p>
-<p><div class="button"></div>[建议]图片尽量添加 alt 属性添加 alt 属性，在图片不能显示时，它能替代图片显示五、CSS编码规范[强制]选择器 与 { 之间必须包含空格示例：// good<br>.selector {<br>}</p>
-<p>// bad<br>.selector{<br>}[强制]当长度单位为0时后面不加px示例：// good<br>margin: 0;</p>
-<p>// bad<br>margin: 0px;[强制]每行样式结尾统一加分号示例：// good<br>margin: 0;</p>
-<p>// bad<br>margin: 0若有收获，就点个赞吧陈宇鑫05-21 09:42180投诉加入语雀，参与知识分享与交流注册 或 登录 语雀进行评论立即加入回复注册 或 登录 语雀进行评论关于语雀使用帮助数据安全服务协议English快速注册</p>
+if (!!a || a === 0 ){
+    b = a;
+} else {
+    b = c;
+}
+</code></pre>
+<p>当我们想判断一个值存在，但是它等于0的时候，我们也需要当作它存在，于是就有上面的例子，其实我们可以这样做</p>
+<pre><code class="js">let b;
+let a = 0;
+let c = { name: &#39;aa&#39; };
+
+b = a ?? c;
+</code></pre>
+<p>上面的例子中，当<code>a</code>除了<code>undefined</code>、或者<code>null</code>之外的任何值，<code>b</code>都会等于<code>a</code>，否则就等于<code>c</code>。</p>
+<h3 id="（空值赋值运算符）"><a href="#（空值赋值运算符）" class="headerlink" title="??=（空值赋值运算符）"></a><code>??=</code>（空值赋值运算符）</h3><pre><code class="js">let b = &#39;你好&#39;;
+let a = 0
+let c = null;
+let d = ’123‘
+b ??= a;  // b = “你好”
+c ??= d  // c = &#39;123&#39;
+
+</code></pre>
+<p>当<code>??=</code>左侧的值为<code>null</code>、<code>undefined</code>的时候，才会将右侧变量的值赋值给左侧变量。其他所有值都不会进行赋值。同样在一些场景下，可以省略很多代码。</p>
+<h2 id="Vue项目在IE下缓存的问题"><a href="#Vue项目在IE下缓存的问题" class="headerlink" title="Vue项目在IE下缓存的问题"></a>Vue项目在IE下缓存的问题</h2><p><a href="解决vue在IE11读取缓存的问题">解决vue在IE11读取缓存的问题</a></p>
+<blockquote>
+<p>IE11get，post请求时会读取接口缓存，我们要使用时间戳拼接在url来解决。最好不要直接加载参数上，怕后端会进行设置。</p>
+<pre><code class="js">function filterUrl (url) {
+  return url.indexOf(&#39;?&#39;) !== -1 ? `${url}&amp;time=${new Date().getTime()}` : `${url}?time=${new Date().getTime()}`
+}
+</code></pre>
+</blockquote>
+<pre><code class="js">request.interceptors.request.use(
+  (config) =&gt; {
+    if (config.method === &#39;get&#39;) {
+      // 加上这一句
+      config.url = filterUrl(config.url);
+
+      config.paramsSerializer = (params) =&gt; {
+        return qs.stringify(params, { arrayFormat: &#39;brackets&#39; });
+      };
+    }
+    return config;
+  },
+  (err) =&gt; {
+    return Promise.reject(err);
+  }
+);
+</code></pre>
 
         </div>
         <!-- .entry-content -->
@@ -432,7 +492,7 @@
           
             <div class="post-nepre half previous">
           
-            <a href="/2021/07/27/workTips/" rel="prev">
+            <a href="/2021/10/15/vue-operating-mechanism/" rel="prev">
               <div class="background">
                 <img class="lazyload" src="/images/bg1.jpg" data-src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg">
               </div>
@@ -440,7 +500,7 @@
               Previous Post</span>
               <div class="info">
                 <h3>
-                日常小知识点</h3>
+                vue.js内部运行机制</h3>
                 <hr>
               </div>
             </a>
@@ -450,15 +510,15 @@
           
             <div class="post-nepre half next">
           
-            <a href="/2018/12/12/Hexo-Theme-Sakura/" rel="next">
+            <a href="/2021/09/24/leancloud/" rel="next">
               <div class="background">
-                <img class="lazyload" src="/images/bg1.jpg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
+                <img class="lazyload" src="/images/bg1.jpg" data-src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                Hexo-Theme-Sakura</h3>
+                leancloud部署项目</h3>
                 <hr>
               </div>
             </a>
