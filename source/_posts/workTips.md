@@ -130,6 +130,33 @@ c ??= d  // c = '123'
 当`??=`左侧的值为`null`、`undefined`的时候，才会将右侧变量的值赋值给左侧变量。其他所有值都不会进行赋值。同样在一些场景下，可以省略很多代码。
 
 
+## Vue项目在IE下缓存的问题
+[解决vue在IE11读取缓存的问题](解决vue在IE11读取缓存的问题)
 
+> IE11get，post请求时会读取接口缓存，我们要使用时间戳拼接在url来解决。最好不要直接加载参数上，怕后端会进行设置。
+```js
+function filterUrl (url) {
+  return url.indexOf('?') !== -1 ? `${url}&time=${new Date().getTime()}` : `${url}?time=${new Date().getTime()}`
+}
+```
+
+```js
+request.interceptors.request.use(
+  (config) => {
+    if (config.method === 'get') {
+      // 加上这一句
+      config.url = filterUrl(config.url);
+      
+      config.paramsSerializer = (params) => {
+        return qs.stringify(params, { arrayFormat: 'brackets' });
+      };
+    }
+    return config;
+  },
+  (err) => {
+    return Promise.reject(err);
+  }
+);
+```
 
 
