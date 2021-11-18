@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2021-11-12T01:52:46.326Z</updated>
+  <updated>2021-11-16T01:49:09.054Z</updated>
   <id>/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="/2021/11/16/prototype/"/>
+    <id>/2021/11/16/prototype/</id>
+    <published>2021-11-16T01:49:09.054Z</published>
+    <updated>2021-11-16T01:49:09.054Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>vue3</title>
+    <link href="/2021/11/16/vue3/"/>
+    <id>/2021/11/16/vue3/</id>
+    <published>2021-11-16T01:47:11.632Z</published>
+    <updated>2021-11-17T06:45:59.741Z</updated>
+    
+    <summary type="html">
+    
+      vue
+    
+    </summary>
+    
+      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="vue3" scheme="/tags/vue3/"/>
+    
+      <category term="vue" scheme="/tags/vue/"/>
+    
+  </entry>
   
   <entry>
     <title>mysql</title>
