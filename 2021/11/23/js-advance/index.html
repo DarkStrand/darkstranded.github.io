@@ -359,7 +359,7 @@
         </span>
         <span class="bull">
         ·</span>
-        2021-8-26<span class="bull">
+        2021-11-23<span class="bull">
         ·</span>
       <span id="busuanzi_value_page_pv"></span>次阅读</p>
     </header>
@@ -412,7 +412,7 @@ console.log(a.age);    // 第二个console
 </code></pre>
 <p>这道题涉及了 function，你通过上述代码可以看到第一个 console 的结果是30，b最后打印结果是 {name: &#39;Kath&#39;, age:30}；第二个 console 的返回结果是24，而 a 最后的打印结果是{name:&#39;Julia&#39;, age:24}。</p>
 <p>是不是和你预想的有些区别？你要注意的是，<strong>这里的 function 和 return 带来了不一样的东西</strong>。</p>
-<p>原因在于：函数传参进来的 o ，传递的是对象在堆中的内存地址值，通过调用 o.age=24 确实改变了 a 对象的 age 属性；12行把参数 o 的地址重新返回了，将{name: &#39;Kath&#39;,age:30}存入其中，最后返回 b 的📄就变成了{name:&#39;Kath&#39;,age:30}。而如果把第12行去掉，那么 b 就会返回 undefined。</p>
+<p>原因在于：函数传参进来的 o ，传递的是对象在堆中的内存地址值，通过调用 o.age=24 确实改变了 a 对象的 age 属性；12行把参数 o 的地址重新返回了，将{name: &#39;Kath&#39;,age:30}存入其中，最后返回 b 的值就变成了{name:&#39;Kath&#39;,age:30}。而如果把第12行去掉，那么 b 就会返回 undefined。</p>
 <p>讲完数据类型的基本概念，我们继续看下一部分，如何对数据类型进行检测，这也是比较重要的问题。</p>
 <h2 id="1-2-检测"><a href="#1-2-检测" class="headerlink" title="1.2 检测"></a>1.2 检测</h2><p>数据类型检测也是面试过程中经常会遇到的问题，比如：如何判断是否为数组？让你写一段代码把 JavaScript 的各种数据类型判断出来，等等。类似的题目会很多，而且在平常写代码过程中我们也会经常用到。</p>
 <p>有时候回答比如“用 typeof 来判断”，然后就没有其他答案了，但这样的回答是不能令面试官满意的，因为他要考察你对 JS 的数据类型理解的深度，所以我们先要做到的是对各种数据类型的判断方法了然于胸，然后再进行归纳总结，给面试官一个满意的答案。</p>
@@ -688,6 +688,79 @@ b.toString() // Uncaught TypeError: Cannot read property &#39;toString&#39; of n
 console.log(String(a)) // &#39;undefined&#39;
 console.log(String(b)) // &#39;null&#39;
 </code></pre>
+<h4 id="1-3-1-6-valueOf"><a href="#1-3-1-6-valueOf" class="headerlink" title="1.3.1.6 valueOf()"></a>1.3.1.6 valueOf()</h4><p>js对象中的 <code>valueOf()</code> 方法和 <code>toString()</code> 方法非常类似，但是，当需要返回对象的原始值而非字符串的时候才调用它，尤其是转换为数字的时候。如果在需要使用原始值的上下文中使用了对象，JavaScript就会自动调用 valueOf() 方法。</p>
+<p><strong>Object.prototype.valueOf()</strong></p>
+<p>JavaScript 调用 <code>valueOf()</code> 方法将对象转换为原始值。你很少需要自己调用 <code>valueOf()</code> 方法。</p>
+<p>默认情况下，<code>valueOf()</code> 方法由Object 后面的每个对象继承。每个内置的核心对象都会覆盖此方法以放回适当的值。</p>
+<p>如果对象没有原始值，则 <code>valueOf()</code> 将返回对象本身。</p>
+<p>你可以在自己的代码中使用 <code>valueOf()</code> 将内置对象转换为原始值。创建自定义对象时，可以覆盖 <code>Object.prototype.valueOf()</code> 来调用自定义方法，而不是默认 <code>Object</code> 方法。</p>
+<p><em>覆盖自定义对象的 valueOf()方法</em></p>
+<p>你可以创建一个取代 <code>valueOf()</code> 方法的函数，你的方法必需不能传入参数。</p>
+<p>假设你有个对象叫 <code>MyNumberType</code> 而你想为它创建一个 <code>valueOf()</code> 方法。下面的代码为 <code>valueOf()</code> 方法赋予了一个自定义函数：</p>
+<pre><code class="js">MyNumberType.prototype.valueOf = function(){ return customPrimitiveValue }
+</code></pre>
+<p>有了这样一个方法，下一次每当 <code>MyNumberType</code> 要被转换为原始类型值时，JavaScript 在此之前会自动调用自定义的 <code>valueOf()</code> 方法。</p>
+<p>valueOf() 方法一般都会被 JavaScript 自动调用，但你也可以像下面代码那样自己调用：</p>
+<pre><code class="js">myNumberType.valueOf()
+</code></pre>
+<p><strong>String.prototype.valueOf()</strong></p>
+<p>语法：<code>strObj.valueOf()</code></p>
+<p>返回值：表示给定<code>String</code>对象的原始值</p>
+<p>说明：<code>valueOf()</code>方法返回一个<code>String</code>对象的原始值，该值等同于<code>String.prototype.toString()</code>。</p>
+<p>该方法通常在 JavaScript 内部被调用，而不是在代码里显示调用。</p>
+<pre><code class="js">let x = new String(&#39;Hello World&#39;)
+console.log(x.valueOf()) // Hello World
+</code></pre>
+<p><strong>Date.prototype.valueOf()</strong></p>
+<p>语法：<code>dateObj.valueOf()</code></p>
+<p>返回值：表示给定<code>Date</code>对象的原始值</p>
+<p>说明：<code>valueOf()</code>方法返回以数值格式表示的一个<code>Date</code>对象的原始值。该值从1970年1月1日0时0分0秒（UTC，即协调世界时）到该日期对象所代表时间的毫秒数。</p>
+<p>该方法的功能和<code>Date.prototype.getTime()</code>方法一样。</p>
+<p>该方法通常在 JavaScript 内部调用，而不是在代码中显示调用。</p>
+<pre><code class="js">var x = new Date(2018,1,12)
+var myVar = x.valueOf()
+console.log(myVar) // 1518364800000
+</code></pre>
+<p><strong>Number.prototype.valueOf()</strong></p>
+<p>语法：<code>numObj.valueOf()</code></p>
+<p>返回值：表示给定<code>Number</code>对象的原始值。</p>
+<p>说明：该方法通常在 JavaScript 内部调用，而不是在代码中显示调用。覆盖<code>Object.prototype.valueOf()</code>方法</p>
+<p>案例：</p>
+<pre><code class="js">var numObj = new Number(2018)
+console.log(typeof numObj) // object
+console.log(numObj) // Number {2018}
+var num = numObj.valueOf()
+console.log(typeof num) // number
+console.log(num) // 2018
+</code></pre>
+<p><strong>Boolean.prototype.valueOf()</strong></p>
+<p>语法：<code>bool.valueOf()</code></p>
+<p>返回值：返回给定<code>Boolean</code>对象的原始值</p>
+<p>说明：<code>Boolean</code>的<code>valueOf()</code>方法返回一个<code>Boolean</code>字面量的原始值作为布尔数据类型。该方法通常在 JavaScript 内部调用，而不是在代码中显示调用。</p>
+<p>案例：</p>
+<pre><code class="js">var x = new Boolean()
+console.log(typeof x) // object
+console.log(x) // Boolean {false}
+var xv = x.valueOf()
+console.log(typeof xv) // boolean
+console.log(xv) // false
+
+var y = new Boolean(&#39;weiqinl&#39;)
+console.log(typeof y) // object
+console.log(y.valueOf()) // true
+</code></pre>
+<p><strong>Symbol.prototype.valueOf()</strong></p>
+<p>语法：<code>Symbol.valueOf()</code></p>
+<p>返回值：返回给定<code>Symbol</code>对象的原始值</p>
+<p>说明：<code>Symbol</code>的<code>valueOf()</code>方法返回<code>Symbol</code>对象的原始值作为<code>Symbol</code>数据类型。JavaScript 调用<code>valueOf()</code>方法将对象转换为原始值。</p>
+<p>案例：</p>
+<pre><code class="js">Object(Symbol(&#39;foo&#39;)) + &#39;bar&#39;
+&gt;Uncaught TypeError: Cannot convert a Symbol value to a string at &lt;anonymous&gt;:1:23
+Object(Symbol(&#39;f00&#39;)).valueOf() + &#39;bar&#39;
+&gt;uncaught TypeError: Cannot convert a Symbol value to a string at &lt;anonymous&gt;:1:33
+Object(Symbol(&#39;foo&#39;)).toString() + &#39;bar&#39;
+&gt;&quot;Symbol(foo)bar&quot;
+</code></pre>
 <h3 id="1-3-2-隐式类型转换"><a href="#1-3-2-隐式类型转换" class="headerlink" title="1.3.2 隐式类型转换"></a>1.3.2 隐式类型转换</h3><p>凡是通过逻辑运算符（&amp;&amp;、||、!）、运算符（+、-、*、/）、关系操作符（&gt;、&lt;、&lt;=、&gt;=）、相等运算符（==）或者 if/while 条件的操作，如果遇到两个数据类型不一样的情况，都会出现隐式类型转换。</p>
 <p>下面着重讲解一下日常用得比较多的“==” 和 “+” 这两个符号的隐式转换规则。</p>
 <h4 id="1-3-2-1-39-39-的隐式类型转换规则"><a href="#1-3-2-1-39-39-的隐式类型转换规则" class="headerlink" title="1.3.2.1 &#39;==&#39;的隐式类型转换规则"></a>1.3.2.1 &#39;==&#39;的隐式类型转换规则</h4><ul>
@@ -740,7 +813,35 @@ console.log(a == 1 &amp;&amp; a == 2 &amp;&amp; a ==3);  //true f规则 Object�
 </code></pre>
 <p>整体来看，如果数据中有字符串，JavaScript 类型转换还是更倾向于转换成字符串，因为第三条规则中可以看到再字符串和数字相加的过程中最后返回的还是字符串，这里需要关注一下。</p>
 <p>了解了&#39;+&#39;的转换规则后，我们最后再看一下Object的转换规则。</p>
-<h3 id="1-3-3-Object的转换规则"><a href="#1-3-3-Object的转换规则" class="headerlink" title="1.3.3 Object的转换规则"></a>1.3.3 Object的转换规则</h3>
+<h3 id="1-3-3-Object的转换规则"><a href="#1-3-3-Object的转换规则" class="headerlink" title="1.3.3 Object的转换规则"></a>1.3.3 Object的转换规则</h3><p>对象转换的规则，会先调用内置的 [ToPrimitive] 函数，其规则逻辑如下：</p>
+<ul>
+<li>如果部署了 Symbol.toPrimitive 方法，优先调用再返回；</li>
+<li>调用 valueOf()，如果转换为基础类型，则返回；</li>
+<li>调用 toString()，如果转换为基础类型，则返回；</li>
+<li>如果都没有返回基础类型，会报错。</li>
+</ul>
+<p>直接理解有些晦涩，还是直接看代码。</p>
+<pre><code class="js">var obj = {
+  value: 1,
+  valueOf() {
+    return 2;
+  },
+  toString() {
+    return &#39;3&#39;
+  },
+  [Symbol.toPrimitive]() {
+    return 4
+  }
+}
+console.log(obj + 1); // 输出5
+// 因为有Symbol.toPrimitive，就优先执行这个；如果Symbol.toPrimitive这段代码删掉，则执行valueOf打印结果为3；如果valueOf也去掉，则调用toString返回&#39;31&#39;(字符串拼接)
+// 再看两个特殊的case：
+10 + {}
+// &quot;10[object Object]&quot;，注意：{}会默认调用valueOf是{}，不是基础类型继续转换，调用toString，返回结果&quot;[object Object]&quot;，于是和10进行&#39;+&#39;运算，按照字符串拼接规则来，参考&#39;+&#39;的规则C
+[1,2,undefined,4,5] + 10
+// &quot;1,2,,4,510&quot;，注意[1,2,undefined,4,5]会默认先调用valueOf结果还是这个数组，不是基础数据类型继续转换，也还是调用toString，返回&quot;1,2,,4,5&quot;，然后再和10进行运算，还是按照字符串拼接规则，参考&#39;+&#39;的第3条规则
+</code></pre>
+
         </div>
         <!-- .entry-content -->
         <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
@@ -758,36 +859,19 @@ console.log(a == 1 &amp;&amp; a == 2 &amp;&amp; a ==3);  //true f规则 Object�
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2021/08/30/Authorized-authentication/" rel="prev">
-              <div class="background">
-                <img class="lazyload" src="/images/bg1.jpg" data-src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/3.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/3.jpg">
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                授权认证</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2021/08/26/mac/" rel="next">
+            <a href="/2021/11/16/prototype/" rel="next">
               <div class="background">
-                <img class="lazyload" src="/images/bg1.jpg" data-src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg">
+                <img class="lazyload" src="/images/bg1.jpg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                mac系统遇到的各种问题</h3>
+                </h3>
                 <hr>
               </div>
             </a>
