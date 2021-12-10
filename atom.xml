@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2021-11-24T06:52:40.909Z</updated>
+  <updated>2021-12-09T09:10:32.472Z</updated>
   <id>/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>js进阶</title>
-    <link href="/2021/11/23/js-advance/"/>
-    <id>/2021/11/23/js-advance/</id>
-    <published>2021-11-23T12:00:00.000Z</published>
-    <updated>2021-11-24T06:52:40.909Z</updated>
+    <title>ES6</title>
+    <link href="/2021/12/08/ES6/"/>
+    <id>/2021/12/08/ES6/</id>
+    <published>2021-12-08T05:41:00.000Z</published>
+    <updated>2021-12-09T09:10:32.472Z</updated>
     
     <summary type="html">
     
@@ -37,16 +37,42 @@
   </entry>
   
   <entry>
-    <title></title>
-    <link href="/2021/11/16/prototype/"/>
-    <id>/2021/11/16/prototype/</id>
-    <published>2021-11-16T01:49:09.054Z</published>
-    <updated>2021-11-16T01:49:09.054Z</updated>
+    <title>js进阶</title>
+    <link href="/2021/11/23/js-advance/"/>
+    <id>/2021/11/23/js-advance/</id>
+    <published>2021-11-23T12:00:00.000Z</published>
+    <updated>2021-12-07T01:47:36.466Z</updated>
     
     <summary type="html">
     
+      js
+    
     </summary>
     
+      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="js" scheme="/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript深度剖析</title>
+    <link href="/2021/11/23/js-parsing/"/>
+    <id>/2021/11/23/js-parsing/</id>
+    <published>2021-11-23T12:00:00.000Z</published>
+    <updated>2021-11-29T03:11:31.058Z</updated>
+    
+    <summary type="html">
+    
+      js
+    
+    </summary>
+    
+      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="js" scheme="/tags/js/"/>
     
   </entry>
   
@@ -117,7 +143,7 @@
     <link href="/2021/10/13/workTips/"/>
     <id>/2021/10/13/workTips/</id>
     <published>2021-10-13T09:20:28.000Z</published>
-    <updated>2021-10-13T09:20:28.000Z</updated>
+    <updated>2021-11-29T02:14:22.086Z</updated>
     
     <summary type="html">
     

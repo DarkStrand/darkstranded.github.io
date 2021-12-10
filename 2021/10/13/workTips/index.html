@@ -471,6 +471,17 @@ c ??= d  // c = &#39;123&#39;
   }
 );
 </code></pre>
+<h2 id="includes的妙用"><a href="#includes的妙用" class="headerlink" title="includes的妙用"></a>includes的妙用</h2><p>利用数组进行判断的代码更优雅</p>
+<p>使用前</p>
+<pre><code class="js">if (fruit === &#39;apple&#39; || fruit === &#39;orange&#39; || fruit === &#39;grape&#39;) {
+     // ...
+}
+</code></pre>
+<p>使用后</p>
+<pre><code class="js">if ([&#39;apple&#39;, &#39;orange&#39;, &#39;grape&#39;].includes(fruit) {
+    // ...
+})
+</code></pre>
 
         </div>
         <!-- .entry-content -->

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">DarkStrand</title>
+  <title itemprop="name">ES6 | DarkStrand</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -341,6 +341,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
 
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg);" src="/images/bg1.jpg" data-src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      ES6</h1>
+      <p class="entry-census">
+        <span>
+          <a href="DarkStrand.cn">
+            <img src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="DarkStrand.cn">DarkStrand</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-12-8<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -348,15 +372,755 @@
         <div class="toc"></div>
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
-          <header class="entry-header">
-            <h1 class="entry-title"></h1>
-            <p class="entry-census">&nbsp;·&nbsp;2021-11-16&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
-
-            <hr>
-          </header>
-        
         <div class="entry-content">
-          
+          <h1 id="1-ECMAScript概述"><a href="#1-ECMAScript概述" class="headerlink" title="1-ECMAScript概述"></a>1-ECMAScript概述</h1><p>实际上 JavaScript 是 ECMAScript 的扩展语言。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/ES6/1.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/ES6/2.png" alt></p>
+<p>JavaScript 语言本身指的就是 ECMAScript。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/ES6/3.png" alt></p>
+<h1 id="2-ES6概述"><a href="#2-ES6概述" class="headerlink" title="2-ES6概述"></a>2-ES6概述</h1><p>ES2015也可以叫做ES6</p>
+<ul>
+<li><p>相比于ES5.1变化较大</p>
+</li>
+<li><p>自此之后命名规则改变</p>
+</li>
+</ul>
+<p>  <a href="http://www.ecma-international.org/ecma-262/6.0/" target="_blank" rel="noopener">ES6</a></p>
+<ul>
+<li>解决原有语法上的一些问题或者不足（let,const提供的块级作用域）</li>
+<li>对原有语法进行增强（解构，展开，参数默认值，模板字符串）</li>
+<li>全新的对象、全新的方法、全新的功能（promise，proxy）</li>
+<li>全新的数据类型和数据结构（symbol，set，map）</li>
+</ul>
+<h1 id="3-准备工作"><a href="#3-准备工作" class="headerlink" title="3-准备工作"></a>3-准备工作</h1><p>nodejs、nodemon</p>
+<h1 id="4-let与块级作用域"><a href="#4-let与块级作用域" class="headerlink" title="4-let与块级作用域"></a>4-let与块级作用域</h1><p>作用域：某个成员能够起作用的范围</p>
+<p>在此之前，ES只有两种作用域</p>
+<ul>
+<li>全局作用域</li>
+<li><p>函数作用域</p>
+</li>
+<li><p>块级作用域</p>
+</li>
+</ul>
+<p>块：<code>{}</code>包裹的范围</p>
+<pre><code class="js">if (true) {
+    console.log(&#39;zce.me&#39;)
+}
+for (var i = 0; i &lt; 10; i++) {
+    console.log(&#39;zce.me&#39;)
+}
+</code></pre>
+<p>以前块没有独立的作用域</p>
+<ul>
+<li>在块级作用域内定义的成员外部无法访问</li>
+</ul>
+<pre><code class="js">for (var i = 0; i &lt; 3; i++) {
+    for (var i = 0; i&lt; 3; i++) {
+        console.log(i)
+  }
+  console.log(&#39;内层结束i = &#39; + i)
+}
+// 0
+// 1
+// 2
+// 内层结束i = 3
+
+for (let i = 0; i &lt; 3; i++) {
+    for (let i = 0; i&lt; 3; i++) {
+        console.log(i)
+  }
+  console.log(&#39;内层结束i = &#39; + i)
+}
+// 0
+// 1
+// 2
+// 内层结束i = 0
+// 0
+// 1
+// 2
+// 内层结束i = 1
+// 0
+// 1
+// 2
+// 内层结束i = 2
+</code></pre>
+<blockquote>
+<p>let解决循环嵌套计数器重名导致的问题，但一般不建议使用同名</p>
+</blockquote>
+<pre><code class="js">//var elements = [{},{},{}]
+//for (var i = 0; i&lt; elements.length; i++) {
+//    elements[i].onclick = function() {
+//        console.log(i)
+//  }
+//}
+//elements[0].onclick() // 3
+// 全局作用域中的i已经被累加到了3，不管打印哪个i都是3
+
+//var elements = [{},{},{}]
+//for (var i = 0;i &lt; elements.length; i++) {
+//    elements[i].onclick = (function(i) {
+//        return function () {
+//            console.log(i)
+//    }
+//  })(i)
+//}
+//elements[0].onclick() // 0
+// 闭包可以解决，借助函数作用域摆脱全局作用域影响
+
+var elements = [{},{},{}]
+for (let i = 0; i&lt; elements.length; i++) {
+    elements[i].onclick = function() {
+        console.log(i)
+  }
+}
+elements[0].onclick() // 0
+// 运用块级作用域
+</code></pre>
+<p>for循环内部有两层作用域</p>
+<pre><code class="js">for (let i = 0; i&lt; 3;i++) {
+    let i = &#39;foo&#39;
+  console.log(i)
+}
+// &#39;foo&#39;
+// &#39;foo&#39;
+// &#39;foo&#39;
+// 这两个i互不影响，也就是两个i不在一个作用域内
+
+=&gt; 相当于
+let i = 0
+if (i &lt; 3) {
+    let i = &#39;foo&#39;
+  console.log(i)
+}
+i++
+
+if (i &lt; 3) {
+    let i = &#39;foo&#39;
+  console.log(i)
+}
+i++
+
+if (i &lt; 3) {
+    let i = &#39;foo&#39;
+  console.log(i)
+}
+i++
+</code></pre>
+<ul>
+<li>let声明不会提升（var 声明变量会提升）</li>
+</ul>
+<pre><code class="js">console.log(foo) // undefined
+var foo = &#39;zce&#39;
+
+console.log(foo) // 报错
+let foo = &#39;zce&#39;
+</code></pre>
+<h1 id="5-const-恒量-变量"><a href="#5-const-恒量-变量" class="headerlink" title="5-const(恒量/变量)"></a>5-const(恒量/变量)</h1><p>let基础上多了「只读」，声明过后不允许再被修改。声明时必须赋值。</p>
+<blockquote>
+<p>const声明的成员不允许被修改，只是说不允许在声明过后重新指向新的内存地址，并不是说不允许修改恒量中的属性成员。</p>
+</blockquote>
+<pre><code class="js">const obj = {}
+obj.name = &#39;zce&#39;
+
+obj = [] // 报错
+</code></pre>
+<blockquote>
+<p>最佳实践：不用 var，主用 const，配合 let</p>
+</blockquote>
+<h1 id="6-数组的解构"><a href="#6-数组的解构" class="headerlink" title="6-数组的解构"></a>6-数组的解构</h1><pre><code class="js">// 以前
+const arr = [100,200,300]
+const foo = arr[0]
+const bar = arr[1]
+const baz = arr[2]
+console.log(foo, bar, baz)
+
+// 使用解构快速赋值
+//const [foo, bar, baz] = arr
+//console.log(foo, bar, baz)
+
+// 只想获取指定位置成员，需要保留&#39;,&#39;，确保格式一致
+const [,,baz] = arr
+console.log(baz)
+
+// 可以加&#39;...&#39;，表示提取从当前位置开始往后的所有成员，这些成员会放到数组中，这三个点只能放在最后
+const [foo, ...rest] = arr
+console.log(rest) // [200, 300]
+
+// 如果解构位置成员个数小于被解构的数组长度，会按照从前到后的顺序提取，多出来的不会被提取
+// 反之如果解构位置成员个数大于被解构的数组长度的话，提取到的就是undefined（相当于提取数组中不存在的下标）
+// 也可以设置默认值变量后面+&#39;=&#39;
+const [foo, bar, baz=123, more = &#39;default value&#39;] = arr
+console.log(bar, more) // 200 &#39;default value&#39;
+
+
+// 例子：拆分字符串，获取拆分后的指定位置
+const path = &#39;/foo/bar/baz&#39;
+//const tmp = path.split(&#39;/&#39;)
+//const rootdir = tmp[1] // foo
+
+const [, rootdir] = path.split(&#39;/&#39;)
+console.log(rootdir) // &#39;foo&#39;
+</code></pre>
+<h1 id="7-对象的解构"><a href="#7-对象的解构" class="headerlink" title="7-对象的解构"></a>7-对象的解构</h1><p>对象的解构需要根据属性名匹配提取而不是位置，因为数组中元素有下标（有顺序规则），而对象里面的成员没有固定次序，所以不能按照位置提取。</p>
+<p>解构对象其他特点基本和解构数组一致，例如：没有匹配到的成员会返回undefined，也能设置默认值。</p>
+<pre><code class="js">const obj = {name: &#39;zce&#39;, age: 18}
+//const { name } = obj
+
+// 重命名，这样就不会出现变量冲突
+const name = &#39;tom&#39;
+const {name: objName = &#39;jack&#39;} = obj
+console.log(objName)
+
+const {log} = console
+log(1)
+log(2)
+</code></pre>
+<h1 id="8-模板字符串字面量"><a href="#8-模板字符串字面量" class="headerlink" title="8-模板字符串字面量"></a>8-模板字符串字面量</h1><p>反引号`</p>
+<ul>
+<li>可以支持多行</li>
+<li>支持插值表达式</li>
+</ul>
+<pre><code class="js">const str = `hello es2015, this is a \`string\``
+console.log(str) // &#39;hello es2015, this is a `string`&#39;
+
+const name = &#39;tom&#39;
+const msg = `hey, ${name}---${1+2}`
+console.log(msg)
+</code></pre>
+<h1 id="9-模板字符串标签函数"><a href="#9-模板字符串标签函数" class="headerlink" title="9-模板字符串标签函数"></a>9-模板字符串标签函数</h1><pre><code class="js">const name = &#39;tom&#39;
+const gender = true
+
+function myTagFunc(strings, name, gender) {
+    console.log(strings, name, gender)
+  return strings[0] + name + strings[1] + gender + strings[2]
+}
+
+const result = myTagFunc`hey, ${name} is a ${gender}.`
+console.log(result)
+//[ &#39;hey, &#39;, &#39; is a &#39;, &#39;.&#39; ] tom true
+//hey, tom is a true.
+</code></pre>
+<h1 id="10-字符串的扩展方法"><a href="#10-字符串的扩展方法" class="headerlink" title="10-字符串的扩展方法"></a>10-字符串的扩展方法</h1><h2 id="10-1-includes"><a href="#10-1-includes" class="headerlink" title="10.1-includes()"></a>10.1-includes()</h2><h2 id="10-2-startsWith"><a href="#10-2-startsWith" class="headerlink" title="10.2-startsWith()"></a>10.2-startsWith()</h2><h2 id="10-3-endsWith"><a href="#10-3-endsWith" class="headerlink" title="10.3-endsWith()"></a>10.3-endsWith()</h2><pre><code class="js">const message = &#39;Error: foo is not defined.&#39;
+console.log(message.startsWith(&#39;Error&#39;)) // true
+console.log(message.endsWith(&#39;.&#39;)) // true
+console.log(message.includes(&#39;foo&#39;)) // true
+</code></pre>
+<h1 id="11-函数参数默认值"><a href="#11-函数参数默认值" class="headerlink" title="11-函数参数默认值"></a>11-函数参数默认值</h1><blockquote>
+<p>注意：</p>
+<ol>
+<li>函数参数默认值会在没有传参或者传的是undefined的时候赋值</li>
+<li>有多个参数的时候设置默认值应当放在最后</li>
+</ol>
+</blockquote>
+<pre><code class="js">// 原先
+function foo(enable) {
+    // enable = enable || true
+  enable = enable === undefined ? true : false
+  console.log(enable)
+}
+
+// 现在
+function foo(bar, enable = true) {
+    console.log(enable)
+}
+</code></pre>
+<h1 id="12-剩余参数"><a href="#12-剩余参数" class="headerlink" title="12-剩余参数"></a>12-剩余参数</h1><pre><code class="js">// 以前
+// 使用arguments（伪数组）接收
+function foo() {
+  console.log(arguments) //[Arguments] { &#39;0&#39;: 1, &#39;1&#39;: 2, &#39;2&#39;: 3, &#39;3&#39;: 4 }
+}
+foo(1,2,3,4)
+
+// 现在
+function foo(first, ...args) {
+    console.log(args) // [2,3,4]
+}
+foo(1,2,3,4)
+</code></pre>
+<h1 id="13-展开数组"><a href="#13-展开数组" class="headerlink" title="13-展开数组"></a>13-展开数组</h1><pre><code class="js">const arr = [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;]
+
+// 以前
+console.log(arr[0], arr[1], arr[2])
+
+// 改进1
+console.log.apply(console, arr)
+
+// 现在
+console.log(...arr)
+</code></pre>
+<h1 id="14-箭头函数"><a href="#14-箭头函数" class="headerlink" title="14-箭头函数"></a>14-箭头函数</h1><pre><code class="js">// 以前
+function inc(number) {
+    return number + 1
+}
+
+// 现在
+const inc = (n, m) =&gt; n + 1
+console.log(inc(100))
+
+// 例子
+const arr = [1,2,3,4,5,6]
+arr.filter(function(item) {
+    return item % 2
+})
+arr.filter(i =&gt; i % 2)
+</code></pre>
+<h1 id="15-箭头函数与this"><a href="#15-箭头函数与this" class="headerlink" title="15-箭头函数与this"></a>15-箭头函数与this</h1><ul>
+<li>箭头函数不会改变 this 指向</li>
+</ul>
+<pre><code class="js">// 例子1
+const person = {
+    name: &#39;tom&#39;,
+  sayHi: function() {
+    console.log(`hi, my name is ${this.name}`)
+  }
+}
+person.sayHi() // &#39;hi, my name is tom&#39;
+
+// 例子2
+const person = {
+    name: &#39;tom&#39;,
+  sayHi: () =&gt; {
+    console.log(`hi, my name is ${this.name}`)
+  }
+}
+person.sayHi() // &#39;hi, my name is undefined&#39;
+
+// 例子3
+const person = {
+    name: &#39;tom&#39;,
+  sayHiAsync: function() {
+        setTimeout(function() {
+            console.log(this.name)
+    }, 1000)
+  }
+}
+person.sayHiAsync() // undefined
+// setTimeout中的普通function拿到的this指向是全局对象
+
+// 例子4
+const person = {
+    name: &#39;tom&#39;,
+  sayHiAsync: function() {
+        setTimeout(()=&gt; {
+            console.log(this.name)
+    }, 1000)
+  }
+}
+person.sayHiAsync() // &#39;tom&#39;
+</code></pre>
+<h1 id="16-对象字面量增强"><a href="#16-对象字面量增强" class="headerlink" title="16-对象字面量增强"></a>16-对象字面量增强</h1><pre><code class="js">const bar = &#39;123&#39;
+
+// 以前
+const obj = {
+    foo: 123,
+  bar: bar,
+  method: function() {
+        console.log(&#39;method&#39;)
+  }
+}
+obj[Math.random()] = 123
+
+// 现在
+const obj = {
+    foo: 123,
+  bar,
+  method() {
+        console.log(&#39;method&#39;)
+  },
+  [Math.random()]: 123
+}
+
+console.log(obj)
+</code></pre>
+<h1 id="17-对象的扩展方法-Object-assign"><a href="#17-对象的扩展方法-Object-assign" class="headerlink" title="17-对象的扩展方法-Object.assign"></a>17-对象的扩展方法-Object.assign</h1><blockquote>
+<p>将多个源对象中的属性复制到一个目标对象中</p>
+<p>即，用后面对象的属性去覆盖前面对象</p>
+</blockquote>
+<pre><code class="js">const source = {
+    a: 123,
+  b: 123
+}
+const target = {
+    a: 456,
+  c: 456
+}
+const result = Object.assign(target, source)
+console.log(target)
+console.log(result === target)
+
+//{ a: 123, c: 456, b: 123 }
+//true
+
+// 例子
+function fuc(obj) {
+    obj.name = &#39;bb&#39;
+  console.log(obj)
+}
+const obj = {name: &#39;aa&#39;}
+fuc(obj)
+console.log(obj)
+// { name: &#39;bb&#39; }
+// { name: &#39;bb&#39; }
+
+
+// 改进
+function fuc(obj) {
+  const funcObj = Object.assign({}, obj)
+  funcObj.name = &#39;bb&#39;
+  console.log(funcObj)
+}
+const obj = {name: &#39;aa&#39;}
+fuc(obj)
+console.log(obj)
+// { name: &#39;bb&#39; }
+// { name: &#39;aa&#39; }
+</code></pre>
+<h1 id="18-对象的扩展方法-Object-is"><a href="#18-对象的扩展方法-Object-is" class="headerlink" title="18-对象的扩展方法-Object.is"></a>18-对象的扩展方法-Object.is</h1><blockquote>
+<p>判断两个值是否相等</p>
+</blockquote>
+<pre><code class="js">NaN == NaN // false
+Object.is(NaN, NaN) // true
++0 == -0 // true
++0 === -0 // true
+OBject.is(+0, -0) // false
+</code></pre>
+<h1 id="19-Proxy-代理对象"><a href="#19-Proxy-代理对象" class="headerlink" title="19-Proxy(代理对象)"></a>19-Proxy(代理对象)</h1><p>Object.defineProperty: 监视数据属性读写</p>
+<p>Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种“元编程”，即对编程语言进行编程。</p>
+<p>Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。</p>
+<pre><code class="js">const person = {
+    name: &#39;zs&#39;,
+  age: 20
+}
+const personProxy = new Proxy(person, {
+    get(target, property) {
+        return property in target ? target[property] : &#39;default&#39;
+  },
+  set(target, property, value) {
+    if (property === &#39;age&#39;) {
+            if (!Number.isInteger(value)) {
+                throw new TypeError(`${value} is not an int`)
+      }
+    }
+        target[property] = value
+  }
+})
+
+personProxy.age = &#39;hh&#39;
+console.log(personProxy.name)
+</code></pre>
+<h1 id="20-Reflect"><a href="#20-Reflect" class="headerlink" title="20-Reflect"></a>20-Reflect</h1><p>Reflect属于一个静态类（和Math一样）</p>
+<p>Reflect内部封装了一系列对对象的底层操作</p>
+<p>Reflect成员方法就是 Proxy 处理对象的默认实现</p>
+<p>统一提供一套用于操作对象的API</p>
+<ul>
+<li>Reflect.apply(target, thisArg, args)</li>
+<li>Reflect.construct(target, args)</li>
+<li>Reflect.get(target, name, receiver)</li>
+<li>Reflect.set(target, name, value, receiver)</li>
+<li>Reflect.defineProperty(target, name, desc)</li>
+<li>Reflect.deleteProperty(target, name)</li>
+<li>Reflect.has(target, name)</li>
+<li>Reflect.ownKeys(target)</li>
+<li>Reflect.isExtensible(target)</li>
+<li>Reflect.preventExtensions(target)</li>
+<li>Reflect.getOwnPropertyDescriptor(target, name)</li>
+<li>Reflect.getPrototypeOf(target)</li>
+<li>Reflect.setPrototypeOf(target, prototype)</li>
+</ul>
+<pre><code class="js">const obj = {
+    foo: &#39;123&#39;,
+  bar: &#39;456&#39;
+}
+const proxy = new Proxy(obj, {
+    get(target, property) {
+    console.log(&#39;watch logic~&#39;)
+    return Reflect.get(target, property)
+  }
+})
+console.log(proxy.foo)
+</code></pre>
+<pre><code class="js">const obj = {
+    name: &#39;zs&#39;,
+  age: 18
+}
+console.log(&#39;name&#39; in obj)
+console.log(delete obj[&#39;age&#39;])
+console.log(Object.keys(obj))
+
+// =&gt;
+
+console.log(Reflect.has(obj, &#39;name&#39;))
+console.log(Reflect.deleteProperty(obj, &#39;age&#39;))
+console.log(Reflect.ownKeys(obj))
+</code></pre>
+<h1 id="21-Promise"><a href="#21-Promise" class="headerlink" title="21-Promise"></a>21-Promise</h1><ul>
+<li>一种更优的异步编程解决方案</li>
+</ul>
+<h1 id="22-class类"><a href="#22-class类" class="headerlink" title="22-class类"></a>22-class类</h1><pre><code class="js">// 以前
+function Person(name) {
+    this.name = name
+}
+Person.prototype.say = function() {
+    console.log(`hi, my name is ${this.name}`)
+}
+
+// 现在
+class Person() {
+  constructor(name) {
+        this.name = name
+  }
+  say() {
+        console.log(`hi, my name is ${this.name}`)
+  }
+}
+const p = new Person(&#39;tom&#39;)
+p.say()
+</code></pre>
+<h1 id="23-静态方法（static）"><a href="#23-静态方法（static）" class="headerlink" title="23-静态方法（static）"></a>23-静态方法（static）</h1><p>ES2015中新增添加静态成员的 static 关键词</p>
+<pre><code class="js">class Person() {
+  constructor(name) {
+        this.name = name
+  }
+  say() {
+        console.log(`hi, my name is ${this.name}`)
+  }
+  static create(name) {
+    return new Person(name)
+  }
+}
+const tom = Person.create(&#39;tom&#39;)
+tom.say()
+
+</code></pre>
+<blockquote>
+<p>静态方法是挂载到类型上的，所以静态方法内部this不会指向某个实例对象，而是当前的类型。</p>
+</blockquote>
+<h1 id="24-类的继承（extends）"><a href="#24-类的继承（extends）" class="headerlink" title="24-类的继承（extends）"></a>24-类的继承（extends）</h1><pre><code class="js">class Person {
+    constructor(name) {
+        this.name = name
+  }
+  say() {
+        console.log(`hi, my name is ${this.name}`)
+  }
+}
+class Student extends Person {
+  constructor(name, number) {
+        super(name)
+    this.number = number
+  }
+  hello() {
+        super.say()
+    console.log(`my school number is ${this.number}`)
+  }
+}
+const s = new Student(&#39;jack&#39;, &#39;100&#39;)
+s.hello()
+</code></pre>
+<h1 id="25-Set数据结构"><a href="#25-Set数据结构" class="headerlink" title="25-Set数据结构"></a>25-Set数据结构</h1><p>ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。</p>
+<p><code>Set</code>本身是一个构造函数，用来生成 Set 数据结构。</p>
+<pre><code class="js">const s = new Set()
+s.add(1).add(2).add(3).add(4).add(2)
+
+console.log(s)
+
+s.forEach(i =&gt; console.log(i))
+
+for(let i of s) {
+    console.log(i)
+}
+
+console.log(s.size)
+
+console.log(s.has(100))
+
+console.log(s.delete(3))
+
+console.log(s)
+
+s.clear()
+console.log(s)
+
+const arr = [1,2,3,1,2]
+const result = Array.from(new Set(arr))
+const result = [...new Set(arr)]
+console.log(result)
+</code></pre>
+<h1 id="26-Map数据结构"><a href="#26-Map数据结构" class="headerlink" title="26-Map数据结构"></a>26-Map数据结构</h1><p>JavaScript 的对象（Object），本质上是键值对的集合（Hash 结构），但是传统上只能用字符串当作键。这给它的使用带来了很大的限制。</p>
+<pre><code class="js">const obj = {}
+obj[true] = &#39;value&#39;
+obj[123] = &#39;value&#39;
+obj[{a: 1}] = &#39;value&#39;
+
+console.log(Object.keys(obj))
+// [ &#39;123&#39;, &#39;true&#39;, &#39;[object Object]&#39; ]
+</code></pre>
+<pre><code class="js">const m = new Map()
+const tom = { name: &#39;tom&#39; }
+m.set(tom, 90)
+console.log(m)
+console.log(m.get(tom))
+
+// m.has()
+// m.delete()
+// m.clear()
+
+//Map(1) { { name: &#39;tom&#39; } =&gt; 90 }
+//90
+
+m.forEach((value,key) =&gt; {
+    console.log(value, key)
+})
+// 90 { name: &#39;tom&#39; }
+</code></pre>
+<h1 id="27-Symbol"><a href="#27-Symbol" class="headerlink" title="27-Symbol"></a>27-Symbol</h1><p>一种全新的原始数据类型，表示独一无二的值</p>
+<pre><code class="js">// shared.js ==================
+const ache = {}
+
+// a.js========================
+cache[&#39;a_foo&#39;] = Math.random()
+
+// b.js========================
+cache[&#39;b_foo&#39;] = &#39;123&#39;
+console.log(cache )
+</code></pre>
+<pre><code class="js">console.log(Symbol(&#39;foo&#39;))
+console.log(Symbol(&#39;bar&#39;))
+
+const obj = {}
+obj[Symbol()] = &#39;123&#39;
+obj[Symbol()] = &#39;456&#39;
+console.log(obj)
+
+const obj = {
+    [Symbol()]: 123
+}
+console.log(obj)
+</code></pre>
+<blockquote>
+<p>最主要的作用就是为对象添加独一无二的属性名</p>
+</blockquote>
+<pre><code class="js">console.log(Symbol() === Symbol()) // false
+console.log(Symbol(&#39;foo&#39;) === Symbol(&#39;foo&#39;)) // false
+console.log(Symbol.for(&#39;foo&#39;) === Symbol.for(&#39;foo&#39;)) // true
+
+console.log(Symbol.iterator) // Symbol(Symbol.iterator)
+console.log(Symbol.hasInstance) // Symbol(Symbol.hasInstance)
+
+const obj = {
+    [Symbol.toStringTag]: &#39;XObject&#39;
+}
+console.log(obj.toString()) // [object XObject]
+
+const obj = {
+    [Symbol()]: &#39;symbol value&#39;,
+  foo: &#39;normal value&#39;
+}
+for (var key in obj) {
+    console.log(key)
+}
+// &#39;foo&#39;
+console.log(Object.keys(obj)) //[ &#39;foo&#39; ]
+
+console.log(JSON.stringify(obj)) // {&quot;foo&quot;:&quot;normal value&quot;}
+</code></pre>
+<h1 id="28-for-of-循环"><a href="#28-for-of-循环" class="headerlink" title="28-for of 循环"></a>28-for of 循环</h1><ul>
+<li>for适合遍历普通数组</li>
+<li>for...in 遍历键值对</li>
+<li>一些对象的遍历方法</li>
+</ul>
+<p>这些遍历都有局限性</p>
+<p>for...of作为遍历所有数据结构的统一方式</p>
+<pre><code class="js">const arr = [100,200,300,400]
+for (const item of arr) {
+    console.log(item)
+  if (item &gt; 100) {
+        break // 随时终止循环，forEach不能跳出循环
+  }
+}
+
+// 一些伪数组也可以遍历(arguments)
+
+const s = new Set([&#39;foo&#39;, &#39;bar&#39;])
+for (const item of s) {
+    console.log(item)
+}
+// &#39;foo&#39;
+// &#39;bar&#39;
+
+const m = new Map()
+m.set(&#39;foo&#39;, &#39;123&#39;)
+m.set(&#39;bar&#39;, &#39;456&#39;)
+for (const [key, value] of m) {
+    console.log(key, value)
+}
+// &#39;foo&#39; &#39;123&#39;
+// &#39;bar&#39; &#39;456&#39;
+
+// 遍历对象
+const obj = {
+  foo: 123,
+  bar: 456
+}
+for (const i of obj) {
+    console.log(i) // 报错
+}
+</code></pre>
+<h1 id="29-Iterable可迭代接口"><a href="#29-Iterable可迭代接口" class="headerlink" title="29-Iterable可迭代接口"></a>29-Iterable可迭代接口</h1><p>ES中能够表示有结构的数据类型越来越多。为了给各种各样的数据结构提供统一遍历方式，ES2015提供了 Iterable 接口。</p>
+<blockquote>
+<p>接口（规格标准）</p>
+</blockquote>
+<p>实现 Iterable 接口就是 for...of 的前提</p>
+<p><img src="![](https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/ES6/4.png" alt>)</p>
+<pre><code class="js">const set = new Set([&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;])
+const iterator = set[Symbol.iterator]()
+console.log(iterator.next())
+console.log(iterator.next())
+console.log(iterator.next())
+console.log(iterator.next())
+// { value: &#39;foo&#39;, done: false }
+// { value: &#39;bar&#39;, done: false }
+// { value: &#39;baz&#39;, done: false }
+// { value: undefined, done: true }
+</code></pre>
+<h1 id="30-实现可迭代接口"><a href="#30-实现可迭代接口" class="headerlink" title="30-实现可迭代接口"></a>30-实现可迭代接口</h1><pre><code class="js">const obj = {
+    [Symbol.iterator]: function() {
+        return {
+            next: function() {
+                return {
+                    value: &#39;zce&#39;,
+          done: true // 用了表示迭代是否结束
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<pre><code class="js">const obj = {
+    store: [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;],
+  [Symbol.iterator]: function() {
+        let index = 0
+    const self = this
+
+    return {
+            next: function() {
+                const result = {
+                    value: self.store[index],
+          done: index &gt;= self.store.length
+        }
+        index++
+        return result
+      }
+    }
+  }
+}
+for (const item of obj) {
+    console.log(item)
+}
+// &#39;foo&#39;
+// &#39;bar&#39;
+// &#39;baz&#39;
+</code></pre>
+<h1 id="31-迭代器模式"><a href="#31-迭代器模式" class="headerlink" title="31-迭代器模式"></a>31-迭代器模式</h1>
         </div>
         <!-- .entry-content -->
         <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
@@ -374,28 +1138,11 @@
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2021/11/23/js-advance/" rel="prev">
-              <div class="background">
-                <img class="lazyload" src="/images/bg1.jpg" data-src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg">
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                js进阶</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2021/11/16/vue3/" rel="next">
+            <a href="/2021/11/23/js-advance/" rel="next">
               <div class="background">
                 <img class="lazyload" src="/images/bg1.jpg" data-src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/4.jpg">
               </div>
@@ -403,7 +1150,7 @@
               Next Post</span>
               <div class="info">
                 <h3>
-                vue3</h3>
+                js进阶</h3>
                 <hr>
               </div>
             </a>
@@ -427,16 +1174,16 @@
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <a href="DarkStrand.cn" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/avatar.jpg" itemprop="image" alt="DarkStrand" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
-            <a href="" itemprop="url" rel="author"></a>
+            <a href="DarkStrand.cn" itemprop="url" rel="author">DarkStrand</a>
             </h3>
           </div>
         </div>
         <hr>
-        <p><i class="iconfont icon-write"></i></p>
+        <p><i class="iconfont icon-write"></i>一个神奇的小伙</p>
       </section>
     </main><!-- #main -->
   </div><!-- #primary -->
