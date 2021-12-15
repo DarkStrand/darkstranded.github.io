@@ -1362,7 +1362,7 @@ p
 .catch(console.error)
 </code></pre>
 <p>上面代码中，如果5秒之内<code>fetch</code>方法无法返回结果，变量<code>p</code>的状态就会变为<code>rejected</code>，从而触发<code>catch</code>方法指定的回调函数。</p>
-<h1 id="22-class类"><a href="#22-class类" class="headerlink" title="22-class类"></a>22-class类</h1><pre><code class="js">// 以前
+<h2 id="21-8-Promise-allSettled"><a href="#21-8-Promise-allSettled" class="headerlink" title="21.8-Promise.allSettled()"></a>21.8-Promise.allSettled()</h2><h2 id="21-9-Promise-any"><a href="#21-9-Promise-any" class="headerlink" title="21.9-Promise.any()"></a>21.9-Promise.any()</h2><h2 id="21-10-Promise-resolve"><a href="#21-10-Promise-resolve" class="headerlink" title="21.10-Promise.resolve()"></a>21.10-Promise.resolve()</h2><h2 id="21-11-Promise-reject"><a href="#21-11-Promise-reject" class="headerlink" title="21.11-Promise.reject()"></a>21.11-Promise.reject()</h2><h2 id="21-12-应用"><a href="#21-12-应用" class="headerlink" title="21.12-应用"></a>21.12-应用</h2><h3 id="21-12-1-加载图片"><a href="#21-12-1-加载图片" class="headerlink" title="21.12.1-加载图片"></a>21.12.1-加载图片</h3><h3 id="21-12-2-Generator函数与Promise的结合"><a href="#21-12-2-Generator函数与Promise的结合" class="headerlink" title="21.12.2-Generator函数与Promise的结合"></a>21.12.2-Generator函数与Promise的结合</h3><h2 id="21-13-Promise-try"><a href="#21-13-Promise-try" class="headerlink" title="21.13-Promise.try()"></a>21.13-Promise.try()</h2><h1 id="22-class类"><a href="#22-class类" class="headerlink" title="22-class类"></a>22-class类</h1><pre><code class="js">// 以前
 function Person(name) {
     this.name = name
 }
@@ -1845,7 +1845,156 @@ for (const [name, count] of Object.entries(books)) {
    400,
  ]
 </code></pre>
-<h1 id="37-Async-Await"><a href="#37-Async-Await" class="headerlink" title="37-Async/Await"></a>37-Async/Await</h1>
+<h1 id="37-Async-Await"><a href="#37-Async-Await" class="headerlink" title="37-Async/Await"></a>37-Async/Await</h1><h2 id="37-1-含义"><a href="#37-1-含义" class="headerlink" title="37.1-含义"></a>37.1-含义</h2><p>ES2017 标准引入了 async 函数，使得异步操作变得更加方便。</p>
+<p>async 函数是什么？一句话，它就是 Generator 函数的语法糖。</p>
+<p>前文有一个 Generator 函数，依次读取两个文件。</p>
+<pre><code class="js">const fs = require(&#39;fs&#39;);
+
+const readFile = function (fileName) {
+  return new Promise(function (resolve, reject) {
+    fs.readFile(fileName, function(error, data) {
+      if (error) return reject(error);
+      resolve(data);
+    });
+  });
+};
+
+const gen = function* () {
+  const f1 = yield readFile(&#39;/etc/fstab&#39;);
+  const f2 = yield readFile(&#39;/etc/shells&#39;);
+  console.log(f1.toString());
+  console.log(f2.toString());
+};
+</code></pre>
+<p>上面代码的函数<code>gen</code>可以写成<code>async</code>函数，就是下面这样。</p>
+<pre><code class="js">const asyncReadFile = async function () {
+  const f1 = await readFile(&#39;/etc/fstab&#39;);
+  const f2 = await readFile(&#39;/etc/shells&#39;);
+  console.log(f1.toString());
+  console.log(f2.toString());
+};
+</code></pre>
+<p>一比较就会发现，<code>async</code>函数就是将 Generator 函数的星号（<code>*</code>）替换成<code>async</code>，将<code>yield</code>替换成<code>await</code>，仅此而已。</p>
+<p><code>async</code>函数对 Generator 函数的改进，体现在以下四点。</p>
+<ol>
+<li>内置执行器</li>
+</ol>
+<p>Generator 函数的执行必须靠近执行器，所以才有了<code>co</code>模块，而<code>async</code>函数自带执行器。也就是说，<code>async</code>函数的执行，与普通函数一模一样，只要一行。</p>
+<pre><code class="js">asyncReadFile()
+</code></pre>
+<p>上面的代码调用了<code>asyncReadFile</code>函数，然后它就会自动执行，输出最后结果。这完全不像 Generator 函数，需要调用 <code>next</code> 方法，或者<code>co</code>模块，才能真正执行，得到最后结果。</p>
+<ol start="2">
+<li>更好的语义</li>
+</ol>
+<p><code>async</code>和<code>await</code>，比起星号和<code>yield</code>，语义更清楚了。<code>async</code>表示函数里有异步操作，<code>await</code>表示紧跟在后面的表达式需要等待结果。</p>
+<ol start="3">
+<li>更广的适用性</li>
+</ol>
+<p><code>co</code>模块约定，<code>yield</code>命令后面只能是 Thunk 函数或 Promise 对象，而 <code>async</code> 函数的 <code>await</code> 命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时会自动转成立即 resolved 的 Promise 对象）。</p>
+<ol start="4">
+<li>返回值是 Promise</li>
+</ol>
+<p><code>async</code>函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了。你可以用<code>then</code>方法指定下一步的操作。</p>
+<p>进一步说，<code>async</code>函数完全可以看作多个异步操作，包装成的一个 Promise 对象，而 <code>await</code> 命令就是内部<code>then</code>命令的语法糖。</p>
+<h2 id="37-2-基本用法"><a href="#37-2-基本用法" class="headerlink" title="37.2-基本用法"></a>37.2-基本用法</h2><p><code>async</code>函数返回一个 Promise 对象，可以使用<code>then</code>方法添加回调函数。当函数执行的时候，一旦遇到 <code>await</code> 就会先返回，等到异步操作完成，再接着执行函数内后面的语句。</p>
+<p>下面是一个例子。</p>
+<pre><code class="js">async function getStockPriceByName(name) {
+    const symbol = await getStockSymbol(name)
+  const stockPrice = await getStockPrice(symbol)
+  return stockPrice
+}
+getStockPriceByName(&#39;goog&#39;).then(function (result) {
+    console.log(result)
+})
+</code></pre>
+<p>上面代码是一个获取股票报价的函数，函数前面的<code>async</code>关键字，表明该函数内部有异步操作。调用该函数时，会立即返回一个 <code>Promise</code> 对象。</p>
+<p>下面是另一个例子，指定多少毫秒后输出一个值。</p>
+<pre><code class="js">function timeout(ms) {
+    return new Promise(resolve =&gt; {
+        setTimeout(resolve, ms)
+  })
+}
+async function asyncPrint((value, ms) {
+    await timeout(ms)
+  console.log(value)
+})
+asyncPrint(&#39;hello world&#39;, 50)
+</code></pre>
+<p>上面代码指定 50 毫秒之后，输出 hello world。</p>
+<p>由于<code>async</code>函数返回的是 Promise 对象，可以作为<code>await</code>命令的参数。所以，上面的例子也可以写成下面的形式。</p>
+<pre><code class="js">async function timeout(ms) {
+  await new Promise((resolve) =&gt; {
+    setTimeout(resolve, ms);
+  });
+}
+
+async function asyncPrint(value, ms) {
+  await timeout(ms);
+  console.log(value);
+}
+
+asyncPrint(&#39;hello world&#39;, 50);
+</code></pre>
+<p>Async 函数有多种使用形式。</p>
+<pre><code class="js">// 函数声明
+async function foo() {}
+
+// 函数表达式
+const foo = async function () {};
+
+// 对象的方法
+let obj = { async foo() {} };
+obj.foo().then(...)
+
+// Class 的方法
+class Storage {
+  constructor() {
+    this.cachePromise = caches.open(&#39;avatars&#39;);
+  }
+
+  async getAvatar(name) {
+    const cache = await this.cachePromise;
+    return cache.match(`/avatars/${name}.jpg`);
+  }
+}
+
+const storage = new Storage();
+storage.getAvatar(&#39;jake&#39;).then(…);
+
+// 箭头函数
+const foo = async () =&gt; {};
+</code></pre>
+<h2 id="37-3-语法"><a href="#37-3-语法" class="headerlink" title="37.3-语法"></a>37.3-语法</h2><p><code>async</code>函数的语法规则总体上比较简单，难点是错误处理机制。</p>
+<h2 id="37-4-返回-Promise-对象"><a href="#37-4-返回-Promise-对象" class="headerlink" title="37.4-返回 Promise 对象"></a>37.4-返回 Promise 对象</h2><p><code>async</code>函数返回一个 Promise 对象。</p>
+<p><code>async</code>函数内部<code>return</code>语句返回的值，会成为<code>then</code>方法回调函数的参数。</p>
+<pre><code class="js">async function f() {
+    return &#39;hello world&#39;
+}
+f().then(v =&gt; console.log(v))
+// &#39;hello world&#39;
+</code></pre>
+<p>上面代码中，函数<code>f</code>内部<code>return</code>命令返回的值，会被<code>then</code>方法回调函数接收到。</p>
+<p><code>async</code>函数内部抛出错误，会导致返回的 Promise 对象变为<code>reject</code>状态。抛出的错误会被<code>catch</code>方法回调函数接收到。</p>
+<pre><code class="js">async function f() {
+    throw new Error(&#39;出错了&#39;)
+}
+f().then(
+    v =&gt; console.log(v),
+  e =&gt; console.log(e)
+)
+// Error: 出错了
+</code></pre>
+<h2 id="37-5-Promise对象的状态变化"><a href="#37-5-Promise对象的状态变化" class="headerlink" title="37.5-Promise对象的状态变化"></a>37.5-Promise对象的状态变化</h2><p><code>async</code>函数返回的 Promise 对象，必须等到内部所有<code>await</code>命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到<code>return</code>语句或者抛出错误。也就是说，只有<code>async</code>函数内部的异步操作执行完，才会执行<code>then</code>方法指定的回调函数。</p>
+<p>下面是一个例子。</p>
+<pre><code class="js">async function getTitle(url) {
+  let response = await fetch(url);
+  let html = await response.text();
+  return html.match(/&lt;title&gt;([\s\S]+)&lt;\/title&gt;/i)[1];
+}
+getTitle(&#39;https://tc39.github.io/ecma262/&#39;).then(console.log)
+// &quot;ECMAScript 2017 Language Specification&quot;
+</code></pre>
+
         </div>
         <!-- .entry-content -->
         <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
