@@ -160,3 +160,26 @@ request.interceptors.request.use(
 ```
 
 
+
+## includes的妙用
+
+利用数组进行判断的代码更优雅
+
+使用前
+
+```js
+if (fruit === 'apple' || fruit === 'orange' || fruit === 'grape') {
+	 // ...
+}
+```
+
+使用后
+
+```js
+if (['apple', 'orange', 'grape'].includes(fruit) {
+	// ...
+})
+```
+
+
+
