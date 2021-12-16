@@ -1124,3 +1124,181 @@ console.log('cloneObj', cloneObj)
 > **参数**：`obj` 任意对象
 >
 > **返回值**：所指定对象的所有自身属性的描述符，如果没有自身属性，则返回空对象。
+
+
+
+# 3. 继承实现：探究JS常见的6种继承方式
+
+## 3.1 继承概念的探究
+
+说到继承的概念，首先要说一个经典的例子。
+
+先定义一个类（Class）叫汽车，汽车的属性包括颜色、轮胎、品牌、速度、排气量等，由汽车这个类可以派生出“轿车”和“货车”两个类，那么可以在汽车的基础属性上，为轿车添加一个后备箱、给货车添加一个大货箱。这样轿车和货车就是不一样的，但是二者都属于汽车这个类，这样从例子中就能详细说明汽车、轿车以及卡车之间的继承关系。
+
+
+
+继承可以使得子类别具有父类的各种方法和属性，比如上面的例子中“轿车”和“货车”分别继承了汽车的属性，而不需要再次在“轿车”中定义汽车已经有的属性。在“轿车”继承“汽车”的同时，也可以重新定义汽车的某些属性，并重写或覆盖某些属性和方法，使其获得与“汽车”这个父类不同的属性和方法。
+
+
+
+继承的基本概念就初步介绍这些，下面我们就来看看 JavaScript 中都有哪些实现继承的方法。
+
+
+
+## 3.2 JS实现继承的几种方式
+
+### 3.2.1 第一种：原型链继承
+
+原型链继承是比较常见的继承方式之一，其中涉及的构造函数、原型和实例，三者之间存在着一定的关系，即每一个构造函数都有一个原型对象，原型对象又包含一个指向构造函数的指针，而实例则包含一个原型对象的指针。
+
+下面我们结合代码来了解一下。
+
+```js
+function Parent1() {
+	this.name = 'parent1'
+  this.play = [1,2,3]
+}
+function Child1() {
+	this.type = 'child2'
+}
+Child1.prototype = new Parent1()
+console.log(new Child1)
+```
+
+上面的代码看似没有问题，虽然父类的方法和属性都能够访问，但其实有一个潜在的问题，再举个例子来说明这个问题。
+
+```js
+var s1 = new Child1()
+var s2 = new Child2()
+s1.play.push(4)
+console.log(s1.play, s2.play)
+```
+
+这段代码在控制台执行之后，可以看到结果如下：
+
+```js
+> (4) [1,2,3,4]
+> (4) [1,2,3,4]
+```
+
+明明只改变了 s1 的 play 属性，为什么 s2 也跟着变了呢？原因也很简单，因为两个实例使用的是同一个原型对象。它们的内存空间是共享的，当一个发生变化的时候，另外一个也随之进行了变化，这就是使用原型链继承方式的一个缺点。
+
+
+
+那么要解决这个问题的话，我们就得再看看其他的继承方式，下面我们看看能解决原型属性共享问题的第二种方法。
+
+
+
+### 3.2.2 第二种：构造函数继承（借助call）
+
+直接通过代码来了解，如下所示。
+
+```js
+function Parent1() {
+	this.name = 'parent1'
+}
+Parent1.prototype.getName = function() {
+	return this.name
+}
+function Child1() {
+	Parent1.call(this)
+  this.type = 'child1'
+}
+let child = new Child1()
+console.log(child) // 没问题
+console.log(child.getName()) // 会报错
+```
+
+执行上面的这段代码，可以得到这样的结果。
+
+![](https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/js进阶/5.png)
+
+可以看到最后打印的 child 在控制台显示，除了 Child1 的属性 type 之外，也继承了 Parent1 的属性 name。这样写的时候子类虽然能够拿到父类的属性值，解决了第一种继承方式的弊端，但问题是，父类原型对象中一旦存在父类之前自己定义的方法，那么子类将无法继承这些方法。
+
+因此，从上面的结果就可以看到构造函数实现继承的优缺点，它使父类的引用属性不会被共享，优化了第一种继承方式的弊端；但是随之而来的缺点也比较明显——只能继承父类的实例属性和方法，不能继承原型属性或者方法。
+
+
+
+上面的两种继承方式各有优缺点，那么结合二者的优点，于是就产生了下面这种组合的继承方式。
+
+
+
+### 3.2.3 第三种：组合继承（前两种组合）
+
+这种方式结合了前两种继承方式的优缺点，结合起来的继承，代码如下。
+
+```js
+function Parent3() {
+	this.name = 'parent3'
+  this.play = [1,2,3]
+}
+Parent3.prototype.getName = function() {
+  return this.name
+}
+function Child3() {
+  // 第二次调用Parent3()
+  Parent3.call(this)
+  this.type = 'child3'
+}
+// 第一次调用 Parent3()
+Child3.prototype = new Parent3()
+// 手动挂上构造器，指向自己的构造函数
+Child3.prototype.constructor = Child3
+var s3 = new Child3()
+var s4 = new Child3()
+s3.play.push(4)
+console.log(s3.play, s4.play) // 互不影响
+console.log(s3.getName()) // 正常输出'parent3'
+console.log(s4.getName()) // 正常输出'parent3'
+```
+
+执行上面的代码，可以看到控制台的输出结果，之前方法一和方法二的问题都得以解决。
+
+
+
+但是这里又增加了一个新问题：通过注释我们可以看到 Parent3 执行了两次，第一次是改变 Child3 的 prototype 的时候，第二次是通过 call 方法调用 Parent3 的时候，那么 Parent3 多构造一次就多进行了一次性能开销，这是我们不愿看到的。
+
+那么是否有更好的办法解决这个问题呢？下面的第六种继承方式可以更好地解决这里的问题。
+
+上面介绍的更多是围绕着构造函数的方式，那么对于 JavaScript 的普通对象，怎么实现继承呢？
+
+
+
+### 3.2.4 第四种：原型式继承
+
+这里不得不提到的就是 ES5 里面的 Object.create 方法，这个方法接收两个参数：一是用作新对象原型的对象、二是为新对象定义额外属性的对象（可选参数）。
+
+我们通过一段代码，看看普通对象是怎么实现的继承。
+
+```js
+let parent4 = {
+	name: 'parent4',
+  friends: ['p1', 'p2', 'p3'],
+  getName: function() {
+		return this.name
+  }
+}
+
+let person4 = Object.create(parent4)
+person4.name = 'tom'
+person4.friends.push('jerry')
+
+let person5 = Object.create(parent4)
+person5.friends.push('lucy')
+
+console.log(person4.name) // 'tom'
+console.log(person4.name === person4.getName()) // true
+console.log(person5.name) // 'parent4'
+console.log(person4.friends) // ['p1', 'p2', 'p3', 'jerry', 'lucy']
+console.log(person5.friends) // ['p1', 'p2', 'p3', 'jerry', 'lucy']
+```
+
+从上面的代码中可以看到，通过 Object.create 这个方法可以实现普通对象的继承，不仅仅能继承属性，同样也可以继承 getName 的方法。
+
+第一个结果“tom”，比较容易理解，perosn4 继承了 parent4 的 name 属性，但是在这个基础上又进行了自定义。
+
+第二个是继承过来的 getName 方法检查自己的 name 是否和属性里面的值一样，答案是 true。
+
+第三个结果“parent4”也比较容易理解，person5 继承了 parent4 的 name 属性，没有进行覆盖，因此输出父对象的属性。
+
+最后两个输出结果是一样的，讲到这里应该可以联想到 2 讲中浅拷贝的知识点，关于引用数据类型“共享”的问题，其实 Object.create 方法是可以为一些对象实现浅拷贝的。

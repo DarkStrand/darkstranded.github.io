@@ -2243,3 +2243,323 @@ getTitle('https://tc39.github.io/ecma262/').then(console.log)
 // "ECMAScript 2017 Language Specification"
 ```
 
+上面代码中，函数`getTitle`内部有三个操作：抓取网页、取出文本、匹配页面标题。只有这三个操作全部完成，才会执行`then`方法里面的`console.log`。
+
+
+
+## 37.6-await命令
+
+正常情况下，`await`命令后面是一个 Promise 对象，返回该对象的结果。如果不是 Promise 对象，就直接返回对应的值。
+
+```js
+async function f() {
+	// 等同于
+  // return 123
+  return await 123
+}
+f().then(v => console.log(v))
+```
+
+上面代码中，`await`命令的参数是数值`123`，这时等同于`return 123`。
+
+另一种情况是，`await`命令后面是一个`thenable`对象（即定义`then`方法的对象），那么`await`会将其等同于 Promise 对象。
+
+```js
+class Sleep {
+	constructor(timeout) {
+		this.timeout = timeout
+  }
+  then(resolve, reject) {
+		const startTime = Date.now()
+    setTimeout(
+    	() => resolve(Date.now() - startTime),
+      this.timeout
+    )
+  }
+}
+(async() => {
+	const sleepTime = await new Sleep(1000)
+  console.log(sleepTime)
+})()
+// 1000
+```
+
+上面代码中，`await`命令后面是一个`Sleep`对象的实例。这个实例不是 Promise 对象，但是因为定义了`then`方法，`await`会将其视为`Promise`处理。
+
+这个例子还演示了如何实现休眠效果。JavaScript 一直没有休眠的语法，但是借助`await`命令就可以让程序停顿指定的时间。下面给出了一个简化的`sleep`实现。
+
+```js
+function sleep(interval) {
+	return new Promise(resolve => {
+    setTimeout(resolve, interval)
+  })
+}
+
+// 用法
+async function one2FiveInAsync() {
+	for (let i = 1;i <=5; i++) {
+		console.log(i)
+    await sleep(1000)
+  }
+}
+one2FiveInAsync()
+```
+
+
+
+`await`命令后面的 Promise 对象如果变为`reject`状态，则`reject`的参数会被`catch`方法的回调函数接收到。
+
+```js
+async function f() {
+	await Promise.reject('出错了')
+}
+f()
+.then(v => console.log(v))
+.catch(e => console.log(e))
+// 出错了
+```
+
+注意，上面代码中，`await`语句前面没有`return`，但是`reject`方法的参数依然传入了`catch`方法的回调函数。这里如果在`await`前面加上`return`，效果是一样的。
+
+任何一个`await`语句后面的 Promise 对象变为`reject`状态，那么整个`async`函数都会中断执行。
+
+```js
+async function f() {
+	await Promise.reject('出错了')
+  await Promise.resolve('hello world') // 不会执行
+}
+```
+
+上面代码中，第二个`await`语句是不会执行的，因为第一个`await`语句状态变成了`reject`。
+
+有时，我们希望即使前一个异步操作失败，也不要中断后面的异步操作。这时可以将第一个`await`放在`try...catch`结构里面，这样不管这个异步操作是否成功，第二个`await`都会执行。
+
+```js
+async function f() {
+	try {
+		await Promise.reject('出错了')
+  } catch(e) {
+	}
+  return await Promise.resolve('hello world')
+}
+f()
+.then(v => console.log(v))
+// hello world
+```
+
+
+
+另一种方法是`await`后面的 Promise 对象再跟一个`catch`方法，处理前面可能出现的错误。
+
+```js
+async function f() {
+	await Promise.reject('出错了')
+  	.catch(e => console.log(e))
+  return await Promise.resolve('hello world')
+}
+f()
+.then(v => console.log(v))
+// 出错了
+// hello world
+```
+
+
+
+## 37.7-错误处理
+
+如果`await`后面的异步操作出错，那么等同于`async`函数返回的 Promise 对象被`reject`。
+
+```js
+async function f() {
+	await new Promise(function(resolve, reject) {
+    throw new Error('出错了')
+  })
+}
+f()
+.then(v => console.log(v))
+.catch(e => console.log(e))
+// Error：出错了
+```
+
+上面代码中，`async`函数`f`执行后，`await`后面的 Promise 对象会抛出一个错误对象，导致`catch`方法的回调函数被调用，它的参数就是抛出的错误对象。具体的执行机制，可以参考后文的“async函数的实现原理”。
+
+防止出错的方法，也是将其放在`try...catch`代码块之中。
+
+```js
+async function f() {
+	try {
+		await new Promise(function(resolve, reject) {
+			throw new Error('出错了')
+    })
+  } catch(e) {
+	}
+  return await('hello world')
+}
+```
+
+如果有多个`await`命令，可以统一放在`try...catch`结构中。
+
+```js
+async function main() {
+	try {
+		const val1 = await firstStep()
+    const val2 = await secondStep(val1)
+    const val3 = await thirdStep(val1, val2)
+    constle.log('Final:', val3)
+  } catch(err) {
+		console.error(err)
+  }
+}
+```
+
+下面的例子使用`try...catch`结构，实现多次重复尝试。
+
+```js
+const superagent = require('superagent')
+const NUM_RETRIES = 3
+async function test() {
+	let i
+  for(i = 0; i < NUM_RETRIES; ++i) {
+		try {
+			await superagent.get('http://google.com/this-throws-an-error')
+    } catch(err) {}
+  }
+  console.log(i) // 3
+}
+test()
+```
+
+上面代码中，如果`await`操作成功，就会使用`break`语句退出循环；如果失败，会被`catch`语句捕捉，然后进入下一轮循环。
+
+
+
+## 37.8-使用注意点
+
+1. 前面已经说过，`await`命令后面的`Promise`对象，运行结果可能是`rejected`，所以最好把`await`命令放在`try...catch`代码块中。
+
+```js
+async function myFunction() {
+	try {
+		await somethingThatReturnsAPromise()
+  } catch (err) {
+		console.log(err)
+  }
+}
+
+// 另一种写法
+async function myFunction() {
+	await somethingThatReturnsAPromise()
+  .catch(function(err) {
+		console.log(err)
+  })
+}
+```
+
+
+
+2. 多个`await`命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。
+
+```js
+let foo = await getFoo()
+let bar = await getBar()
+```
+
+上面代码中，`getFoo`和`getBar`是两个独立的异步操作（即互不依赖），被写成继发关系。这样比较耗时，因为只有`getFoo`完成以后，才会执行`getBar`，完全可以让它们同时触发。
+
+```js
+// 写法一
+let [foo, bar] = await Promise.all([getFoo(), getBar()])
+
+// 写法二
+let fooPromise = getFoo()
+let barPromise = getBar()
+let foo = await fooPromise
+let bar = await barPromise
+```
+
+上面两种写法，`getFoo`和`getBar`都是同时触发，这样就会缩短程序的执行时间。
+
+
+
+3. `await`命令只能用在`async`函数之中，如果用在普通函数，就会报错。
+
+```js
+async function dbFuc(db) {
+	let docs = [{}, {}, {}]
+  
+  // 报错
+  docs.forEach(function(doc) {
+		await db.post(doc)
+  })
+}
+```
+
+上面代码会报错，因为`await`用在普通函数之中了。但是，如果将`forEach`方法的参数改成`async`函数，也有问题。
+
+```js
+function dbFuc(db) { // 这里不需要 async
+  let docs = [{}, {}, {}]
+	
+  // 可能得到错误结果
+  docs.forEach(async function(doc) {
+		await db.post(doc)
+  })
+}
+```
+
+上面代码可能不会正常工作，原因是这时三个`db.post`操作将是并发执行，也就是同时执行，而不是继发执行。正确的写法是采用`for`循环。
+
+```js
+async function dbFuc(db) {
+  let docs = [{}, {}, {}]
+  for(let doc of docs) {
+    await db.post(doc)
+  }
+}
+```
+
+如果确实希望多个请求并发执行，可以使用`Promsie.all`方法。当三个请求都会`resolved`时，下面两种写法效果相同。
+
+```js
+async function dbFuc(db) {
+	let docs = [{}, {}, {}]
+  let promises = docs.map(doc => db.post(doc))
+  
+  let results = await Promsie.all(promises)
+  console.log(results)
+}
+
+// 或者使用下面的写法
+async function dbFuc(db) {
+	let docs = [{}, {}, {}]
+  let promises = docs.map(doc => db.post(doc))
+	let results = []
+  for (let promise of promises) {
+		results.push(await promise)
+  }
+  console.log(results)
+}
+```
+
+
+
+4. Async 函数可以保留运行堆栈。
+
+```js
+const a = () => {
+	b().then(() => c())
+}
+```
+
+上面代码中，函数`a`内部运行了一个异步任务`b()`。当`b()`运行的时候，函数`a()`不会中断，而是继续执行。等到`b()`运行结束，可能`a()`早就运行结束了，`b()`所在的上下文环境已经消失了。如果`b()`或`c()`报错，错误堆栈将不包括`a()`。
+
+现在将这个例子改成`async`函数。
+
+```js
+const a = async () => {
+	await b()
+  c()
+}
+```
+
+上面代码中，`b()`运行的时候，`a()`是暂停执行，上下文环境都保存着。一旦`b()`或`c()`报错，错误堆栈将包括`a()`。
