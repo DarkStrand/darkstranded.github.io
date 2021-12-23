@@ -2151,3 +2151,336 @@ JSON.parse 方法用来解析 JSON 字符串，构造由字符串描述的 JavaS
 
 下面通过一段代码来看看这个方法以及 reviver 参数的用法，如下所示。
 
+```js
+const json = '{"result": true, "count": 2}'
+const obj = JSON.parse(json)
+console.log(obj.count) // 2
+console.log(obj.result) // true
+
+/* 带第二个参数的情况 */
+JSON.parse('{"p": 5}', function(k, v) {
+	if (k === '') return v  // 如果k不是空，
+  return v * 2            // 就将属性值变为原来的2倍返回
+})                        // { p: 10 }
+```
+
+上面的代码说明了，我们可以将一个符合 JSON 格式的字符串转化成对象返回；带第二个参数的情况，可以将待处理的字符串进行一定的操作处理，比如上面这个例子就是将属性值乘以 2 进行返回。
+
+下面我们来了解一下 JSON.stringify 的基本情况。
+
+
+
+### 6.1.2 JSON.stringify
+
+JSON.stringify 方法是将一个 JavaScript 对象或值转换为 JSON 字符串，默认该方法其实有三个参数：第一个参数是必选，后面两个是可选参数非必选。第一个参数传入的是要转换的对象；第二个是一个 replacer 函数，比如指定的 replacer 是数组，则可选择性地仅处理包含数组指定的属性；第三个参数用来控制结果字符串里面的间距，后面两个参数整体用得比较少。
+
+> 该方法的语法为：JSON.stringify(value[, replacer [, space]])
+
+下面我们通过一段代码来看看后面几个参数的妙用，如下所示。
+
+```js
+JSON.stringify({ x: 1, y: 2 }) // "{"x": 1, "y": 2}"
+JSON.stringify({ x: [10, undefined, function(){}, Symbol('')] })
+// "{"x": [10, null, null, null]}"
+
+/* 第二个参数的例子 */
+function replacer(key, value) {
+	if (typeof value === 'string') {
+		return undefined
+  }
+  return value
+}
+var foo = {foundation: 'Mozilla', model: 'box', week: 4, transport: 'car', month: 7}
+var jsonString = JSON.stringify(foo, replacer)
+console.log(jsonString) // "{"week": 4, "month": 7}"
+
+/* 第三个参数的例子 */
+JSON.stringify({a: 2}, null, ' ')
+/* 
+{
+ "a": 2
+} 
+*/
+JSON.stringify({a: 2}, null, '')  // "{"a": 2}"
+```
+
+从上面的代码中可以看到，增加第二个参数 replacer 带来的变化：通过替换方法把对象中的属性为字符串的过滤掉，在 stringify 之后返回的仅为数字的属性变为字符串之后的结果；当第三个参数传入的是多个空格的时候，则会增加结果字符串里面的间距数量，从最后一段代码中可以看到结果。
+
+下面我们再看下 JSON.stringify 的内部针对各种数据类型的转换方式。
+
+
+
+## 6.2 如何自己手动实现？
+
+为了让你更好地理解实现的过程，回想一下 【1. 数据类型】中的基本知识，我们当时讲了那么多种数据类型，如果它们都使用这个方法，返回的结果又会是怎么样的呢？
+
+
+
+### 6.2.1 分析各种数据类型及边界情况
+
+我们来分析一下都有哪些数据类型传入，传入了之后会有什么返回，通过分析的结果我们之后才能更好地实现编码。大致的分析汇总如下表所示（可参考MDN文档）。
+
+| JSON.stringify |                      输入                       |                             输出                             |
+| :------------: | :---------------------------------------------: | :----------------------------------------------------------: |
+|  基础数据类型  |                    undefined                    |                          undefined                           |
+|                |                     boolean                     |                        "false"/"true"                        |
+|                |                     number                      |                       字符串类型的数值                       |
+|                |                     symbol                      |                          undefined                           |
+|                |                      null                       |                            "null"                            |
+|                |                     string                      |                            string                            |
+|                |                 NaN 和 Infinity                 |                            "null"                            |
+|  引用数据类型  |                    function                     |                          undefined                           |
+|                | Array数组中出现了undefined、function以及 symbol |                  string<br />/<br />"null"                   |
+|                |                     RegExp                      |                             "{}"                             |
+|                |                      Date                       |                  Date 的 toJSON() 字符串值                   |
+|                |                   普通object                    | 1. 如果有 toJSON() 方法，那么序列化 toJSON() 的返回值<br />2. 如果属性值中出现了 undefined、任意的函数以及 symbol值，忽略<br />3. 所有以 symbol 为属性键的属性都会被完全忽略掉 |
+
+上面这个表中，基本整理出了各种数据类型通过 JSON.stringify 这个方法之后返回对应的值，但是还有一个特殊情况需要注意：对于包含循环引用的对象（深拷贝那讲中也有提到）执行此方法，会抛出错误。
+
+那么根据上面梳理的这个表格，我们来一起看下代码怎么编写吧。
+
+
+
+### 6.2.2 代码逻辑实现
+
+我们先利用 typeof 把基础数据类型和引用数据类型分开，分开之后再根据不同情况来分别处理不同的情况，按照这个逻辑代码实现如下。
+
+```js
+function jsonStringify(data) {
+  let type = typeof data;
+
+  if(type !== 'object') {
+    let result = data;
+    //data 可能是基础数据类型的情况在这里处理
+    if (Number.isNaN(data) || data === Infinity) {
+       //NaN 和 Infinity 序列化返回 "null"
+       result = "null";
+    } else if (type === 'function' || type === 'undefined' || type === 'symbol') {
+      // 由于 function 序列化返回 undefined，因此和 undefined、symbol 一起处理
+       return undefined;
+    } else if (type === 'string') {
+       result = '"' + data + '"';
+    }
+    return String(result);
+  } else if (type === 'object') {
+     if (data === null) {
+        return "null"  // 第01讲有讲过 typeof null 为'object'的特殊情况
+     } else if (data.toJSON && typeof data.toJSON === 'function') {
+        return jsonStringify(data.toJSON());
+     } else if (data instanceof Array) {
+        let result = [];
+        //如果是数组，那么数组里面的每一项类型又有可能是多样的
+        data.forEach((item, index) => {
+        if (typeof item === 'undefined' || typeof item === 'function' || typeof item === 'symbol') {
+               result[index] = "null";
+           } else {
+               result[index] = jsonStringify(item);
+           }
+         });
+         result = "[" + result + "]";
+         return result.replace(/'/g, '"');
+      } else {
+         // 处理普通对象
+         let result = [];
+         Object.keys(data).forEach((item, index) => {
+            if (typeof item !== 'symbol') {
+              //key 如果是 symbol 对象，忽略
+              if (data[item] !== undefined && typeof data[item] !== 'function' && typeof data[item] !== 'symbol') {
+                //键值如果是 undefined、function、symbol 为属性值，忽略
+                result.push('"' + item + '"' + ":" + jsonStringify(data[item]));
+              }
+            }
+         });
+         return ("{" + result + "}").replace(/'/g, '"');
+        }
+    }
+}
+```
+
+整体来说这段代码还是比较复杂的，如果在面试过程中让你当场手写，其实整体还是需要考虑很多东西的。当然上面的代码根据每个人的思路不同，你也可以写出自己认为更优的代码，比如你也可以尝试直接使用 switch 语句，来分别针对特殊情况进行处理，整体写出来可能看起来会比上面的写法更清晰一些，这些可以根据自己情况而定。
+
+
+
+### 6.2.3 实现效果测试
+
+上面的这个方法已经实现了，那么用起来会不会有问题呢？我们就用上面的代码来进行一些用例的检测吧。
+
+```js
+let nl = null;
+console.log(jsonStringify(nl) === JSON.stringify(nl));
+// true
+let und = undefined;
+console.log(jsonStringify(undefined) === JSON.stringify(undefined));
+// true
+let boo = false;
+console.log(jsonStringify(boo) === JSON.stringify(boo));
+// true
+let nan = NaN;
+console.log(jsonStringify(nan) === JSON.stringify(nan));
+// true
+let inf = Infinity;
+console.log(jsonStringify(Infinity) === JSON.stringify(Infinity));
+// true
+let str = "jack";
+console.log(jsonStringify(str) === JSON.stringify(str));
+// true
+let reg = new RegExp("\w");
+console.log(jsonStringify(reg) === JSON.stringify(reg));
+// true
+let date = new Date();
+console.log(jsonStringify(date) === JSON.stringify(date));
+// true
+let sym = Symbol(1);
+console.log(jsonStringify(sym) === JSON.stringify(sym));
+// true
+let array = [1,2,3];
+console.log(jsonStringify(array) === JSON.stringify(array));
+// true
+let obj = {
+    name: 'jack',
+    age: 18,
+    attr: ['coding', 123],
+    date: new Date(),
+    uni: Symbol(2),
+    sayHi: function() {
+        console.log("hi")
+    },
+    info: {
+        sister: 'lily',
+        age: 16,
+        intro: {
+            money: undefined,
+            job: null
+        }
+    }
+}
+console.log(jsonStringify(obj) === JSON.stringify(obj));
+// true
+```
+
+
+
+# 7. 数组原理（上）：梳理数组API
+
+**数组概念的探究**
+
+截止 ES7 规范，数组共包含 33 个标准的 API 方法和一个非标准的 API 方法，使用场景和使用方案纷繁复杂，其中还有不少坑。为了方便可以循序渐进学习这部分内容，下面将从数组的概念开始讲起。
+
+由于数组的 API 较多，很多相近的名字也容易导致混淆，所以在这里按照“会改变自身值的” “不会改变自身值的” “遍历方法” 这三种类型分开讲解。
+
+
+
+## 7.1  Array的构造器
+
+Array 构造器用于创建一个新的数组。通常，我们推荐使用`对象字面量`的方式创建一个数组，例如 `var a = []`就是一个比较好的写法。但是，总有对象字面量表述乏力的时候，比如，我想创建一个长度为 6 的空数组，用对象字面量的方式是无法创建的，因此只能写出下面这样。
+
+```js
+// 使用 Array 构造器，可以自定义长度
+var a = Array(6) // [empty * 6]
+
+// 使用对象字面量
+var b = []
+b.length = 6 // [undefined * 6]
+```
+
+Array 构造器根据参数长度的不同，有如下两种不同的处理方式：
+
+* `new Array(arg1, arg2, ...)`，参数长度为 0 或 长度大于等于 2 时，传入的参数将按照顺序依次成为新数组的第 0 至第 N 项（参数长度为 0 时，返回空数组）；
+* `new Array(len)`，当 len 不是数值时，处理同上，返回一个只包含 len 元素一项的数组；当 len 为数值时，len 最大不能超过 32 位无符号整型，即需要小于 2 的 32次方（len 最大为 `Math.pow(2, 32)`），否则将抛出 RangeError。
+
+以上就是 Array 构造器的基本情况，我们来看下 ES6 新增的几个构造方法。
+
+
+
+## 7.2 ES6新增的构造方法：Array.of 和 Array.from
+
+鉴于数组的常用性，ES6 专门扩展了数组构造器 Array，新增了2个方法：`Array.of`、`Array.from`。其中，Array.of 整体用得比较少；而 Array.from 具有灵活性，你在平常开发中应该会经常使用。
+
+
+
+### 7.2.1 Array.of
+
+Array.of 用于将参数依次转化为数组中的一项，然后返回这个新数组，而不管这个参数是数字还是其他。它基本上与 Array 构造器功能一致，唯一的区别就在单个数字参数的处理上。
+
+比如，在下面的这几行代码中，你可以看到区别：当参数为两个时，返回的结果是一致的；当参数是一个时，Array.of 会把参数变成数组里的一项，而构造器则会生成长度和第一个参数相同的空数组。
+
+```js
+Array.of(8.0) // [8]
+Array(8) // [empty * 8]
+Array.of(8.0, 5) // [8, 5]
+Array(8.0, 5) // [8, 5]
+Array.of('8') // ['8']
+Array('8') // ['8']
+```
+
+
+
+### 7.2.2 Array.from
+
+Array.from 的设计初衷是快速便捷地基于其他对象创建新数组，准确来说就是从一个类似数组的可迭代对象中创建一个新的数组实例。其实就是，只要一个对象有迭代器，Array.from  就能把它变成一个数组（注意：是返回新的数组，不改变原对象）
+
+从语法上，Array.from 拥有3个参数：
+
+1. 类似数组的对象，必选；
+2. 加工函数，新生成的数组会经过该函数的加工再返回；
+3. this 作用域，表示加工函数执行时 this 的值。
+
+这三个参数里面第一个参数是必选的，后两个参数都是可选的。
+
+```js
+var obj = { 0: 'a', 1: 'b', 2: 'c', length: 3 }
+Array.from(obj, function(value, index) {
+	console.log(value, index, this, arguments.length)
+  return value.repeat(3) // 必须指定返回值，否则返回 undefined
+}, obj)
+```
+
+![js数据类型](https://cdn.jsdelivr.net/gh/Darkstranded/CDN/images/js进阶/8.png)
+
+结果中可以看出`console.log(value,index,this,arguments.length)`对应的四个值，并且看到 return 的 value 重复了三遍，最后返回的数组为 `['aaa','bbb','ccc']`。
+
+这表明了通过 `Array.from`这个方法可以自己定义加工函数的处理方式，从而返回想要得到的值；如果不确定返回值，则会返回 undefined，最终生成的也是一个包含若干个 undefined 元素的空数组。
+
+实际上，如果这里不指定 this 的话，加工函数完全可以是一个箭头函数。上述代码可以简写为如下形式。
+
+```js
+Array.from(obj, (value) => value.repeat(3))
+// ['aaa', 'bbb', 'ccc']
+```
+
+除了上述 obj 对象以外，拥有迭代器的对象还包括 String、Set、Map等，Array.from 统统可以处理，请看下面的代码。
+
+```js
+// String
+Array.from('abc');         // ["a", "b", "c"]
+// Set
+Array.from(new Set(['abc', 'def'])); // ["abc", "def"]
+// Map
+Array.from(new Map([[1, 'ab'], [2, 'de']])); 
+// [[1, 'ab'], [2, 'de']]
+```
+
+
+
+## 7.3 Array的判断
+
+在 ES5 提供Array.isArray方法之前，我们至少有如下5中方式去判断一个变量是否为数组。
+
+```js
+var a = []
+// 1. 基于instanceof
+a instanceof Array
+
+// 2. 基于construcotr
+a.constructor === Array
+
+// 3. 基于Object.prototype.isPrototypeOf
+Array.prototype.isPrototypeOf(a)
+
+// 4. 基于getPrototypeOf
+Object.getPrototypeOf(a) === Array.prototype
+
+// 5. 基于Object.prototype.toString
+Object.prototype.toString.apply(a) === '[object Array]'
+```
+
