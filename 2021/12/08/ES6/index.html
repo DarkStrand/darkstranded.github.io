@@ -1994,6 +1994,243 @@ f().then(
 getTitle(&#39;https://tc39.github.io/ecma262/&#39;).then(console.log)
 // &quot;ECMAScript 2017 Language Specification&quot;
 </code></pre>
+<p>上面代码中，函数<code>getTitle</code>内部有三个操作：抓取网页、取出文本、匹配页面标题。只有这三个操作全部完成，才会执行<code>then</code>方法里面的<code>console.log</code>。</p>
+<h2 id="37-6-await命令"><a href="#37-6-await命令" class="headerlink" title="37.6-await命令"></a>37.6-await命令</h2><p>正常情况下，<code>await</code>命令后面是一个 Promise 对象，返回该对象的结果。如果不是 Promise 对象，就直接返回对应的值。</p>
+<pre><code class="js">async function f() {
+    // 等同于
+  // return 123
+  return await 123
+}
+f().then(v =&gt; console.log(v))
+</code></pre>
+<p>上面代码中，<code>await</code>命令的参数是数值<code>123</code>，这时等同于<code>return 123</code>。</p>
+<p>另一种情况是，<code>await</code>命令后面是一个<code>thenable</code>对象（即定义<code>then</code>方法的对象），那么<code>await</code>会将其等同于 Promise 对象。</p>
+<pre><code class="js">class Sleep {
+    constructor(timeout) {
+        this.timeout = timeout
+  }
+  then(resolve, reject) {
+        const startTime = Date.now()
+    setTimeout(
+        () =&gt; resolve(Date.now() - startTime),
+      this.timeout
+    )
+  }
+}
+(async() =&gt; {
+    const sleepTime = await new Sleep(1000)
+  console.log(sleepTime)
+})()
+// 1000
+</code></pre>
+<p>上面代码中，<code>await</code>命令后面是一个<code>Sleep</code>对象的实例。这个实例不是 Promise 对象，但是因为定义了<code>then</code>方法，<code>await</code>会将其视为<code>Promise</code>处理。</p>
+<p>这个例子还演示了如何实现休眠效果。JavaScript 一直没有休眠的语法，但是借助<code>await</code>命令就可以让程序停顿指定的时间。下面给出了一个简化的<code>sleep</code>实现。</p>
+<pre><code class="js">function sleep(interval) {
+    return new Promise(resolve =&gt; {
+    setTimeout(resolve, interval)
+  })
+}
+
+// 用法
+async function one2FiveInAsync() {
+    for (let i = 1;i &lt;=5; i++) {
+        console.log(i)
+    await sleep(1000)
+  }
+}
+one2FiveInAsync()
+</code></pre>
+<p><code>await</code>命令后面的 Promise 对象如果变为<code>reject</code>状态，则<code>reject</code>的参数会被<code>catch</code>方法的回调函数接收到。</p>
+<pre><code class="js">async function f() {
+    await Promise.reject(&#39;出错了&#39;)
+}
+f()
+.then(v =&gt; console.log(v))
+.catch(e =&gt; console.log(e))
+// 出错了
+</code></pre>
+<p>注意，上面代码中，<code>await</code>语句前面没有<code>return</code>，但是<code>reject</code>方法的参数依然传入了<code>catch</code>方法的回调函数。这里如果在<code>await</code>前面加上<code>return</code>，效果是一样的。</p>
+<p>任何一个<code>await</code>语句后面的 Promise 对象变为<code>reject</code>状态，那么整个<code>async</code>函数都会中断执行。</p>
+<pre><code class="js">async function f() {
+    await Promise.reject(&#39;出错了&#39;)
+  await Promise.resolve(&#39;hello world&#39;) // 不会执行
+}
+</code></pre>
+<p>上面代码中，第二个<code>await</code>语句是不会执行的，因为第一个<code>await</code>语句状态变成了<code>reject</code>。</p>
+<p>有时，我们希望即使前一个异步操作失败，也不要中断后面的异步操作。这时可以将第一个<code>await</code>放在<code>try...catch</code>结构里面，这样不管这个异步操作是否成功，第二个<code>await</code>都会执行。</p>
+<pre><code class="js">async function f() {
+    try {
+        await Promise.reject(&#39;出错了&#39;)
+  } catch(e) {
+    }
+  return await Promise.resolve(&#39;hello world&#39;)
+}
+f()
+.then(v =&gt; console.log(v))
+// hello world
+</code></pre>
+<p>另一种方法是<code>await</code>后面的 Promise 对象再跟一个<code>catch</code>方法，处理前面可能出现的错误。</p>
+<pre><code class="js">async function f() {
+    await Promise.reject(&#39;出错了&#39;)
+      .catch(e =&gt; console.log(e))
+  return await Promise.resolve(&#39;hello world&#39;)
+}
+f()
+.then(v =&gt; console.log(v))
+// 出错了
+// hello world
+</code></pre>
+<h2 id="37-7-错误处理"><a href="#37-7-错误处理" class="headerlink" title="37.7-错误处理"></a>37.7-错误处理</h2><p>如果<code>await</code>后面的异步操作出错，那么等同于<code>async</code>函数返回的 Promise 对象被<code>reject</code>。</p>
+<pre><code class="js">async function f() {
+    await new Promise(function(resolve, reject) {
+    throw new Error(&#39;出错了&#39;)
+  })
+}
+f()
+.then(v =&gt; console.log(v))
+.catch(e =&gt; console.log(e))
+// Error：出错了
+</code></pre>
+<p>上面代码中，<code>async</code>函数<code>f</code>执行后，<code>await</code>后面的 Promise 对象会抛出一个错误对象，导致<code>catch</code>方法的回调函数被调用，它的参数就是抛出的错误对象。具体的执行机制，可以参考后文的“async函数的实现原理”。</p>
+<p>防止出错的方法，也是将其放在<code>try...catch</code>代码块之中。</p>
+<pre><code class="js">async function f() {
+    try {
+        await new Promise(function(resolve, reject) {
+            throw new Error(&#39;出错了&#39;)
+    })
+  } catch(e) {
+    }
+  return await(&#39;hello world&#39;)
+}
+</code></pre>
+<p>如果有多个<code>await</code>命令，可以统一放在<code>try...catch</code>结构中。</p>
+<pre><code class="js">async function main() {
+    try {
+        const val1 = await firstStep()
+    const val2 = await secondStep(val1)
+    const val3 = await thirdStep(val1, val2)
+    constle.log(&#39;Final:&#39;, val3)
+  } catch(err) {
+        console.error(err)
+  }
+}
+</code></pre>
+<p>下面的例子使用<code>try...catch</code>结构，实现多次重复尝试。</p>
+<pre><code class="js">const superagent = require(&#39;superagent&#39;)
+const NUM_RETRIES = 3
+async function test() {
+    let i
+  for(i = 0; i &lt; NUM_RETRIES; ++i) {
+        try {
+            await superagent.get(&#39;http://google.com/this-throws-an-error&#39;)
+    } catch(err) {}
+  }
+  console.log(i) // 3
+}
+test()
+</code></pre>
+<p>上面代码中，如果<code>await</code>操作成功，就会使用<code>break</code>语句退出循环；如果失败，会被<code>catch</code>语句捕捉，然后进入下一轮循环。</p>
+<h2 id="37-8-使用注意点"><a href="#37-8-使用注意点" class="headerlink" title="37.8-使用注意点"></a>37.8-使用注意点</h2><ol>
+<li>前面已经说过，<code>await</code>命令后面的<code>Promise</code>对象，运行结果可能是<code>rejected</code>，所以最好把<code>await</code>命令放在<code>try...catch</code>代码块中。</li>
+</ol>
+<pre><code class="js">async function myFunction() {
+    try {
+        await somethingThatReturnsAPromise()
+  } catch (err) {
+        console.log(err)
+  }
+}
+
+// 另一种写法
+async function myFunction() {
+    await somethingThatReturnsAPromise()
+  .catch(function(err) {
+        console.log(err)
+  })
+}
+</code></pre>
+<ol start="2">
+<li>多个<code>await</code>命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。</li>
+</ol>
+<pre><code class="js">let foo = await getFoo()
+let bar = await getBar()
+</code></pre>
+<p>上面代码中，<code>getFoo</code>和<code>getBar</code>是两个独立的异步操作（即互不依赖），被写成继发关系。这样比较耗时，因为只有<code>getFoo</code>完成以后，才会执行<code>getBar</code>，完全可以让它们同时触发。</p>
+<pre><code class="js">// 写法一
+let [foo, bar] = await Promise.all([getFoo(), getBar()])
+
+// 写法二
+let fooPromise = getFoo()
+let barPromise = getBar()
+let foo = await fooPromise
+let bar = await barPromise
+</code></pre>
+<p>上面两种写法，<code>getFoo</code>和<code>getBar</code>都是同时触发，这样就会缩短程序的执行时间。</p>
+<ol start="3">
+<li><code>await</code>命令只能用在<code>async</code>函数之中，如果用在普通函数，就会报错。</li>
+</ol>
+<pre><code class="js">async function dbFuc(db) {
+    let docs = [{}, {}, {}]
+
+  // 报错
+  docs.forEach(function(doc) {
+        await db.post(doc)
+  })
+}
+</code></pre>
+<p>上面代码会报错，因为<code>await</code>用在普通函数之中了。但是，如果将<code>forEach</code>方法的参数改成<code>async</code>函数，也有问题。</p>
+<pre><code class="js">function dbFuc(db) { // 这里不需要 async
+  let docs = [{}, {}, {}]
+
+  // 可能得到错误结果
+  docs.forEach(async function(doc) {
+        await db.post(doc)
+  })
+}
+</code></pre>
+<p>上面代码可能不会正常工作，原因是这时三个<code>db.post</code>操作将是并发执行，也就是同时执行，而不是继发执行。正确的写法是采用<code>for</code>循环。</p>
+<pre><code class="js">async function dbFuc(db) {
+  let docs = [{}, {}, {}]
+  for(let doc of docs) {
+    await db.post(doc)
+  }
+}
+</code></pre>
+<p>如果确实希望多个请求并发执行，可以使用<code>Promsie.all</code>方法。当三个请求都会<code>resolved</code>时，下面两种写法效果相同。</p>
+<pre><code class="js">async function dbFuc(db) {
+    let docs = [{}, {}, {}]
+  let promises = docs.map(doc =&gt; db.post(doc))
+
+  let results = await Promsie.all(promises)
+  console.log(results)
+}
+
+// 或者使用下面的写法
+async function dbFuc(db) {
+    let docs = [{}, {}, {}]
+  let promises = docs.map(doc =&gt; db.post(doc))
+    let results = []
+  for (let promise of promises) {
+        results.push(await promise)
+  }
+  console.log(results)
+}
+</code></pre>
+<ol start="4">
+<li>Async 函数可以保留运行堆栈。</li>
+</ol>
+<pre><code class="js">const a = () =&gt; {
+    b().then(() =&gt; c())
+}
+</code></pre>
+<p>上面代码中，函数<code>a</code>内部运行了一个异步任务<code>b()</code>。当<code>b()</code>运行的时候，函数<code>a()</code>不会中断，而是继续执行。等到<code>b()</code>运行结束，可能<code>a()</code>早就运行结束了，<code>b()</code>所在的上下文环境已经消失了。如果<code>b()</code>或<code>c()</code>报错，错误堆栈将不包括<code>a()</code>。</p>
+<p>现在将这个例子改成<code>async</code>函数。</p>
+<pre><code class="js">const a = async () =&gt; {
+    await b()
+  c()
+}
+</code></pre>
+<p>上面代码中，<code>b()</code>运行的时候，<code>a()</code>是暂停执行，上下文环境都保存着。一旦<code>b()</code>或<code>c()</code>报错，错误堆栈将包括<code>a()</code>。</p>
 
         </div>
         <!-- .entry-content -->
