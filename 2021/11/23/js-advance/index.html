@@ -465,7 +465,7 @@ console.log(myInstanceof(123, Number));
 <li>而 <code>typeof</code> 也存在弊端，它虽然可以判断<code>基础</code>数据类型（null除外），但是<code>引用</code>数据类型中，除了 <code>function</code> 类型以外，其他的也无法判断。</li>
 </ol>
 <p>总之，不管单独用 instanceof 还是 typeof，都不能满足所有场景的需求，而只能通过二者混写的方式来判断。但是这种方式判断出来的其实也只是大多数情况，并且写起来也比较难受，其实个人比较推荐下面的第三种方法，想比上述两个而言，能更好地解决数据类型检测问题。</p>
-<h3 id="1-2-3-第三种判断方法：constructor"><a href="#1-2-3-第三种判断方法：constructor" class="headerlink" title="1.2.3 第三种判断方法：constructor"></a>1.2.3 第三种判断方法：constructor</h3><p>原理：每一个实力对象都可通过constructor来访问它的构造函数，其实也是根据原型链的原理来的。</p>
+<h3 id="1-2-3-第三种判断方法：constructor"><a href="#1-2-3-第三种判断方法：constructor" class="headerlink" title="1.2.3 第三种判断方法：constructor"></a>1.2.3 第三种判断方法：constructor</h3><p>原理：每一个实例对象都可通过constructor来访问它的构造函数，其实也是根据原型链的原理来的。</p>
 <pre><code class="js">&#39;5&#39;.__proto__.constructor === String // true
 [5].__proto__.constructor === Array // true
 
@@ -872,7 +872,7 @@ Object(Symbol(&#39;foo&#39;)).toString() + &#39;bar&#39;
 <td>&#39;0xA&#39;&#39;&#39;</td>
 <td>10</td>
 <td>10</td>
-<td>0</td>
+<td>10</td>
 <td>&#39;0xA&#39;</td>
 <td>&#39;0xA&#39;</td>
 </tr>
@@ -880,7 +880,7 @@ Object(Symbol(&#39;foo&#39;)).toString() + &#39;bar&#39;
 <td>&#39;0x11&#39;</td>
 <td>17</td>
 <td>17</td>
-<td>0</td>
+<td>17</td>
 <td>&#39;0x11&#39;</td>
 <td>&#39;0x11&#39;</td>
 </tr>
@@ -1129,10 +1129,10 @@ console.log(arr);  //[ 1, 2, { val: 1000 } ]
 </blockquote>
 <h3 id="2-2-1-JSON-stringify"><a href="#2-2-1-JSON-stringify" class="headerlink" title="2.2.1 JSON.stringify"></a>2.2.1 JSON.stringify</h3><p>JSON.stringify() 是目前开发过程中最简单的深拷贝方法，其实就是把一个对象序列化成为 JSON 的字符串，并将对象里面的内容转换成字符串，最后再用 JSON.parse() 的方法将 JSON 字符串生成一个新的对象。示例代码如下所示。</p>
 <pre><code class="js">let obj1 = { a:1, b:[1,2,3] }
-let str = JSON.stringify(obj1)；
-let obj2 = JSON.parse(str)；
+let str = JSON.stringify(obj1);
+let obj2 = JSON.parse(str);
 console.log(obj2);   //{a:1,b:[1,2,3]} 
-obj1.a = 2；
+obj1.a = 2;
 obj1.b.push(4);
 console.log(obj1);   //{a:2,b:[1,2,3,4]}
 console.log(obj2);   //{a:1,b:[1,2,3]}
@@ -2238,7 +2238,14 @@ Object.getPrototypeOf(a) === Array.prototype
 // 5. 基于Object.prototype.toString
 Object.prototype.toString.apply(a) === &#39;[object Array]&#39;
 </code></pre>
-
+<p>ES6之后新增了一个 <code>Array.isArray</code>方法，能直接判断数据类型是否为数组，但是如果 isArray 不存在，那么 Array.isArray 的 polyfill 通常可以这样写：</p>
+<pre><code class="js">if (!Array.isArray) {
+    Array.isArray = function(arg) {
+        return Object.prototype.toString.call(arg) === &#39;[object Array]&#39;
+  }
+}
+</code></pre>
+<h2 id="7-4-改变自身的方法"><a href="#7-4-改变自身的方法" class="headerlink" title="7.4 改变自身的方法"></a>7.4 改变自身的方法</h2>
         </div>
         <!-- .entry-content -->
         <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
