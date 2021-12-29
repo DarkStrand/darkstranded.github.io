@@ -187,7 +187,7 @@ console.log(myInstanceof(123, Number));
 
 ### 1.2.3 第三种判断方法：constructor
 
-原理：每一个实力对象都可通过constructor来访问它的构造函数，其实也是根据原型链的原理来的。
+原理：每一个实例对象都可通过constructor来访问它的构造函数，其实也是根据原型链的原理来的。
 
 ```js
 '5'.__proto__.constructor === String // true
@@ -639,8 +639,8 @@ Object(Symbol('foo')).toString() + 'bar'
 | '0123'    | 123      | 123        | 123          | 0123'             | '0123'            |
 | '-012.5'  | -12.5    | -12        | -12.5        | '-012.5'          | '-012.5'          |
 | '012.5.5' | NaN      | 12         | 12.5         | '0121.5.5'        | '012.5.5'         |
-| '0xA'''   | 10       | 10         | 0            | '0xA'             | '0xA'             |
-| '0x11'    | 17       | 17         | 0            | '0x11'            | '0x11'            |
+| '0xA'''   | 10       | 10         | 10           | '0xA'             | '0xA'             |
+| '0x11'    | 17       | 17         | 17           | '0x11'            | '0x11'            |
 | true      | 1        | NaN        | NaN          | 'true'            | 'true'            |
 | false     | 0        | NaN        | NaN          | 'false'           | 'false'           |
 | null      | 0        | NaN        | NaN          | 报错              | 'null'            |
@@ -947,10 +947,10 @@ JSON.stringify() 是目前开发过程中最简单的深拷贝方法，其实就
 
 ```js
 let obj1 = { a:1, b:[1,2,3] }
-let str = JSON.stringify(obj1)；
-let obj2 = JSON.parse(str)；
+let str = JSON.stringify(obj1);
+let obj2 = JSON.parse(str);
 console.log(obj2);   //{a:1,b:[1,2,3]} 
-obj1.a = 2；
+obj1.a = 2;
 obj1.b.push(4);
 console.log(obj1);   //{a:2,b:[1,2,3,4]}
 console.log(obj2);   //{a:1,b:[1,2,3]}
@@ -2483,4 +2483,18 @@ Object.getPrototypeOf(a) === Array.prototype
 // 5. 基于Object.prototype.toString
 Object.prototype.toString.apply(a) === '[object Array]'
 ```
+
+ES6之后新增了一个 `Array.isArray`方法，能直接判断数据类型是否为数组，但是如果 isArray 不存在，那么 Array.isArray 的 polyfill 通常可以这样写：
+
+```js
+if (!Array.isArray) {
+	Array.isArray = function(arg) {
+		return Object.prototype.toString.call(arg) === '[object Array]'
+  }
+}
+```
+
+
+
+## 7.4 改变自身的方法
 
